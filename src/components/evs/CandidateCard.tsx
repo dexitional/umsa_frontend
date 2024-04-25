@@ -14,7 +14,7 @@ function CandidateCard({ data, showResult, winner, vtotal }: Props) {
     <div className="px-2 p-2 w-full h-fit border-2 border-blue-950/10 bg-blue-300/5 rounded flex flex-col items-start">
         <div className="px-1 p-2 w-full h-fit border border-slate-300 rounded flex  space-x-2 items-start">
             <div className="relative h-32 w-32 md:h-36 md:w-36 rounded bg-slate-200">
-                <img src={`${REACT_APP_API_URL}/auth/pixo?eid=${data?.portfolio?.electionId}&tag=${data?.id}`} className="rounded object-cover object-top h-32 w-32 md:h-36 md:w-36 bg-slate-200" alt="Voter" />
+                <img loading="eager" src={`${REACT_APP_API_URL}/auth/pixo?eid=${data?.portfolio?.electionId}&tag=${data?.id}`} className="rounded object-cover object-top h-32 w-32 md:h-36 md:w-36 bg-slate-200" alt="Voter" />
             </div>
             <div className="flex-1 flex flex-col space-y-1.5">
                 <div className={ showResult ? `block`: `hidden`}>

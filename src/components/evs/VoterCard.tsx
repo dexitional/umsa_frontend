@@ -9,7 +9,7 @@ function VoterCard({ data, vmask }: Props) {
   return (
     <div className={`px-3 p-2 w-full h-fit border ${data.voteStatus && vmask  ? 'border-green-600':'border-slate-300'}  rounded flex space-x-3 items-start`}>
         <div className="relative h-10 w-10 md:h-14 md:w-14 rounded bg-slate-200">
-            <img src={`${REACT_APP_API_URL}/auth/photos?tag=${data?.tag}`} className="rounded object-cover object-top h-10 w-10 md:h-14 md:w-14 bg-slate-200" alt="Voter" />
+            <img loading="eager" src={`${REACT_APP_API_URL}/auth/photos?tag=${data?.tag}`} className="rounded object-cover object-top h-10 w-10 md:h-14 md:w-14 bg-slate-200" alt="Voter" />
         </div>
         <div className="flex-1 flex flex-col items-start justify-start">
             <h3 className="text-[0.68rem] md:text-[0.87rem] text-blue-950/80 md:text-blue-950/80 font-bold md:font-bold uppercase">{data?.name}</h3>

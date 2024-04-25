@@ -5,7 +5,7 @@ import Logo from '../assets/img/logo_sso.png'
 // @ts-ignore
 // import Adinkra from '../assets/img/adinkra-bullet.png'
 import Adinkra from '../assets/img/logo/mlk/logo.png'
-import Adinkra2 from '../assets/img/logo/mlk/logo.png'
+import Adinkra2 from '../assets/img/adinkra-bullet.png'
 // @ts-ignore
 import SafeGuard from '../assets/img/icon-national-id.png'
 import { FcGoogle, FcLock, FcSupport } from 'react-icons/fc';
@@ -89,23 +89,23 @@ function Login() {
                 <img src={Logo} alt="" className="h-[6.5rem]"/>
             </div>
             <div className="pl-10 text-white space-y-10">
-                <h2 className="px-4 py-1 text-[1.24rem] font-bold rounded-md bg-primary-dark/70 text-slate-50 tracking-wider">All College Services placed in one location for easy access.</h2>
+                <h2 className="px-4 py-0.5 text-[1.1rem] font-bold rounded-md bg-primary-dark/70 text-slate-50 tracking-wider">All Services in One location for Easy access.</h2>
                 <ul className="space-y-4 text-white">
-                    <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-6"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to Admission Management System.</span>
+                    <li className="flex items-center space-x-4">
+                        <img src={Adinkra2} alt="" className="h-4"/>
+                        <span className="text-[1.1rem] font-semibold">Easy access to Admission Management System.</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-6"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to Academic Management System.</span>
+                    <li className="flex items-center space-x-4">
+                        <img src={Adinkra2} alt="" className="h-4"/>
+                        <span className="text-[1.1rem] font-semibold">Easy access to Academic Management System.</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-6"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to Financial Management System.</span>
+                    <li className="flex items-center space-x-4">
+                        <img src={Adinkra2} alt="" className="h-4"/>
+                        <span className="text-[1.1rem] font-semibold">Easy access to Financial Management System.</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-6"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to Student Portal Services.</span>
+                    <li className="flex items-center space-x-4">
+                        <img src={Adinkra2} alt="" className="h-4"/>
+                        <span className="text-[1.1rem] font-semibold">Easy access to Student Portal Services.</span>
                     </li>
                     
                    {/* <li className="flex items-center space-x-2">
@@ -167,7 +167,7 @@ function Login() {
                     {/* Forms */}
                     <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm || showVoucherForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-primary-dark/30 bg-primary flex-col space-y-4 text-white text-lg`}>
                         <div className="shadow bg-white/10 rounded-md flex items-center justify-between">
-                           <h1 className="px-4 py-1 text-lg text-primary-dark font-semibold tracking-widest">
+                           <h1 className="px-4 py-1 text-lg text-amber-100 font-semibold tracking-widest">
                              {showStudentForm ? 'STUDENT LOGIN' : showVoucherForm ? 'APPLICANT LOGIN':'STAFF LOGIN' }
                            </h1>
                            <div className="relative pr-2">
@@ -175,10 +175,10 @@ function Login() {
                            </div>
                         </div>
                         <div>
-                           <input type="text" name={`username`} value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Student Number' : showVoucherForm ? 'Serial':'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/80 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                           <input type="text" name={`username`} value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Username' : showVoucherForm ? 'Serial':'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/30 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
                         </div>
                         <div>
-                           <input type="password" name={`password`} value={form.password} onChange={onChange} placeholder={`${showVoucherForm ? 'Pin':'Password'}`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                           <input type="password" name={`password`} value={form.password} onChange={onChange} placeholder={`${showVoucherForm ? 'Pin':'Password'}`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/30 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
                         </div>
                         <button type="submit" className="py-2.5 px-4 md:px-10 w-full flex items-center justify-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider">
                             <FaLock className="h-4 w-4 text-gray-800"/>
