@@ -15,8 +15,11 @@ import { HiAcademicCap } from "react-icons/hi2";
 import { PiStudentFill } from 'react-icons/pi'
 
 function Home() {
+  
   const { user, logout } = useUserStore(state => state)
-  console.log(user?.roles)
+  const evsRole =  user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'evs')
+  const isEvsAdmin =  user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'evs' && r?.isAdmin)
+  
   return (
     <div className="w-full h-screen flex flex-col justify-between">
         <Header user={user} logout={logout} />
@@ -24,7 +27,7 @@ function Home() {
           <section className="mx-auto py-6 w-full max-w-6xl space-y-2">
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Services</h1>
              <div className="p-3 md:p-0 w-full bg-blue-50/50 md:bg-transparent grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-4">
-                <ServiceCard title="General Elections Portal" Icon={GiVote} link="/evs/dash" /> 
+                { evsRole && <ServiceCard title="General Elections Portal" Icon={GiVote} link="/evs/dash" /> }
                 { [1].includes(user?.user?.group_id) && <ServiceCard title="Student Portal System" Icon={FaUsersViewfinder} link="/aisp" />}
                 {/* <ServiceCard title="Staff Portal System" Icon={FaUsersViewfinder} link="#" /> */}
                 {[3].includes(user?.user?.group_id) && <ServiceCard title="Admission Portal System" Icon={FaUsersViewfinder} link="" />}
@@ -36,18 +39,18 @@ function Home() {
              </div>
           </section>
 
-          { [2,4].includes(user?.user?.group_id) && 
+          { [1,2,4].includes(user?.user?.group_id) && 
           <section className="mx-auto py-6 w-full max-w-6xl space-y-4">
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
              <div className="p-3 md:p-6 w-full bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                  
-                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'evs') &&
+                  { evsRole &&
                   <AppCard 
                       title="Electa Voting System"
                       desc="Elect leaders, decide on issues by voting and referendum." 
                       Icon={GiVote} 
                       links={[
-                        { title:'General Elections Portal', url:'#'},
+                        { title:'General Elections Portal', url:'/evs/dash'},
                         // { title:'New Setup', url:'#'},
                       ]} 
                   />
@@ -75,7 +78,7 @@ function Home() {
                   />
                   }
                   
-                  { ([4].includes(user?.user?.group_id) ||
+                  { ([2,4].includes(user?.user?.group_id) ||
                      user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ams')) &&
                   <AppCard 
                     title="Admission Management System &reg;"
@@ -87,7 +90,7 @@ function Home() {
                   />
                   }
 
-                  { ([4].includes(user?.user?.group_id) ||
+                  { ([2,4].includes(user?.user?.group_id) ||
                     user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ais')) &&
                  <AppCard 
                     title="Academic Management System &reg;"
@@ -99,7 +102,7 @@ function Home() {
                  />
                  }
 
-                 { ([4].includes(user?.user?.group_id) ||
+                 { ([2,4].includes(user?.user?.group_id) ||
                    user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'fms')) &&
                  <AppCard 
                     title="Finance Management System &reg;"

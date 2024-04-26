@@ -1,6 +1,10 @@
 import axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 import toast from 'react-hot-toast';
 const { REACT_APP_API_URL } = import.meta.env;
+
+// const instance = Axios.create(); 
+// const axios = setupCache(instance)
 
 class EvsService {
     
