@@ -8,23 +8,23 @@ type Props = {
 
 function VotingCard({ data, chosen }: Props) {
   return (
-    <div className="px-2 p-2 w-full h-fit border-2 border-blue-950/10 bg-blue-300/5 rounded flex flex-col items-start">
+    <div className="px-2 p-2 w-full h-fit border-2 border-blue-950/10 bg-blue-300/5 rounded flex flex-col items-start group">
         <div className="px-1 p-2 w-full h-fit border border-slate-300 rounded flex  space-x-2 items-start">
-            <div className="relative h-32 w-32 md:h-36 md:w-36 rounded bg-slate-200">
-                <img src={`${REACT_APP_API_URL}/auth/pixo?eid=${data?.portfolio?.electionId}&tag=${data?.id}`} className="rounded object-cover object-top h-32 w-32 md:h-36 md:w-36 bg-slate-200" alt="Voter" />
+            <div className="relative h-32 w-32 md:h-36 md:w-36 rounded bg-slate-200 overflow-hidden">
+                <img loading="eager" crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/pixo?eid=${data?.portfolio?.electionId}&tag=${data?.id}`} className="transition group-hover:scale-110 rounded object-cover object-top h-32 w-32 md:h-36 md:w-36 bg-slate-200" alt="Voter" />
             </div>
             <div className="flex-1 flex flex-col space-y-1.5">
                 <div>
                     <div className="my-2 px-1 py-1 w-fit shadow rounded-full border-2 border-blue-950/20 text-sm md:text-base text-blue-950/80 md:text-blue-950/80 bg-white font-bold md:font-bold space-x-2">
                         { !chosen 
-                          ? <button className="px-2 tracking-wider rounded-full bg-amber-50 font-bold">CHOOSE</button>
+                          ? <button className="px-2 tracking-wider rounded-full bg-amber-50 group-hover:bg-green-100 font-bold group-hover:animate-pulse">CHOOSE</button>
                           : <button className="px-2 tracking-wider rounded-full bg-green-300 font-bold">CHOSEN</button>
                         }
                     </div>
                 </div>
                 <h3 className="text-xs md:text-base text-gray-600 font-bold italic text-left">{data?.teaser || data?.tag}</h3>
                 <div className="w-full flex items-center justify-between">
-                <h3 className="w-fit text-3xl text-gray-500 font-bold tracking-widest">#{data?.orderNo}</h3>
+                <h3 className="w-fit text-3xl text-gray-500 font-bold tracking-widest group-hover:rotate-6 transition">#{data?.orderNo}</h3>
                 
                 {/* <button className="p-0.5 px-2 text-[0.6rem] rounded bg-green-400 text-gray-800 font-extrabold tracking-widest">VOTED</button>
                 <button className="p-0.5 px-2 text-[0.6rem] rounded bg-red-200 text-gray-900 font-extrabold tracking-widest">NOT VOTED</button> */}

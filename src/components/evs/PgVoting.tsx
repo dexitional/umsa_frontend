@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import Service from '../../utils/evsService'
 import { redirect, useLoaderData, useNavigate } from 'react-router';
 import VotingCard from './VotingCard';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useUserStore } from '../../utils/authService';
+import VotingCardNo from './VotingCardNo';
 
 export async function loader({ params }){
   const data = await Service.fetchVotes(params.eid);
@@ -93,18 +94,29 @@ function PgVoting() {
                 
                 { data?.portfolios.map((row:any, i: number) => 
                  pageview == i ?
-                (
+                ( <Fragment>
                   <div key={row.id} className="px-2 py-2 flex-1 bg-white rounded space-y-2">
-                    <h2 className="px-6 py-1 rounded text-xs md:text-lg text-center text-blue-950 font-extrabold tracking-widest bg-slate-200/70">{row?.title?.toUpperCase()}</h2>
+                    <h2 className="relative px-6 py-1 rounded text-xs md:text-lg text-center text-blue-950 font-extrabold tracking-widest bg-slate-200/70">
+                      <span>{row?.title?.toUpperCase()}</span>
+                      <button onClick={(e)=> choose(e,row?.id,(row?.candidates?.find((m:any) => m.orderNo == 0)?.id))} className="absolute right-4 top-1/2 -translate-y-[50%] px-3 py-0.5 bg-red-100 border-2 border-red-300 text-sm">SKIP</button>
+                    </h2>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-2 place-content-start overflow-y-scroll">
-                        { row?.candidates?.sort((a,b) => a.orderNo - b.orderNo)?.map((r:any, i: number) => {
+                        { row?.candidates?.sort((a,b) => a.orderNo - b.orderNo)?.filter((m:any) => m.orderNo != 0)?.map((r:any, i: number) => {
                            if(chosenIcon(row?.id,r?.id) ) return <button key={r?.id} onClick={(e)=> choose(e,row?.id,r?.id)}><VotingCard key={r?.id} data={r} chosen /></button>
                            return (<button key={r?.id} onClick={(e)=> choose(e,row?.id,r?.id)}><VotingCard data={r} /></button>)}
-                         )}
+                        )}
+                        { row?.candidates?.length == 2 ? (
+                          chosenIcon( row?.id, row?.candidates?.find((m:any) => m.orderNo == 0)?.id ) 
+                          ? <button onClick={(e)=> choose( e, row?.id, row?.candidates?.find((m:any) => m.orderNo == 0)?.id )}><VotingCardNo data={(row?.candidates?.find((m:any) => m.orderNo == 0))} chosen /></button>
+                          : <button onClick={(e)=> choose( e, row?.id, row?.candidates?.find((m:any) => m.orderNo == 0)?.id )}><VotingCardNo data={(row?.candidates?.find((m:any) => m.orderNo == 0))} /></button>
+                        ): null }
                     </div>
                   </div>
+                  
+                  { (allowSubmit() && i == data?.portfolios?.length - 1 )&& <button onClick={(e) => submitVote(e)} className="px-6 py-3 my-4 rounded bg-green-400 text-blue-950/70 w-full font-bold text-xl">SUBMIT FINAL VOTE</button> }
+            
+                  </Fragment>
                 ) : null )}
-                { allowSubmit() && <button onClick={(e) => submitVote(e)} className="px-6 py-3 my-4 rounded bg-green-400 text-blue-950/70 w-full font-bold text-xl">SUBMIT FINAL VOTE</button> }
             </div>
         </div>
     </div>
