@@ -16,6 +16,7 @@ type Props = {
 function PgElectionCard({ data }: Props) {
   const navigate = useNavigate()
   const { user } = useUserStore.getState();
+  const isVoter = !!(data.voterData.find((r:any) => r?.tag?.toLowerCase() == user?.user?.tag?.toLowerCase()))
 
   return (
     <div className='space-y-2'>
@@ -37,7 +38,7 @@ function PgElectionCard({ data }: Props) {
             </div>
         </div>
         <div className="p-3 rounded shadow-inner shadow-gray-500/20 bg-white space-y-2">
-            { ['STARTED'].includes(data?.action) && !data.voteStatus ? <Link to={`/evs/${data?.id}/voting`} className={`block hover:bg-blue-950/90 bg-red-900 ring-2 ring-blue-950/80 border-2 border-white text-white py-1 px-3.5 w-full rounded-lg focus:ring-0 focus:outline-none font-bold text-base text-center font-noto`}>CLICK TO VOTE</Link> : null }
+            { ['STARTED'].includes(data?.action) && !data.voteStatus && isVoter ? <Link to={`/evs/${data?.id}/voting`} className={`block hover:bg-blue-950/90 bg-red-900 ring-2 ring-blue-950/80 border-2 border-white text-white py-1 px-3.5 w-full rounded-lg focus:ring-0 focus:outline-none font-bold text-base text-center font-noto`}>CLICK TO VOTE</Link> : null }
             { data.voteStatus ? <span className={`block hover:bg-green-600/90 bg-green-600 ring-2 ring-green-600/80 border-2 border-white text-white py-1 px-3.5 w-full rounded-lg focus:ring-0 focus:outline-none font-bold text-base text-center font-noto`}>VOTED</span> : null }
             <Link to={`/evs/${data?.id}/register`} className={`block bg-blue-950/80 text-white py-1.5 px-3.5 w-full rounded focus:ring-0 focus:outline-none font-bold text-sm text-center font-noto`}>ELECTION CENTRE</Link>
         </div>

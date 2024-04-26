@@ -6,14 +6,13 @@ import { useLoaderData } from 'react-router';
 
 export async function loader({ params }){
   const { user } = useUserStore.getState();
-  console.log(user)
   const data = await Service.fetchMyElections(user?.user?.tag);
   return { data }
 }
 
 function EVSDashPage() {
 
-  const { data }:any = useLoaderData();
+  const { data }:any = useLoaderData() || [];
   return (
     <main className="w-full flex flex-col overflow-y-scroll">
        <section className="mx-1.5 md:mx-auto py-6 w-full md:max-w-6xl">
