@@ -15,13 +15,13 @@ function PgControl() {
   const onCheckChange = async (e) => {
     const value = e.target.checked;
     const resp = await Service.updateElection(data?.id, { [e.target.name]: e.target.checked })
-    if(resp) navigate(0)
+    //if(resp) navigate(0)
   }
 
   const onChange = async (e) => {
     const value = e.target.checked;
     const resp = await Service.updateElection(data?.id, { [e.target.name]: e.target.value })
-   if(resp) navigate(0)
+   //if(resp) navigate(0)
   }
 
   return (

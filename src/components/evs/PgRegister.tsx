@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import VoterCard from './VoterCard'
 import Service from '../../utils/evsService'
 import { useLoaderData } from 'react-router';
+import { useUserStore } from '../../utils/authService';
 
 export async function loader({ params }){
   const data = await Service.fetchElection(params.eid);
@@ -11,7 +12,10 @@ export async function loader({ params }){
 
 function PgRegister() {
   const { data }:any = useLoaderData();
+  const user = useUserStore.getState().user
   const [ keyword,setKeyword ] = useState('')
+  const isAdmin = !!(data?.admins?.find(r => r?.toLowerCase() == user?.user?.tag?.toLowerCase()))
+  
   return (
     <div className="py-3 px-3 flex-1 h-full rounded bg-[#f1f1f1]/30 shadow-inner shadow-gray-500/30 space-y-6">
         <h1 className="px-4 py-2.5 flex items-center justify-between text-xl rounded bg-blue-950/80 font-semibold text-white">
@@ -25,7 +29,7 @@ function PgRegister() {
         <div className="px-2 py-2 bg-zinc-200/50 shadow-inner">
             <div className="px-2 py-2 bg-white rounded">
               <div className="w-full h-96 grid grid-cols-1 md:grid-cols-2 gap-2 place-content-start overflow-y-scroll">
-                  { data?.voterData?.filter((r:any) => r?.tag?.toLowerCase().includes(keyword?.toLowerCase()) || r?.name?.toLowerCase().includes(keyword?.toLowerCase()) )?.map((row:any) => (<VoterCard data={row} vmask={data?.allowMask} />))}
+                  { data?.voterData?.filter((r:any) => r?.tag?.toLowerCase().includes(keyword?.toLowerCase()) || r?.name?.toLowerCase().includes(keyword?.toLowerCase()) )?.map((row:any) => (<VoterCard data={row} vmask={data?.allowMask} isAdmin={isAdmin} />))}
               </div>
             </div>
         </div>
