@@ -19,8 +19,8 @@ function StudentCardItem({ data }: Props) {
   <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
     <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.id}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
-      <div className="flex items-center space-x-2">
-          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data.fname+' '+(data.mname && data.mname+' ')+data.lname).toUpperCase()}</div>
+      <div className="w-full flex items-center justify-between space-x-2">
+          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.fname+' '+(data?.mname ? data?.mname+' ': '')+data?.lname).toUpperCase()}</div>
           <div className="py-0.5 px-2 text-sm rounded bg-primary/60 text-white font-bold">{data?.gender}</div>
       </div>
       <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />

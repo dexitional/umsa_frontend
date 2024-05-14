@@ -37,8 +37,7 @@ export async function loader({ params }){
   const { user, stepUrl } = useUserStore.getState() ?? null;
   const serial = user?.user?.tag
   const docs = await Service.fetchDocumentCategories()
-  const data = await Service.fetchStepDocument(serial)
-  console.log(data);
+  const data = await Service.fetchStepDocument(serial) || [{}]
   return { data,docs,stepUrl }
 }
 
@@ -46,7 +45,7 @@ function PgStepDocument({}: Props) {
   
   const navigate = useNavigate()
   const { data,docs,stepUrl }: any = useLoaderData();
-  const [ rows,setRows ] = useState( data || [{}]);
+  const [ rows,setRows ] = useState(data);
   const [ files,setFiles ] = useState( data?.map(r => r.base64) || []);
   
 
@@ -62,8 +61,8 @@ function PgStepDocument({}: Props) {
   const delRecord = (id) => {
     const cm = window.confirm(`REMOVE DOCUMENT ${id+1} ?`)
     if(cm){
-      setRows([...rows.filter((r,i) => i !== id)])
-      setFiles([...files.filter((r,i) => i !== id)])
+      setRows([...rows?.filter((r,i) => i !== id)])
+      setFiles([...files?.filter((r,i) => i !== id)])
     }
   }
 
@@ -76,11 +75,11 @@ function PgStepDocument({}: Props) {
         const base64:any = await Helper.convertBase64(f);
         setFiles([
           ...files.map((r,i) => {
+             //  if(i == id) return URL.createObjectURL(f);
              if(i == id) return base64;
              return r;
           })
         ]);
-        console.log(files)
       } catch (err) {
         console.log(err);
       }
@@ -135,7 +134,7 @@ function PgStepDocument({}: Props) {
                       <input type="hidden" name={`base64_${i}`} value={files[i]}/>
                     </label>
                     {files && files[i] &&
-                    <Link to={(files[i])} className="px-6 py-2 h-fit w-fit border border-primary/60 rounded-full flex items-center space-x-2 self-end">
+                    <Link to={(files[i])} target="_blank" className="px-6 py-2 h-fit w-fit border border-primary/60 rounded-full flex items-center space-x-2 self-end">
                        <FaFilePdf className="h-5 w-5 text-primary/80"/>
                        <span className="text-sm md:text-base text-primary/80 font-medium">Preview </span>
                     </Link>

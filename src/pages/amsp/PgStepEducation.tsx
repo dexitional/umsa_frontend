@@ -32,8 +32,6 @@ export async function action({ request }){
     }
     data.push(row);
   }
-  console.log(data)
-  
   let resp = await Service.saveStepEducation(data);
   if(resp){
     return redirect(stepUrl.nextUrl)
@@ -46,15 +44,18 @@ export async function loader({ params }){
   const serial = user?.user?.tag
   const institutecats = await Service.fetchInstituteCategories()
   const certcats = await Service.fetchCertCategories()
+  const applicant = await Service.fetchApplicant(serial)
   const data = await Service.fetchStepEducation(serial)
-  return { data,institutecats,certcats,stepUrl }
+  console.log(applicant,institutecats)
+  return { data,applicant,institutecats,certcats,stepUrl }
 }
 
 function PgStepEducation({}: Props) {
   
   const navigate = useNavigate()
-  const { data,institutecats,certcats,stepUrl }: any = useLoaderData();
+  const { data,applicant,institutecats,certcats,stepUrl }: any = useLoaderData();
   const [ rows,setRows ] = useState( data || [{}]);
+  //const [ rows,setRows ] = useState( data || [{}]);
   const years = () => {
     var yrs:any = [];
     for(var i = new Date().getFullYear();i >= 1975;i--){
@@ -111,23 +112,32 @@ function PgStepEducation({}: Props) {
                           <span className="text-sm md:text-base text-gray-500 font-medium">Institution Type</span>
                           <select arial-label="instituteCategoryId" name={`instituteCategoryId_${i}`} defaultValue={rec?.instituteCategoryId} required className="capitalize focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
                             <option selected disabled>-- Choose --</option>
-                            { institutecats && institutecats?.map((row:any) =>(
-                              <option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>
-                            ))}
+                            { institutecats && institutecats?.map((row:any) => {
+                              if(["DEGREE/OTHERS","DIPLOMA/DEGREE/OTHERS"].includes(applicant?.applyType?.title.toUpperCase()) && row.title.toUpperCase() == 'TERTIARY') return (<option key={row.id} value={row.id} selected>{row.title?.toUpperCase()}</option>)
+                              if(["WASSCE/SSCE/ABCE/GBCE","IB/IGCSE/GCSE","MATURED APPLICANT"].includes(applicant?.applyType?.title.toUpperCase()) && row.title.toUpperCase() == 'SECONDARY') return (<option key={row.id} value={row.id} selected>{row.title?.toUpperCase()}</option>)
+                            }
+                            )}
                             </select>
                       </label>
                       <label className="flex flex-col space-y-2">
                           <span className="text-sm md:text-base text-gray-500 font-medium">Institution Name  <Asterix /></span>
                           <input arial-label="instituteName" name={`instituteName_${i}`} defaultValue={rec?.instituteName} required className="uppercase focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md" />
                       </label>
+                      
+                      { ["DEGREE/OTHERS","DIPLOMA/DEGREE/OTHERS"].includes(applicant?.applyType?.title?.toUpperCase()) ?
                       <label className="flex flex-col space-y-2">
                           <span className="text-sm md:text-base text-gray-500 font-medium">Awarded Class </span>
                           <input arial-label="classValue" name={`classValue_${i}`} defaultValue={rec?.classValue} className="uppercase focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md" />
                       </label>
-                      <label className="flex flex-col space-y-2">
+                      : null }
+
+                      { ["WASSCE/SSCE/ABCE/GBCE","IB/IGCSE/GCSE","MATURED APPLICANT"].includes(applicant?.applyType?.title?.toUpperCase()) ?
+                        <label className="flex flex-col space-y-2">
                           <span className="text-sm md:text-base text-gray-500 font-medium">Aggregate Obtained <em><small><b>( ** Zero(0) for Awaiting students ** )</b></small></em></span>
                           <input arial-label="gradeValue" name={`gradeValue_${i}`} defaultValue={rec?.gradeValue} className="uppercase focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md" />
-                      </label>
+                        </label>
+                      : null }
+
                       <label className="flex flex-col space-y-2">
                         <span className="text-sm md:text-base text-gray-500 font-medium">Start Month</span>
                         <select arial-label="startMonth" name={`startMonth_${i}`} defaultValue={rec?.startMonth} className="capitalize focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
@@ -150,9 +160,11 @@ function PgStepEducation({}: Props) {
                           <span className="text-sm md:text-base text-gray-500 font-medium">Certificate Type</span>
                           <select arial-label="certCategoryId" name={`certCategoryId_${i}`} defaultValue={rec?.certCategoryId} required className="capitalize focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
                             <option selected disabled>-- Choose --</option>
-                            { certcats && certcats?.map((row:any) =>(
-                              <option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>
-                            ))}
+                            { certcats && certcats?.map((row:any) => {
+                                if(["WASSCE/SSCE/ABCE/GBCE","IB/IGCSE/GCSE","MATURED APPLICANT"].includes(applicant?.applyType?.title.toUpperCase()) && ["WASSCE","SSCE","GCE","ABCE","NABTEX","GSCE","IB","IGCSE"].includes(row.title.toUpperCase())) return (<option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>)
+                                if(["DEGREE/OTHERS","DIPLOMA/DEGREE/OTHERS"].includes(applicant?.applyType?.title.toUpperCase()) && ["DEGREE","HND","DIPLOMA","ABCE","NABTEX","GSCE","IB","IGCSE"].includes(row.title.toUpperCase())) return (<option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>)
+                              }
+                            )}
                             </select>
                       </label>
                       <label className="flex flex-col space-y-2">
@@ -179,7 +191,7 @@ function PgStepEducation({}: Props) {
              </div>
              ))}
 
-            <div className="p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-66">
+            <div className="p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-66">
                <div className="px-2 space-y-4">
                   <div className="flex items-center space-x-4">
                     <input type="hidden" name="count" value={Number(rows?.length)}/>

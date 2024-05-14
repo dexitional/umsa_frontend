@@ -5,10 +5,11 @@ import Loader from '../../components/Loader'
 import { Outlet, useLoaderData, useNavigation } from 'react-router'
 import { useUserStore } from '../../utils/authService'
 import Service from '../../utils/evsService'
+import useSWR, { preload } from 'swr'
 
 export async function loader({ params }){
   const user = useUserStore.getState().user
-  const data = await Service.fetchElection(params.eid);
+  const data = await Service.fetchElection(params.electionId);
   const isAdmin = data?.admins?.find(r => r?.toLowerCase() == user?.user?.tag?.toLowerCase())
   return {  data: {...data, isAdmin: !!isAdmin } }
 }
@@ -18,6 +19,7 @@ function EVSPage() {
   const loading = navigation.state === "loading";
   const { data }:any = useLoaderData();
 
+ 
   return (
     <main className="w-full flex flex-col overflow-y-scroll">
       <EVSHeader data={data} />

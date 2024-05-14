@@ -39,7 +39,7 @@ function Home() {
              </div>
           </section>
 
-          { [1,2,4].includes(user?.user?.group_id) && 
+          { [2,4].includes(user?.user?.group_id) && 
           <section className="mx-auto py-6 w-full max-w-6xl space-y-4">
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
              <div className="p-3 md:p-6 w-full bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
@@ -51,7 +51,7 @@ function Home() {
                       Icon={GiVote} 
                       links={[
                         { title:'General Elections Portal', url:'/evs/dash'},
-                        // { title:'New Setup', url:'#'},
+                        { title:'Manage Elections', url:'/evs/admin/elections'},
                       ]} 
                   />
                   }
@@ -78,8 +78,7 @@ function Home() {
                   />
                   }
                   
-                  { ([2,4].includes(user?.user?.group_id) ||
-                     user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ams')) &&
+                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ams') &&
                   <AppCard 
                     title="Admission Management System &reg;"
                     desc="Manage new admission applications and new enrolments." 
@@ -90,8 +89,7 @@ function Home() {
                   />
                   }
 
-                  { ([2,4].includes(user?.user?.group_id) ||
-                    user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ais')) &&
+                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ais') &&
                  <AppCard 
                     title="Academic Management System &reg;"
                     desc="Manage academic records, registration, assessment & graduation." 
@@ -102,8 +100,7 @@ function Home() {
                  />
                  }
 
-                 { ([2,4].includes(user?.user?.group_id) ||
-                   user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'fms')) &&
+                 { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'fms') &&
                  <AppCard 
                     title="Finance Management System &reg;"
                     desc="Manage student financial records, payments, bills, charges and other transactions." 

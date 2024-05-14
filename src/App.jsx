@@ -31,9 +31,6 @@ function App() {
       element: isAuthenticated() ? <Outlet/> : <Navigate to={{ pathname:'/login'}} replace />,
       children:[
          { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/evs/dash'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Suspense fallback={<Loader/>}><Home /></Suspense> },
-         // { path: "evs", element: <EVSPage /> },
-         // { path: "evsmain", element: <EVSDashPage /> },
-         // { path: "service/:module", element: <Home /> },
          /* ADMISSION PORTAL ROUTE */
          {...AMSPRoute },
          /* STUDENT PORTAL ROUTE */

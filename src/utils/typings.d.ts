@@ -34,6 +34,7 @@ export interface StoreState {
     isLoggedIn: boolean;
     isAuthenticated : () => boolean;
     lasChosen: any|null;
+    electionData: any|null;
     loadUserData: () => void;
     loadStudentVote: () => void;
     lasChoose: (data: object) => void;

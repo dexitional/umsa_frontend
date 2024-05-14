@@ -28,9 +28,9 @@ function PgAISSheets({}: Props) {
       <PageTitle title="Sheets" createtext="New" createlink="create" pages={totalPages} setView={setView} view={view} />
       <div className="">
          { view == 'card' && (
-            <div className="grid md:grid-cols-3 gap-3 md:gap-6">
-              { data && data?.map((row:any) => (<SheetCardItem key={row.id} data={row} /> ))}
-              { !data && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
+            <div className={`grid ${data.length ? 'md:grid-cols-3':'md:grid-cols-2 justify' } gap-3 md:gap-6`}>
+              { data?.map((row:any) => (<SheetCardItem key={row.id} data={row} /> ))}
+              { !data?.length && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
             </div>
           )}
 

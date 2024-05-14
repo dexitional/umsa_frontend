@@ -10,6 +10,16 @@ import PgPublic from '../components/evs/PgPublic';
 import PgStrongroom from '../components/evs/PgStrongroom';
 import EVSLayout from '../components/evs/EVSLayout';
 import PgVoting from '../components/evs/PgVoting';
+import EVSAdminLayout from '../components/evs/EVSAdminLayout';
+import PgEVSElections, { loader as adminElectionsLoader } from '../pages/evs/PgEVSElections';
+import PgEVSElectionForm, { loader as evsElectionFormLoader, action as evsElectionFormAction } from '../pages/evs/PgEVSElectionForm';
+import PgEVSElection, { loader as adminElectionLoader } from '../pages/evs/PgEVSElection';
+import PgEVSPortfolios, { loader as evsPortfoliosLoader, action as evsPortfolioDestroy } from '../pages/evs/PgEVSPortfolios';
+import PgEVSCandidates, { loader as evsCandidatesLoader, action as evsCandidateDestroy } from '../pages/evs/PgEVSCandidates';
+import PgEVSPortfolioForm, { loader as evsPortfolioFormLoader, action as  evsPortfolioActionLoader } from '../pages/evs/PgEVSPortfolioForm';
+import PgEVSCandidateForm, { loader as evsCandidateFormLoader, action as  evsCandidateActionLoader } from '../pages/evs/PgEVSCandidateForm';
+import PgEVSVoters from '../pages/evs/PgEVSVoters';
+import PgAdminControl from '../components/evs/PgAdminControl';
 
 const user = useUserStore.getState().user
 const evsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'evs')
@@ -26,8 +36,8 @@ const EVSRoute:any =  {
          index:true
       },
       
-      // Election Page
-      {  path:':eid',
+      // Election Portal
+      {  path:':electionId',
          element: <EVSPage />,
          loader: pageLoader,
          children: [
@@ -70,18 +80,118 @@ const EVSRoute:any =  {
             },
          ] 
       },
-      
-      
-      // { 
-      //    path:'profile/:profileId/edit', 
-      //    element: <PgAISPProfileForm />, 
-      //    loader: aispProfileFormLoader,
-      //    action: aispProfileAction
-      // },
 
-      
-      
-
+      // Election Admin
+      {  path:'admin',
+         element: <EVSAdminLayout />,
+         loader: pageLoader,
+         children: [
+            {  
+               path:'elections',
+               element: <PgEVSElections />, 
+               loader: adminElectionsLoader,
+            },
+            { 
+               path:'elections/create', 
+               element: <PgEVSElectionForm />,
+               loader: evsElectionFormLoader,
+               action: evsElectionFormAction
+            },
+            {  
+               path:'elections/:electionId',
+               element: <PgEVSElection />, 
+               loader: adminElectionLoader,
+               children: [
+                  {
+                     path:'portfolios', 
+                     children: [
+                        // Portfolios
+                        {
+                           element: <PgEVSPortfolios />,
+                           loader: evsPortfoliosLoader,
+                           index: true
+                        },
+                        {
+                           path:':portfolioId/edit', 
+                           element: <PgEVSPortfolioForm />,
+                           loader: evsPortfolioFormLoader,
+                           action: evsPortfolioActionLoader
+                        },
+                        {
+                           path:'create', 
+                           element: <PgEVSPortfolioForm />,
+                           loader: evsPortfolioFormLoader,
+                           action: evsPortfolioActionLoader
+                        },
+                        { 
+                           path:':portfolioId/destroy', 
+                           action: evsPortfolioDestroy,
+                        },
+                     ]
+                  },
+                  {
+                     path:'candidates', 
+                     children: [
+                        {
+                           element: <PgEVSCandidates />,
+                           loader: evsCandidatesLoader,
+                           index: true
+                        },
+                        {
+                           path:'create', 
+                           element: <PgEVSCandidateForm />,
+                           loader: evsCandidateFormLoader,
+                           action: evsCandidateActionLoader
+                        },
+                        {
+                           path:':candidateId/edit', 
+                           element: <PgEVSCandidateForm />,
+                           loader: evsCandidateFormLoader,
+                           action: evsCandidateActionLoader
+                        },
+                        { 
+                           path:':candidateId/destroy', 
+                           action: evsCandidateDestroy,
+                        },
+                     ]
+                  },
+                  { 
+                     path:'voters', 
+                     element: <PgRegister />, 
+                     loader: registerLoader,
+                  },
+                  {  
+                     path:'controls',
+                     element: <PgAdminControl />, 
+                     loader: pageLoader,
+                  },
+                  {  
+                     path:'stage',
+                     element: <PgCandidate />, 
+                     loader: candiateLoader,
+                  },
+                  
+                  {  
+                     path:'results',
+                     element: <PgResult />, 
+                     loader: candiateLoader,
+                  },
+                
+               ]
+            },
+            { 
+               path:'elections/:electionId/edit', 
+               element: <PgEVSElectionForm />, 
+               loader: evsElectionFormLoader,
+               action: evsElectionFormAction
+            },
+            { 
+               path:'elections/:electionId/destroy', 
+               action: evsCandidateDestroy,
+            }
+            
+         ] 
+      },
    ]
 }
 

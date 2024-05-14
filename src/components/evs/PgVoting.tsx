@@ -8,7 +8,7 @@ import { useUserStore } from '../../utils/authService';
 import VotingCardNo from './VotingCardNo';
 
 export async function loader({ params }){
-  const data = await Service.fetchVotes(params.eid);
+  const data = await Service.fetchVotes(params.electionId);
   return { data }
 }
 
@@ -80,14 +80,14 @@ function PgVoting() {
 
   return (
     <div className="py-3 px-3 flex-1 h-full rounded bg-[#f1f1f1]/30 shadow-inner shadow-gray-500/30 space-y-6">
-        <h1 className="px-4 py-2.5 flex items-center justify-between text-lg md:text-xl rounded bg-blue-950/80 font-semibold text-white">
+        <h1 className="px-4 py-2.5 flex items-center justify-between text-lg md:text-xl rounded bg-primary/80 font-semibold text-white">
           <span className="text-white">VOTING SESSION</span>
-          <button onClick={() => setPageview(0)} className="p-0.5 px-2 rounded bg-purple-50 text-base text-blue-950 font-bold tracking-wider">START AGAIN</button>
+          <button onClick={() => setPageview(0)} className="p-0.5 px-2 rounded bg-purple-50 text-base text-primary font-bold tracking-wider">START AGAIN</button>
         </h1>
         <div className="py-4 px-2 rounded shadow-inner shadow-gray-500/20 bg-white space-y-4">
         <div className="pt-2 flex items-center justify-center space-x-2">
               { data?.portfolios?.map((row:any, i:number) => 
-                <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full border-4 ${0 == i ? 'bg-blue-950/80':'bg-slate-100'} `}></div>
+                <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full border-4 ${0 == i ? 'bg-primary/80':'bg-slate-100'} `}></div>
               )}
             </div>
             <div className="px-2 py-2 h-[35rem] bg-zinc-200/50 shadow-inner space-y-3 overflow-y-auto">
@@ -96,7 +96,7 @@ function PgVoting() {
                  pageview == i ?
                 ( <Fragment>
                   <div key={row.id} className="px-2 py-2 flex-1 bg-white rounded space-y-2">
-                    <h2 className="relative px-6 py-1 rounded text-xs md:text-lg text-center text-blue-950 font-extrabold tracking-widest bg-slate-200/70">
+                    <h2 className="relative px-6 py-1 rounded text-xs md:text-lg text-center text-primary font-extrabold tracking-widest bg-slate-200/70">
                       <span>{row?.title?.toUpperCase()}</span>
                       <button onClick={(e)=> choose(e,row?.id,(row?.candidates?.find((m:any) => m.orderNo == 0)?.id))} className="absolute right-4 top-1/2 -translate-y-[50%] px-3 py-0.5 bg-red-100 border-2 border-red-300 text-sm">SKIP</button>
                     </h2>
@@ -113,7 +113,7 @@ function PgVoting() {
                     </div>
                   </div>
                   
-                  { (allowSubmit() && i == data?.portfolios?.length - 1 )&& <button onClick={(e) => submitVote(e)} className="px-6 py-3 my-4 rounded bg-green-400 text-blue-950/70 w-full font-bold text-xl">SUBMIT FINAL VOTE</button> }
+                  { (allowSubmit() && i == data?.portfolios?.length - 1 )&& <button onClick={(e) => submitVote(e)} className="px-6 py-2 md:py-5 my-2 md:my-10 rounded bg-green-400 text-primary/90 w-full font-bold text-xl animate-pulse">SUBMIT FINAL VOTE</button> }
             
                   </Fragment>
                 ) : null )}

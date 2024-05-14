@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import Service from '../../utils/evsService'
+import { useNavigate } from 'react-router';
 
 type Props = {
     data:any;
@@ -9,8 +10,34 @@ type Props = {
 function EVSHeader({ data }: Props) {
   
   const [ period, setPeriod ] = useState('')
+  const [ stop, setStop ] = useState(moment().isSameOrBefore(data.endAt))
+  const navigate = useNavigate()
   const loadTime = () => {
-    setInterval(() => setPeriod(moment().format("HH:mm:ss")), 1000)
+   // setInterval(() => setPeriod(moment().format("HH:mm:ss")), 1000)
+    setInterval(async() => {
+      // const time = moment(data.endAt).diff(moment(),"minutes");
+      // const hh = Math.floor(time/60);
+      // const mm =  Math.round((time%60));
+      // const ss = Math.round(((time%60)/60));
+
+      const time = moment(data.endAt).diff(moment(),"seconds");
+      const time1 = moment(data.endAt).diff(moment(),"minutes");
+      let hh = Math.floor(time/3600);
+          hh = hh < 0 ? 0 : hh;
+      let mm =  Math.round((time1%(60)));
+          mm = mm < 0 ? 0 : mm;
+      let ss = Math.round(time%60);
+          ss = ss < 0 ? 0 : ss;
+      const output = `${hh.toString().length == 1 ? '0'+hh : hh}:${mm.toString().length == 1 ? '0'+mm : mm}:${ss.toString().length == 1 ? '0'+ss : ss }`
+      setPeriod(output)
+      // Auto-stop Feature
+      if(data.autoStop && output == '00:00:00' && stop) {
+         await Service.updateElection(data?.id, { action:'ENDED' });
+         setStop(false)
+         navigate(0)
+      }
+
+    }, 1000)
   }
   useEffect(() => {
     loadTime()
@@ -29,8 +56,13 @@ function EVSHeader({ data }: Props) {
                 <span className="hidden md:flex">Next</span>
             </button> */}
         </div>
-        <div className="px-4 py-2 md:py-1 md:px-3 w-full md:w-64 rounded bg-[#f1f1f1]/30 shadow-inner shadow-gray-500/30 space-y-6">
-            <div className="text-center text-xl md:text-3xl text-blue-950 font-bold font-mono">{period}</div>
+        <div className="flex items-center space-x-3">
+          <div className="px-4 py-2 md:py-1 md:px-3 w-full md:w-64 rounded bg-[#f1f1f1]/30 shadow-inner shadow-gray-500/30 space-y-6">
+              <div className="text-center text-xl md:text-3xl text-blue-950 font-bold font-mono">{period}</div>
+          </div>
+          {/* <div className="px-4 py-2 md:py-1 md:px-3 w-full md:w-20 rounded bg-[#f1f1f1]/30 shadow-inner shadow-gray-500/30 space-y-6">
+              <div className="text-center text-xl md:text-3xl text-blue-950 font-bold font-mono">stop</div>
+          </div> */}
         </div>
     </section>
   )

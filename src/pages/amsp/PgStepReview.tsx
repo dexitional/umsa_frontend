@@ -31,7 +31,6 @@ export async function action({ request }) {
     data.choiceId = formData.get('choiceId');
   console.log(data)
   let resp = await Service.saveStepReview(data);
-  console.log("REVIEW:", resp)
   if(resp){
     return redirect('/amsp/dash')
   } return null
@@ -49,7 +48,7 @@ export async function loader({ params }){
 function PgStepReview({}: Props) {
 
   const { data,applicant } :any = useLoaderData();
-  console.log(data.choice[0].id)
+  console.log(data)
 
   const finalize = () => {
 
@@ -71,7 +70,7 @@ function PgStepReview({}: Props) {
             </div>
          </section>
          <section>
-             <div className=" p-2 w-fit md:w-full md:py-4 md:px-6 flex flex-col space-y-3 md:space-y-6 border rounded-md md:rounded-xl bg-white overflow-x-scroll">
+             <div className=" p-2 w-full md:w-full md:py-4 md:px-6 flex flex-col space-y-3 md:space-y-6 border rounded-md md:rounded-xl bg-white overflow-x-scroll">
                 {/* <Outlet /> */}
                 <FormTemplate data={{ applicant,data }}/>
              </div> 

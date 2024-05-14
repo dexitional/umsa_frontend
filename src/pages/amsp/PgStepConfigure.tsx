@@ -8,6 +8,7 @@ import Logo from '../../assets/img/logo.png'
 import None from '../../assets/img/add_photo.png'
 import toast from 'react-hot-toast'
 import moment from 'moment'
+import { PiNumberCircleOneBold, PiNumberCircleTwoBold } from 'react-icons/pi'
 
 type Props = {}
 
@@ -46,6 +47,7 @@ export async function loader({ params }){
   const voucher = await Service.fetchVoucher(serial)
   const sorted = await Service.fetchShortlist(serial)
   const data = await Service.fetchStepApplicant(serial)
+  console.log(serial,data)
   return { data,stages,applytypes,voucher,sorted }
 }
 
@@ -55,7 +57,7 @@ function PgStepConfigure({}: Props) {
   const { data,stages,applytypes,voucher,sorted }: any = useLoaderData();
   const [ file, setFile ] = useState(data?.photo || null);
   const [ form, setForm ]:any = useState(data);
-  const [ show, setShow ]:any = useState(data?.submitted == 0);
+  const [ show, setShow ]:any = useState(data?.submitted ? false: true );
   
   const photoChange = async (e) => {
     const f = e.target.files[0];
@@ -82,8 +84,8 @@ function PgStepConfigure({}: Props) {
                  <h1 className="px-3 md:px-4 py-1 w-fit bg-primary text-white rounded text-lg md:text-2xl font-medium md:tracking-wider">{voucher?.admission?.title}</h1>
                  <div className="text-lg md:tracking-wider">Please choose an action from the list of services below.</div>
                  <ul className="list-inside list-disc accent-red-700">
-                  <li>Applications are currently <b>{ voucher.admission.applyPaused ? 'halted temporarily': moment(voucher.admission.applyEnd).isAfter(moment()) ? 'closed': 'opened and on-going' }.</b></li>
-                  <li>Please complete your application before midnight of <b>{moment(voucher.admission.applyEnd).format("LL")}.</b></li>
+                  <li>Applications are currently <b>{ voucher?.admission?.applyPause ? 'halted temporarily': moment().isAfter(moment(voucher?.admission?.applyEnd)) ? 'closed': 'opened and on-going' }.</b></li>
+                  <li>Please complete your application before midnight of <b>{moment(voucher?.admission?.applyEnd).format("LL")}.</b></li>
                  </ul>
               </div>
             </div>
@@ -91,7 +93,8 @@ function PgStepConfigure({}: Props) {
          { show && (
          <Form method="post" onChange={formChange} encType="multipart/form-data" className="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-2">
              {/* Record */}
-             <div className="p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
+             <div className="relative p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
+                <PiNumberCircleOneBold className="absolute h-9 w-9 right-2 top-2 text-primary-accent" />
                 <h1 className="py-0.5 px-2 md:px-4 w-fit text-xs md:text-base font-semibold rounded-md bg-primary/60 text-white tracking-widest uppercase -skew-x-6">APPLICANT PHOTO UPLOAD</h1>
                 <div className="px-2 space-y-4">
                   <div className="w-full flex flex-col space-y-3 items-center justify-center">
@@ -103,7 +106,8 @@ function PgStepConfigure({}: Props) {
                   </div>
                 </div>
              </div>
-             <div className="p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
+             <div className="relative p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
+                <PiNumberCircleTwoBold className="absolute h-9 w-9 right-2 top-2 text-primary-accent" />
                 <div className="px-2 space-y-4">
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-lg text-gray-500 font-medium">Admission Group  <Asterix /></span>
@@ -113,7 +117,7 @@ function PgStepConfigure({}: Props) {
                           //if(row.categoryId != voucher.categoryId ) return
                          if((row.categoryId == voucher.categoryId && row.sellType == voucher.sellType) || (row.categoryId == 'UG' && voucher.sellType == 1) || (row.categoryId == 'PG' && voucher.sellType == 2)) return (
                             <option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>
-                        )})}
+                         )})}
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
@@ -138,10 +142,10 @@ function PgStepConfigure({}: Props) {
          )}
         { !show && (
          <>
-         <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 bg-white">
-            { sorted?.admitted && (<NavLink to={`/amsp/dash/letter`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border bg-slate-100 text-gray-600 font-medium tracking-widest text-center"}>Print Admission Letter</NavLink>)}
-            { !sorted?.admitted && (<NavLink to={`/amsp/dash/form`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border bg-slate-100 text-gray-600 font-medium tracking-widest text-center"}>Print Applicant Form</NavLink>)}
-            { !sorted && (<button onClick={updateForm} className="my-6 mx-3 px-6 py-3 flex-1 bg-slate-100 text-gray-600 font-medium tracking-widest text-center">Update Submitted Form</button>)}
+         <section className="px-6 py-4 w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 bg-white">
+            { sorted?.admitted && (<NavLink to={`/amsp/dash/letter`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border rounded bg-slate-100 text-gray-600 font-semibold tracking-widest text-center"}>Print Admission Letter</NavLink>)}
+            { !sorted?.admitted && (<NavLink to={`/amsp/dash/form`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border rounded bg-slate-100 text-gray-600 font-semibold tracking-widest text-center"}>Print Applicant Form</NavLink>)}
+            { !sorted && (<button onClick={updateForm} className="my-6 px-6 py-3 h-12 self-center flex-1 rounded bg-primary/70 hover:bg-primary/60 transition text-white font-semibold tracking-widest text-center">Update Submitted Form</button>)}
          </section>
          <section>
             <Outlet />

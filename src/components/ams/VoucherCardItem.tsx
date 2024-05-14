@@ -44,13 +44,13 @@ function VoucherCardItem({ data }: Props) {
         { data.applicantName && 
         <div className="flex items-center space-x-4">
             <IoMdPerson className="h-4 w-5 text-primary-accent/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Buyer: &nbsp;&nbsp;<b>{data.applicantName}</b></span>
+            <span className="px-2 py-0.5 bg-green-50 rounded border text-xs text-gray-500">Buyer: &nbsp;&nbsp;<b>{data.applicantName}</b></span>
         </div>
         }
         { data.applicantPhone && 
         <div className="flex items-center space-x-4">
             <FaPhoneAlt className="h-4 w-5 text-primary-accent/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Phone: &nbsp;&nbsp;<b>{data.applicantPhone}</b></span>
+            <span className="px-2 py-0 bg-green-50 rounded border text-xs text-gray-500">Phone: &nbsp;&nbsp;<b>{data.applicantPhone}</b></span>
         </div>
         }
     </div>

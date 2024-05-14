@@ -22,7 +22,7 @@ export const useUserStore = create<StoreState>()(
         search: '',
         courses: [],
         stepUrl: {},
- 
+        electionData: null,
         loadUserData: async() => {  
           const storageToken = cookies.get("@Auth:token")
           if (storageToken) {
@@ -35,7 +35,7 @@ export const useUserStore = create<StoreState>()(
 
         loadStudentVote: async() => {  
            const user =  get().user;
-           const data = await Service.fetchVote(user?.user?.tag);
+           const data = await Service.fetchVotes(user?.user?.tag);
            if(data?.length) set({ lasChosen: data && data[0] })
            else set({ lasChosen: null })
         },

@@ -15,7 +15,6 @@ export async function action({ request }){
   const formData = await request.formData()
   let mdata = Object.fromEntries(formData)
   let data:any = [];
-  console.log(mdata)
   for(let i = 0; i < mdata.count; i++){
     
     const scount = Number(mdata[`scount_${i}`]);
@@ -57,7 +56,7 @@ export async function loader({ params }){
   const subjects = await Service.fetchSubjects()
   const grades = await Service.fetchGradeWeights()
   const certcats = await Service.fetchCertCategories()
-  const data = await Service.fetchStepResult(serial)
+  const data = await Service.fetchStepResult(serial) || [{ grades: [{}]}]
   console.log(data)
   return { data,subjects,certcats,grades,stepUrl }
 }
@@ -66,7 +65,7 @@ function PgStepResult({}: Props) {
   
   const navigate = useNavigate()
   const { data,subjects,certcats,grades,stepUrl }: any = useLoaderData();
-  const [ rows,setRows ] = useState( data || [{}]);
+  const [ rows,setRows ] = useState( data || [{ grades: [{}]}]);
   
   const years = () => {
     var yrs:any = [];
@@ -233,7 +232,7 @@ function PgStepResult({}: Props) {
              </div>
              ))}
 
-            <div className="p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-66">
+            <div className="p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-66">
                <div className="px-2 space-y-4">
                   <div className="flex items-center space-x-4">
                     <input type="hidden" name="count" value={Number(rows?.length)}/>

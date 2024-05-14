@@ -9,18 +9,19 @@ import ListHeading from './ListHeading';
 
 type Props = {
     data: any;
+    count: number
 }
 
-function DepartmentListItem({ data }: Props) {
+function DepartmentListItem({ data, count }: Props) {
   return (
     <div className="px-3 md:px-6 pb-4 md:pb-4 grid md:grid-cols-7 gap-y-4 md:gap-y-0 md:gap-x-2 md:place-items-center text-gray-500 border-b border-slate-200 hover:bg-slate-50/50 group">
         <div className="md:col-span-2 md:place-self-start flex flex-col space-y-2 md:space-y-0">
            <ListHeading title="Department Name"/>
-           <span className="px-2 md:px-0">{data?.title}</span>
+           <span className="px-2 md:px-0 leading-5">{count+1}.&nbsp;&nbsp;{data?.title}</span>
         </div>
         <div className="md:col-span-2 md:place-self-start capitalize flex flex-col space-y-2 md:space-y-0">
           <ListHeading title="Faculty Name"/>
-          <span className="px-2 md:px-0">{data?.level1?.title}</span>
+          <span className="px-2 md:px-0 leading-5">{data?.level1?.title}</span>
         </div>
         <div className="flex flex-col space-y-2  md:space-y-0 md:text-center">
           <ListHeading title="Programs" />

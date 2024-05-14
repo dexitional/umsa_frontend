@@ -16,7 +16,7 @@ function DepartmentListView({ data }: Props) {
                <div>Action</div>
             </div>
             <div className="grid grid-cols-1 gap-y-4  text-xs text-slate-600 font-roboto font-medium tracking-widest">
-              { data && data?.map((row:any) => (<DepartmentListItem key={row.id} data={row} />))}
+              { data && data?.map((row:any, i: number) => (<DepartmentListItem key={row.id} data={row} count={i} />))}
               { !data && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1>)}
             </div>
          </div>
