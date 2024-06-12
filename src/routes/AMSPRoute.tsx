@@ -13,7 +13,6 @@ import PgStepDocument, { loader as stepDocumentLoader, action as stepDocumentAct
 import PgStepReview, { loader as stepReviewLoader, action as stepReviewAction } from '../pages/amsp/PgStepReview';
 import PgStepPrintForm from '../pages/amsp/PgStepPrintForm';
 import PgStepPrintLetter, { loader as stepPrintLetterLoader } from '../pages/amsp/PgStepPrintletter';
-import PgStepNotice, { loader as stepNoticeLoader } from '../pages/amsp/PgStepNotice';
 
 const user = useUserStore.getState().user
 // const dricRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'dric')
