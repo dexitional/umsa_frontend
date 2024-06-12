@@ -2,13 +2,69 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 const { REACT_APP_API_URL } = import.meta.env;
 
-class DricService {
-    
-    /* FUNDERS */
+class FmsService {
+   
+//     /* Session */
+//     this.router.get('/bills', this.controller.fetchBills);
+//     this.router.get('/bills/list', this.controller.fetchBillList);
+//     this.router.get('/bills/:id', this.controller.fetchBill);
+//     this.router.get('/bills/:id/receipients', this.controller.billReceivers);
+//     this.router.post('/bills/:id/include', this.controller.includeBill);
+//     this.router.post('/bills/:id/exclude', this.controller.excludeBill);
+//     this.router.get('/bills/:id/activate', this.controller.activateBill);
+//     this.router.get('/bills/:id/revoke', this.controller.revokeBill);
+//     this.router.post('/bills', this.controller.postBill);
+//     this.router.patch('/bills/:id', this.controller.updateBill);
+//     this.router.delete('/bills/:id', this.controller.deleteBill);
 
-    async fetchFunders(){
+
+    
+    
+    /* Accounts & Debtors */
+
+    async fetchAccounts(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/funders`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/accounts?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+    }
+
+    async fetchDebts(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/accounts/debts?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+    }
+
+    async retireAccount(tag){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/accounts/retire/${encodeURIComponent(tag)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
+   
+
+     /* Charges */
+
+    async fetchCharges(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/charges?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -18,9 +74,9 @@ class DricService {
         }
     }
 
-    async fetchFunder(funderId){
+    async fetchCharge(chargeId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/funders/${funderId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/charges/${chargeId}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -30,9 +86,9 @@ class DricService {
         }
     }
 
-    async postFunder(data){
+    async postCharge(data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/funders`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/charges`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -46,9 +102,9 @@ class DricService {
         }
     }
 
-    async updateFunder(funderId,data){
+    async updateCharge(chargeId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/funders/${funderId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/fms/charges/${chargeId}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -62,9 +118,9 @@ class DricService {
         }
     }
 
-    async deleteFunder(funderId){
+    async deleteCharge(chargeId){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/funders/${funderId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/fms/charges/${chargeId}`)
             if(res.status == 200){
                toast.success("Record deleted successfully!")
                return res.data
@@ -77,35 +133,59 @@ class DricService {
     }
 
 
-    /* PAYMENTS */
+    /* Payments */
 
-    async fetchPayments(){
+    async fetchPayments(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/payments`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/payments?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
+        }
+    }
+
+    async fetchPaymentOthers(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/payments/other?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+    }
+
+    async fetchPaymentVouchers(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/payments/voucher?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
         }
     }
 
     async fetchPayment(paymentId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/payments/${paymentId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/payments/${paymentId}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
         
         } catch (error) {
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
     async postPayment(data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/payments`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/payments`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -115,13 +195,13 @@ class DricService {
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
     async updatePayment(paymentId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/payments/${paymentId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/fms/payments/${paymentId}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -131,13 +211,13 @@ class DricService {
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
     async deletePayment(paymentId){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/payments/${paymentId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/fms/payments/${paymentId}`)
             if(res.status == 200){
                toast.success("Record deleted successfully!")
                return res.data
@@ -145,16 +225,16 @@ class DricService {
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
 
-    /* CLAIMS */
+    /* Services */
 
-    async fetchClaims(){
+    async fetchServices(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/claims`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/services?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -164,9 +244,9 @@ class DricService {
         }
     }
 
-    async fetchClaim(claimId){
+    async fetchService(serviceId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/claims/${claimId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/services/${serviceId}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -176,9 +256,9 @@ class DricService {
         }
     }
 
-    async postClaim(data){
+    async postService(data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/claims`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/services`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -192,9 +272,9 @@ class DricService {
         }
     }
 
-    async updateClaim(claimId,data){
+    async updateService(serviceId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/claims/${claimId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/fms/services/${serviceId}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -208,9 +288,9 @@ class DricService {
         }
     }
 
-    async deleteClaim(claimId){
+    async deleteService(serviceId){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/claims/${claimId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/fms/services/${serviceId}`)
             if(res.status == 200){
                toast.success("Record deleted successfully!")
                return res.data
@@ -222,11 +302,11 @@ class DricService {
         }
     }
 
-    /* PROJECTS */
+    /* Voucher Costs */
 
-    async fetchProjects(){
+    async fetchVsales(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/projects`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/vsales?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -236,9 +316,9 @@ class DricService {
         }
     }
 
-    async fetchProject(projectId){
+    async fetchVsale(id){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/projects/${projectId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/vsales/${id}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -248,9 +328,9 @@ class DricService {
         }
     }
 
-    async postProject(data){
+    async postVsale(data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/projects`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/vsales`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -264,9 +344,9 @@ class DricService {
         }
     }
 
-    async updateProject(projectId,data){
+    async updateVsale(id,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/projects/${projectId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/fms/vsales/${id}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -280,9 +360,9 @@ class DricService {
         }
     }
 
-    async deleteProject(projectId){
+    async deleteVsale(id){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/projects/${projectId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/fms/vsales/${id}`)
             if(res.status == 200){
                toast.success("Record deleted successfully!")
                return res.data
@@ -295,23 +375,35 @@ class DricService {
     }
 
 
-     /* PHASES */
+    /* Bills  */
 
-    //  async fetchPhases(projectId){
-    //     try {
-    //         const res = await axios.get(`${REACT_APP_API_URL}/dric/${projectId}/phases`)
-    //         if(res.status == 200 || res.status == 204)
-    //           return res.data
-    //         else throw new(res.data.message)
-        
-    //     } catch (error) { 
-    //         toast.error(error.message)
-    //     }
-    // }
-
-    async fetchPhase(phaseId){
+    async fetchBills(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/phases/${phaseId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async fetchBillList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async billReceivers(id){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/receipients`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -321,9 +413,73 @@ class DricService {
         }
     }
 
-    async postPhase(data){
+    async includeBill(id,data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/phases`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/bills/${id}/include`, data,{
+                headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async excludeBill(id,data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/bills/${id}/exclude`, data,{
+                headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async activateBill(id){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/activate`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async revokeBill(id){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/revoke`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async fetchBill(id){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async postBill(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/bills`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -337,9 +493,9 @@ class DricService {
         }
     }
 
-    async updatePhase(phaseId,data){
+    async updateBill(id,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/phases/${phaseId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/fms/bills/${id}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -353,9 +509,9 @@ class DricService {
         }
     }
 
-    async deletePhase(phaseId){
+    async deleteBill(id){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/phases/${phaseId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/fms/bills/${id}`)
             if(res.status == 200){
                toast.success("Record deleted successfully!")
                return res.data
@@ -366,332 +522,8 @@ class DricService {
             toast.error(error.message)
         }
     }
-
-
-    /* ACTIVITIES */
-
-    async fetchActivities(phaseId){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/phases/${phaseId}`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async fetchActivity(activityId){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/activities/${activityId}`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-    async postActivity(data){
-        try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/activities`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record created successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async updateActivity(activityId,data){
-        try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/activities/${activityId}`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record updated successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async deleteActivity(activityId){
-        try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/activities/${activityId}`)
-            if(res.status == 200){
-               toast.success("Record deleted successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-    /* INVESTIGATORS */
-
-    async fetchInvestigators(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/investigators`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async fetchInvestigator(InvestigatorId){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/investigators/${InvestigatorId}`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-    async postInvestigator(data){
-        try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/investigators`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record created successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async updateInvestigator(InvestigatorId,data){
-        try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/investigators/${InvestigatorId}`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record updated successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async deleteInvestigator(InvestigatorId){
-        try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/investigators/${InvestigatorId}`)
-            if(res.status == 200){
-               toast.success("Record deleted successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-    /* PERSONNELS */
-
-    async fetchPersonels(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/personels`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async fetchPersonel(personelId){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/personels/${personelId}`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-    async postPersonel(data){
-        try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/personels`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record created successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async updatePersonel(personelId,data){
-        try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/personels/${personelId}`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record updated successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async deletePersonel(personelId){
-        try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/personels/${personelId}`)
-            if(res.status == 200){
-               toast.success("Record deleted successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-    /* ROLES */
-
-    async fetchRoles(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/roles?appId=6`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async fetchRole(roleId){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/roles/${roleId}`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-    async postRole(data){
-        try {
-            const res = await axios.post(`${REACT_APP_API_URL}/dric/roles`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record created successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async updateRole(roleId,data){
-        try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/dric/roles/${roleId}`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record updated successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async deleteRole(roleId){
-        try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/dric/roles/${roleId}`)
-            if(res.status == 200){
-               toast.success("Record deleted successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-    /* COUNTRIES */
-
-    async fetchCountries(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/countries`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    /* DASHBOARD */
-
-    async fetchDashboard(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/dric/dashboard`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-    /** LETACABIN SYSTEM ***/
 
     
 }
 
-export default new DricService();
+export default new FmsService();

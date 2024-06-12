@@ -8,20 +8,21 @@ import PgAMSLetters, { loader as lettersLoader, action as amsLetterDestroy } fro
 import PgAMSLetter, { loader as amsLetterLoader } from '../pages/ams/PgAMSLetter';
 import PgAMSLetterForm, { loader as amsLetterFormLoader, action as amsLetterFormAction } from '../pages/ams/PgAMSLetterForm';
 import PgAMSVouchers, { loader as vouchersLoader, action as amsVoucherRecover } from '../pages/ams/PgAMSVouchers';
-import PgAMSVoucherForm, { loader as amsVoucherFormLoader, action as amsVoucherFormAction } from '../pages/ams/PgAMSVoucherForm';
-import PgAMSVoucherSellForm, { loader as amsVoucherSellFormLoader, action as amsVoucherSellFormAction } from '../pages/ams/PgAMSVoucherSellForm';
-import PgAMSApplicants, { loader as applicantsLoader, action as amsApplicantDestroy } from '../pages/ams/PgAMSApplicants';
-import PgAMSApplicantForm, { loader as amsApplicantFormLoader, action as amsApplicantFormAction } from '../pages/ams/PgAMSApplicantForm';
-import PgAMSApplicant, { loader as applicantLoader, action as amsApplicantShortlist } from '../pages/ams/PgAMSApplicant';
 import PgAMSShortlists, { loader as shortlistsLoader, action as amsShortlistDestroy } from '../pages/ams/PgAMSShortlists';
 import PgAMSShortlist, { loader as shortlistLoader } from '../pages/ams/PgAMSShortlist';
 import PgAMSShortlistForm, { loader as amsShortlistFormLoader, action as amsShortlistFormAction } from '../pages/ams/PgAMSShortlistForm';
 import PgAMSMatriculants, { loader as matriculantsLoader, action as amsMatriculantDestroy } from '../pages/ams/PgAMSMatriculants';
 import PgAMSMatriculant, { loader as amsMatriculantLoader } from '../pages/ams/PgAMSMatriculant';
 import FMSLayout from '../components/fms/FMSLayout';
+import PgFMSAccounts, { loader as accountsLoader } from '../pages/fms/PgFMSAccounts';
+import PgFMSDebts, { loader as debtsLoader } from '../pages/fms/PgFMSDebts';
+import PgFMSPayments, { loader as paymentsLoader } from '../pages/fms/PgFMSPayments';
+import PgFMSTransacts, { loader as transactsLoader } from '../pages/fms/PgFMSTransacts';
+import PgFMSBills, { loader as billsLoader } from '../pages/fms/PgFMSBills';
+import PgFMSBillForm from '../pages/fms/PgFMSBillForm';
 
 const user = useUserStore.getState().user
-const amsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ams')
+const fmsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'fms')
   
 const FMSRoute:any =  { 
    path: "fms",
@@ -31,13 +32,13 @@ const FMSRoute:any =  {
       /* Student Bills Module */
       { 
          path:'bills', 
-         element: <PgAMSSessions />,
-         loader: sessionsLoader,
-         index: true
+         element: <PgFMSBills />,
+         loader: billsLoader,
+         //index: true
       },
       { 
          path:'bills/create', 
-         element: <PgAMSSessionForm />,
+         element: <PgFMSBillForm />,
          loader: amsSessionFormLoader,
          action: amsSessionFormAction
       },
@@ -47,7 +48,7 @@ const FMSRoute:any =  {
       },
       { 
          path:'bills/:billId/edit', 
-         element: <PgAMSSessionForm />, 
+         element: <PgFMSBillForm />, 
          loader: amsSessionFormLoader,
          action: amsSessionFormAction
       },
@@ -84,64 +85,31 @@ const FMSRoute:any =  {
       /* Student Accounts Module */
       { 
          path:'accounts', 
-         element: <PgAMSVouchers />,
-         loader: vouchersLoader,
+         element: <PgFMSAccounts />,
+         loader: accountsLoader,
+         index: true
       },
       { 
-         path:'accounts/create', 
-         element: <PgAMSVoucherForm />,
-         loader: amsVoucherFormLoader,
-         action: amsVoucherFormAction
-      },
-      { 
-         path:'accounts/:voucherId/sell', 
-         element: <PgAMSVoucherSellForm />, 
-         loader: amsVoucherSellFormLoader,
-         action: amsVoucherSellFormAction
-      },
-      { 
-         path:'accounts/:voucherId/recover', 
+         path:'accounts/:accountId/retire', 
          action: amsVoucherRecover,
       },
       { 
-         path:'accounts/:voucherId/reset', 
+         path:'accounts/:accountId/fine', 
          action: amsVoucherRecover,
       },
 
       /* Student Debtors Module */
       { 
          path:'debtors', 
-         element: <PgAMSApplicants />,
-         loader: applicantsLoader,
+         element: <PgFMSDebts />,
+         loader: debtsLoader,
       },
-      { 
-         path:'debtors/create', 
-         element: <PgAMSApplicantForm />,
-         loader: amsApplicantFormLoader,
-         action: amsApplicantFormAction
-      },
-      { 
-         path:'debtors/:debtorId', 
-         element: <PgAMSApplicant />,
-         loader: applicantLoader,
-      },
-      { 
-         path:'debtors/:debtorId/shortlist', 
-         action: amsApplicantShortlist,
-      },
-      { 
-         path:'debtors/:debtorId/edit', 
-         element: <PgAMSApplicantForm />, 
-         loader: amsApplicantFormLoader,
-         action: amsApplicantFormAction
-      },
-
-
+      
       /* Fees Payments Module */
       { 
          path:'payments', 
-         element: <PgAMSShortlists />,
-         loader: shortlistsLoader,
+         element: <PgFMSPayments />,
+         loader: paymentsLoader,
       },
       { 
          path:'payments/create', 
@@ -168,8 +136,8 @@ const FMSRoute:any =  {
        /* Other Payments Module */
        { 
          path:'transacts', 
-         element: <PgAMSMatriculants />,
-         loader: matriculantsLoader,
+         element: <PgFMSTransacts />,
+         loader: transactsLoader,
       },
       { 
          path:'transacts/:transactId', 

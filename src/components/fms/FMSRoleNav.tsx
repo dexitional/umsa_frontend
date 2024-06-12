@@ -26,12 +26,12 @@ function FMSRoleNav({ user }: Props) {
         <Menu.Items className="z-20 absolute top-13 left-0 min-h-max w-full border-b-4 border-blue-100/90 bg-blue-100 backdrop-blur-sm backdrop-opacity-70 bg-opacity-70">
           <div className="py-4 px-6 flex-1 flex flex-col space-y-1 md:space-y-4">
            {['ums techlead','ums admin'].includes(aisRole?.role_name?.toLowerCase()) && <Menu.Item as={AISNavItem} title="Reports" url="System Reports" Icon={FaChartBar}></Menu.Item>}
-            <Menu.Item as={AISNavItem} title="Session Module" url="sessions" Icon={GrDashboard}></Menu.Item>
+            {/* <Menu.Item as={AISNavItem} title="Session Module" url="sessions" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Voucher Module" url="vouchers" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Letters Module" url="letters" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Applicant Module" url="applicants" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Shortlist Module" url="shortlists" Icon={GrDashboard}></Menu.Item>
-            <Menu.Item as={AISNavItem} title="Admitted Students" url="matriculants" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Admitted Students" url="matriculants" Icon={GrDashboard}></Menu.Item> */}
           </div>
         </Menu.Items>
     </Menu>

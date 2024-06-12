@@ -106,7 +106,7 @@ function Home() {
                     desc="Manage student financial records, payments, bills, charges and other transactions." 
                     Icon={SiCashapp} 
                     links={[
-                      { title:'Goto Application', url:'#'},
+                      { title:'Goto Application', url:'/fms/accounts'},
                     ]} 
                  />
                  }
