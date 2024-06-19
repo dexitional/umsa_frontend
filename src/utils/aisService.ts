@@ -395,7 +395,7 @@ class Service {
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
      }
 
@@ -407,7 +407,7 @@ class Service {
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 

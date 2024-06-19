@@ -1,9 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
 import { useUserStore } from '../utils/authService';
-import AMSLayout from '../components/ams/AMSLayout';
-import PgAMSSessions, { loader as sessionsLoader, action as amsSessionDestroy } from '../pages/ams/PgAMSSessions';
-import PgAMSSessionForm, { loader as amsSessionFormLoader, action as amsSessionFormAction } from '../pages/ams/PgAMSSessionForm';
 import PgAMSLetters, { loader as lettersLoader, action as amsLetterDestroy } from '../pages/ams/PgAMSLetters';
 import PgAMSLetter, { loader as amsLetterLoader } from '../pages/ams/PgAMSLetter';
 import PgAMSLetterForm, { loader as amsLetterFormLoader, action as amsLetterFormAction } from '../pages/ams/PgAMSLetterForm';
@@ -18,8 +15,12 @@ import PgFMSAccounts, { loader as accountsLoader } from '../pages/fms/PgFMSAccou
 import PgFMSDebts, { loader as debtsLoader } from '../pages/fms/PgFMSDebts';
 import PgFMSPayments, { loader as paymentsLoader } from '../pages/fms/PgFMSPayments';
 import PgFMSTransacts, { loader as transactsLoader } from '../pages/fms/PgFMSTransacts';
-import PgFMSBills, { loader as billsLoader } from '../pages/fms/PgFMSBills';
-import PgFMSBillForm from '../pages/fms/PgFMSBillForm';
+import PgFMSBills, { loader as billsLoader, action as billsDestroy } from '../pages/fms/PgFMSBills';
+import PgFMSBillForm, { loader as billFormLoader, action as billFormAction } from '../pages/fms/PgFMSBillForm';
+import PgFMSBill, { loader as billLoader, action as billAction } from '../pages/fms/PgFMSBill';
+import PgFMSBillReceiver, { loader as fmsReceiverLoader } from '../pages/fms/PgFMSBillReceiver';
+import PgFMSBillActivity, { loader as  fmsActivityLoader } from '../pages/fms/PgFMSBillActivity';
+import PgFMSBillAccount, { loader as  fmsActionLoader } from '../pages/fms/PgFMSBillAccount';
 
 const user = useUserStore.getState().user
 const fmsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'fms')
@@ -37,20 +38,43 @@ const FMSRoute:any =  {
          //index: true
       },
       { 
+         path:'bills/:billId', 
+         element: <PgFMSBill />,
+         loader: billLoader,
+         children: [
+            {
+               path:'actions', 
+               element: <PgFMSBillAccount />,
+               loader: fmsActionLoader,
+               index: true
+            },
+            {
+               path:'receivers', 
+               element: <PgFMSBillReceiver />,
+               loader: fmsReceiverLoader,
+            },
+            {
+               path:'activity', 
+               element: <PgFMSBillActivity />,
+               loader: fmsActivityLoader,
+            }
+         ]
+      },
+      { 
          path:'bills/create', 
          element: <PgFMSBillForm />,
-         loader: amsSessionFormLoader,
-         action: amsSessionFormAction
+         loader: billFormLoader,
+         action: billFormAction
       },
       { 
          path:'bills/:billId/destroy', 
-         action: amsSessionDestroy,
+         action: billsDestroy,
       },
       { 
          path:'bills/:billId/edit', 
          element: <PgFMSBillForm />, 
-         loader: amsSessionFormLoader,
-         action: amsSessionFormAction
+         loader: billFormLoader,
+         action: billFormAction
       },
 
 

@@ -418,9 +418,12 @@ class FmsService {
             const res = await axios.post(`${REACT_APP_API_URL}/fms/bills/${id}/include`, data,{
                 headers: { "Content-Type" : "application/json" }
             })
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
+            if(res.status == 200){
+                toast.success(`Student added to Bill Inclusion List !`)
+                return res.data
+             } else if(res.status == 204){
+                return res.data
+             } else throw new(res.data.message)
         
         } catch (error) {
             toast.error(error.message)
@@ -432,9 +435,12 @@ class FmsService {
             const res = await axios.post(`${REACT_APP_API_URL}/fms/bills/${id}/exclude`, data,{
                 headers: { "Content-Type" : "application/json" }
             })
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
+            if(res.status == 200){
+                toast.success(`Student added to Bill Exclusion List !`)
+                return res.data
+             } else if(res.status == 204){
+                return res.data
+             } else throw new(res.data.message)
         
         } catch (error) {
             toast.error(error.message)
@@ -444,9 +450,12 @@ class FmsService {
     async activateBill(id){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/activate`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
+            if(res.status == 200){
+                toast.success(`Bill Published !`)
+                return res.data;
+             } else if(res.status == 204){
+                return res.data;
+             } else throw new(res.data.message)
         
         } catch (error) {
             toast.error(error.message)
@@ -456,9 +465,12 @@ class FmsService {
     async revokeBill(id){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/revoke`)
-            if(res.status == 200 || res.status == 204)
+            if(res.status == 200){
+               toast.success(`Bill Revoked !`)
                return res.data
-            else throw new(res.data.message)
+            } else if(res.status == 204){
+               return res.data
+            } else throw new(res.data.message)
         
         } catch (error) {
             toast.error(error.message)
@@ -516,6 +528,22 @@ class FmsService {
                toast.success("Record deleted successfully!")
                return res.data
             } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+     /* Helpers */
+
+    //  Fetch Bank Accounts
+     async fetchBankaccList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bankaccs/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
             else throw new(res.data.message)
         
         } catch (error) { 

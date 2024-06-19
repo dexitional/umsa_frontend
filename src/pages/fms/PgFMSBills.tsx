@@ -8,6 +8,14 @@ type Props = {}
 
 
 
+export async function action({ request }) {
+  const search = new URL(request.url).searchParams.get('search') || '';
+  const page = new URL(request.url).searchParams.get('page') || 1;
+  const data = await Service.fetchBills(search,page);
+  console.log(data)
+  return { data, search, page }
+}
+
 export async function loader({ request }) {
   const search = new URL(request.url).searchParams.get('search') || '';
   const page = new URL(request.url).searchParams.get('page') || 1;

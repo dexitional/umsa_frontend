@@ -19,8 +19,8 @@ type Props = {
 
 function DebtCardItem({ data }: Props) {
   return (
-  <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.id}</h2>
+  <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-2 md:group">
+    <h2 className="text-base md:text-base font-semibold font-noto text-gray-500 uppercase">{data?.id}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="w-full flex items-center justify-between space-x-2">
           <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.fname+' '+(data?.mname ? data?.mname+' ': '')+data?.lname).toUpperCase()}</div>
@@ -28,7 +28,7 @@ function DebtCardItem({ data }: Props) {
       </div>
       <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
     </div>
-    <div className="space-y-1 font-roboto">
+    <div className="space-y-1.5 font-roboto">
         <div className="flex items-center space-x-4">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`${data.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data.program?.longName || 'Not assigned' }</span>

@@ -21,8 +21,8 @@ type Props = {
 
 function PaymentCardItem({ data }: Props) {
   return (
-  <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.transtag}</h2>
+  <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-2 md:group">
+    <h2 className="text-base md:text-base font-semibold font-noto text-gray-500 uppercase">{data?.transtag}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="w-full flex items-center justify-between space-x-2">
           <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.student?.fname+' '+(data?.student?.mname ? data?.student?.mname+' ': '')+data?.student?.lname).toUpperCase()}</div>
@@ -30,7 +30,7 @@ function PaymentCardItem({ data }: Props) {
       </div>
       <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.student?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
     </div>
-    <div className="space-y-1 font-roboto">
+    <div className="space-y-2 font-roboto">
         <div className="mb-4 px-4 py-1 w-fit flex items-center space-x-4 rounded bg-primary-dark/10">
             <span className={`text-gray-500 text-sm  font-bold capitalize`}>{data.transtype?.title || 'Not assigned' }</span>
         </div>
@@ -38,10 +38,10 @@ function PaymentCardItem({ data }: Props) {
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`${data.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data.student.program?.longName || 'Not assigned' }</span>
         </div>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
             <TbListNumbers className="rotate-90 h-4 w-5 text-primary/70" />
             <span className="text-xs text-gray-500 font-semibold">LEVEL: {(Math.ceil(data?.student?.semesterNum/2) * 100) || 'COMPLETED'}</span>
-        </div>
+        </div> */}
         {/* <div className="flex items-center space-x-4">
             <FaPhone className="rotate-90 h-4 w-5 text-primary/70" />
             <span className="text-xs text-gray-500">{data?.student.phone}</span>
@@ -50,17 +50,17 @@ function PaymentCardItem({ data }: Props) {
             <AiOutlineFieldNumber className="h-4 w-5 text-primary/70" />
             <span className="text-xs text-gray-500 font-semibold tracking-wide">STUDENT ID:&nbsp;&nbsp; {data?.student?.id || 'Not Set'}</span>
         </div>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
             <AiOutlineFieldNumber className="h-4 w-5 text-primary/70" />
             <span className="text-xs text-gray-500 font-semibold tracking-wide">INDEX NO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {data?.student?.indexno || 'Not Set'}</span>
-        </div>
+        </div> */}
         <div className="mt-10 flex items-center space-x-4">
             <VscReferences className="h-4 w-5 text-primary/70" />
             <div className={`bg-green-50 px-2 py-0.5 rounded border text-xs font-semibold text-gray-500`}>REF:&nbsp;&nbsp;&nbsp; { data?.reference?.toUpperCase() }</div>
         </div>
         <div className="mt-10 flex items-center space-x-4">
             <MdOutlineDateRange className="h-4 w-5 text-primary/70" />
-            <div className={`bg-green-50 px-2 py-0.5 rounded border text-xs font-semibold text-gray-500`}>DATE: { data?.createdAt && moment(data?.createdAt).format("LL").toUpperCase() }</div>
+            <div className={`bg-green-50 px-2 py-0.5 rounded border text-xs font-semibold text-gray-500`}>{ data?.createdAt && moment(data?.createdAt).format("DD-MMM-YYYY h:mm a").toUpperCase() }</div>
         </div>
       
         
