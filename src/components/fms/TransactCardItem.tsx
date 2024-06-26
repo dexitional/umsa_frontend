@@ -5,12 +5,9 @@ import { Form, Link } from 'react-router-dom'
 // @ts-ignore
 import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFilePdf, FaFolder } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
-import { BsLightningChargeFill } from "react-icons/bs";
 import { BiRefresh } from 'react-icons/bi'
-import { TbListNumbers } from 'react-icons/tb'
 import { VscReferences } from "react-icons/vsc";
 
 const { REACT_APP_API_URL } = import.meta.env;
@@ -20,6 +17,11 @@ type Props = {
 }
 
 function TransactCardItem({ data }: Props) {
+
+  const convertToFees = () => {
+    
+  }
+
   return (
   <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-2 md:group">
     <h2 className="text-base md:text-base font-semibold font-noto text-gray-500 uppercase">{data?.transtag}</h2>
@@ -67,15 +69,10 @@ function TransactCardItem({ data }: Props) {
     </div>
     <div className="flex flex-col space-y-1">
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-start space-x-2 group">
-          <Link to={`${encodeURIComponent(data?.id)}/profile`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
-            {/* <FcViewDetails className="h-4 w-4 text-white"/> */}
+          <button onClick={convertToFees} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             <BiRefresh className="h-4 w-4 text-amber-200"/>
-            <span className="text-sm text-white font-semibold">RETIRE ACCOUNT</span>
-          </Link>
-          <Form method="post" action={`${data?.id}/destroy`} onSubmit={(e)=> { if(!confirm("Charge Late Registration Fine?")) e.preventDefault(); return false; }} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
-            <BsLightningChargeFill className="h-3 w-4 text-red-100" />
-            <button type="submit" className="text-sm text-white font-semibold">FINE</button>
-          </Form>
+            <span className="text-sm text-white font-semibold">CONVERT</span>
+          </button>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`bg-green-800/70 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
               <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency } { data?.amount }</span>

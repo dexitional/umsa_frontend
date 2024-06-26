@@ -8,11 +8,10 @@ type Props = {
 function AISFinanceCard({ data }: Props) {
 
   const sum = data?.reduce((sum:any,cur: any) => {
-     if(['CHARGE','BILL'].includes(cur?.type)) return (cur.amount+sum);
-     if(['PAYMENT'].includes(cur?.type)) return ((cur.amount * -1)+sum);
+    //  if(['CHARGE','BILL'].includes(cur?.type)) return (cur.amount+sum);
+    //  if(['PAYMENT'].includes(cur?.type)) return ((cur.amount * -1)+sum);
+    return (cur.amount+sum)
   }, 0) 
-
-  console.log(sum)
 
   return (
     <div className="w-full space-y-3 rounded">
@@ -31,7 +30,7 @@ function AISFinanceCard({ data }: Props) {
             <span>{row.createdAt && moment(row.createdAt).format('DD MMM YYYY')?.toUpperCase()}</span>
             <span className="col-span-4 font-medium">{row.narrative?.toUpperCase()}</span>
             <span>{row.type}</span>
-            <span className="font-bold">{row.currency} {row.amount}</span>
+            <span className="font-bold">{row.currency} {Math.abs(row.amount)}</span>
           </div>
           ))}
           {/* Totals */}

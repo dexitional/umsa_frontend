@@ -34,6 +34,18 @@ class FmsService {
         }
     }
 
+    async fetchAccount(accountId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/accounts/${encodeURIComponent(accountId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
     async fetchDebts(keyword,page){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/accounts/debts?keyword=${keyword}&page=${page}`)
@@ -86,13 +98,29 @@ class FmsService {
         }
     }
 
+    async lateCharge(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/charges/late`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Late Registration Fine charged!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
     async postCharge(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/fms/charges`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -108,7 +136,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -122,7 +150,7 @@ class FmsService {
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/fms/charges/${chargeId}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -183,13 +211,29 @@ class FmsService {
         }
     }
 
+    async convertPayment(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/fms/payments/convert`, data,{
+                headers: { "Content-Type" : "application/json" }
+             })
+             if(res.status == 200){
+                toast.success("Payment Converted !")
+                return res.data
+             } 
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
     async postPayment(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/fms/payments`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -205,7 +249,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -219,7 +263,7 @@ class FmsService {
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/fms/payments/${paymentId}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -262,7 +306,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -278,7 +322,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -292,7 +336,7 @@ class FmsService {
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/fms/services/${serviceId}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -304,7 +348,7 @@ class FmsService {
 
     /* Voucher Costs */
 
-    async fetchVsales(keyword,page){
+    async fetchVcosts(keyword,page){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/vsales?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
@@ -316,7 +360,7 @@ class FmsService {
         }
     }
 
-    async fetchVsale(id){
+    async fetchVcost(id){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/vsales/${id}`)
             if(res.status == 200 || res.status == 204)
@@ -328,13 +372,13 @@ class FmsService {
         }
     }
 
-    async postVsale(data){
+    async postVcost(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/fms/vsales`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -344,13 +388,13 @@ class FmsService {
         }
     }
 
-    async updateVsale(id,data){
+    async updateVcost(id,data){
         try {
             const res = await axios.patch(`${REACT_APP_API_URL}/fms/vsales/${id}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -360,11 +404,11 @@ class FmsService {
         }
     }
 
-    async deleteVsale(id){
+    async deleteVcost(id){
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/fms/vsales/${id}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -410,6 +454,18 @@ class FmsService {
         
         } catch (error) {
             toast.error(error.message)
+        }
+    }
+
+    async fetchBillActivity(id){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/bills/${id}/activity`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
         }
     }
 
@@ -495,7 +551,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -511,7 +567,7 @@ class FmsService {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -525,7 +581,7 @@ class FmsService {
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/fms/bills/${id}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)

@@ -38,13 +38,12 @@ function PgFMSBill({}: Props) {
       <SubPageTitle title={``} page="BILL INFO" />
       <div className="p-3 md:p-6 border bg-slate-50/50 rounded-xl md:space-y-6 space-y-4 ">
          <section className="relative flex space-x-2 md:space-x-6">
-            {/* <div className="hidden md:flex items-center justify-center p-2 md:p-1 h-16 w-16 md:h-28 md:w-28 border rounded-lg shadow-lg bg-white">
-              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-12 w-12 md:h-[6.5rem] md:w-[6.5rem] object-contain rounded-md" />
-            </div> */}
+            { !data.posted &&
             <Link to={`edit`} className="p-1 md:py-1.5 md:px-2 absolute right-0 top-0 bg-slate-50 border border-gray-200 rounded flex">
                 {/* <span className="text-gray-400">EDIT</span> */}
                 <TbEdit className="h-5 w-5 text-gray-300"/>
             </Link>
+            }
             <div className="flex-1 flex flex-col space-y-4 md:space-y-3">
               <div className="flex space-x-2">
                   {/* <div className="block md:hidden p-2 md:p-4 h-16 w-16 border rounded-xl shadow-lg bg-white">
@@ -83,7 +82,7 @@ function PgFMSBill({}: Props) {
           <nav className="p-2 w-full md:p-3 flex flex-col md:flex-row md:space-x-4 space-y-3 md:space-y-0 border border-primary/5 rounded-md md:rounded-xl bg-primary/5 text-primary-dark/70 text-xs font-noto font-semibold tracking-wider">
             <SubNavLink title="ACTIONS" url="actions" />
             <SubNavLink title="RECEIVERS" url="receivers" />
-            {/* <SubNavLink title="ACTIVITY" url="activity" /> */}
+            <SubNavLink title="ACTIVITY" url="activity" />
           </nav>
         </section>
          <section className="gap-y-2">

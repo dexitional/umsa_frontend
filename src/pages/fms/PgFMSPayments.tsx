@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/ais/PageTitle'
+import PageTitle from '../../components/fms/PageTitle'
 import Service from '../../utils/fmsService'
 import { redirect, useLoaderData } from 'react-router'
 import PaymentListView from '../../components/fms/PaymentListView'
@@ -22,7 +22,7 @@ function PgFMSPayments({}: Props) {
   
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">
-      <PageTitle title="Fee Payments" createtext="" createlink="" pages={totalPages} setView={setView} view={view} />
+      <PageTitle title="Fee Payments" createtext="Create" createlink="create" pages={totalPages} setView={setView} view={view} />
       <div className="">
          { view == 'card' && (
             <div className="grid md:grid-cols-3 gap-3 md:gap-6">

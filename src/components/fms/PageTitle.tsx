@@ -3,8 +3,6 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { ImPlus } from 'react-icons/im'
 import { MdDashboard } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
-import { useUserStore } from '../../utils/authService'
-import { TbSquareRoundedArrowLeft } from 'react-icons/tb'
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
 
 type Props = {
@@ -49,19 +47,19 @@ function PageTitle({ title,createtext,createlink, setView,view, pages }: Props) 
 
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0">
-        <h1 className="text-sm md:text-xl text-primary-accent/80 font-medium uppercase tracking-widest">{title}</h1>
+        <h1 className="text-sm md:text-xl text-primary-dark/70 font-medium uppercase tracking-widest">{title}</h1>
         <div className="flex items-center space-x-2">
             { view ? (
             <div className="p-1 w-fit rounded border md:border-2 flex items-center justify-between space-x-1">
                 <div className="flex items-center space-x-1">
                     <button disabled={page == 1} onClick={prev} className={`bg-blue-50 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center group`}>
-                      <BiSolidLeftArrow className="h-4 w-4 md:h-5 md:w-5 group-disabled:text-red-950/10 text-primary-accent/70" />
+                      <BiSolidLeftArrow className="h-4 w-4 md:h-5 md:w-5 group-disabled:text-red-950/10 text-primary/70" />
                     </button>
                     <button className={`bg-slate-50 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
-                      <span className="w-fit h-4 md:h-5 font-semibold text-[0.65rem] md:text-sm text-primary-accent/70">{page}</span>
+                      <span className="w-fit h-4 md:h-5 font-semibold text-[0.65rem] md:text-sm text-primary-dark/30">{page}</span>
                     </button>
                     <button disabled={page == pages} onClick={next} className={`bg-blue-50 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center group`}>
-                      <BiSolidRightArrow className="h-4 w-4 md:h-5 md:w-5 group-disabled:text-red-950/10 text-primary-accent/70" />
+                      <BiSolidRightArrow className="h-4 w-4 md:h-5 md:w-5 group-disabled:text-red-950/10 text-primary/70" />
                     </button>
                 </div>
                 <div className="relative">
@@ -78,7 +76,7 @@ function PageTitle({ title,createtext,createlink, setView,view, pages }: Props) 
             ): null }
 
             { createlink && createtext ? (
-            <Link to={createlink || '#'} className="py-0 md:py-2 px-3 md:px-4 h-9 md:h-10 rounded-md border bg-primary-accent/90 flex items-center space-x-3">
+            <Link to={createlink || '#'} className="py-0 md:py-2 px-3 md:px-4 h-9 md:h-10 rounded-md border bg-primary/90 flex items-center space-x-3">
                 <ImPlus className="text-white h-3 w-3 md:h-4 md:w-4" />
                 <span className="hidden md:flex text-white text-sm md:text-base font-medium">{createtext}</span>
             </Link>

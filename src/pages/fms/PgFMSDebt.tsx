@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
+import SubPageTitle from '../../components/fms/SubPageTitle'
 // @ts-ignore
 import Logo from '../../assets/img/logo/mlk/logo.png'
 import { Link } from 'react-router-dom'
@@ -8,7 +8,7 @@ import { Outlet, redirect, useLoaderData } from 'react-router'
 import moment from 'moment'
 import { TbEdit } from 'react-icons/tb'
 import { FaNewspaper } from 'react-icons/fa6'
-import SubNavLink from '../../components/ais/SubNavLink'
+import SubNavLink from '../../components/fms/SubNavLink'
 import { RiCommunityFill } from 'react-icons/ri'
 import { MdNumbers } from 'react-icons/md'
 const { REACT_APP_API_URL } = import.meta.env;

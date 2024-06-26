@@ -1,11 +1,7 @@
 import React, { useRef } from 'react'
-import { HiUserAdd } from "react-icons/hi";
-import { GoPasskeyFill } from "react-icons/go";
-import { FaMoneyCheckDollar, FaRegIdCard } from 'react-icons/fa6';
+import { FaMoneyCheckDollar } from 'react-icons/fa6';
 import Service from '../../utils/fmsService'
-import { useUserStore } from '../../utils/authService';
-import { TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb';
-import { redirect, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 type Props = {
     data?: any;
@@ -54,8 +50,8 @@ function FMSActionCard({ data }: Props) {
   
   return (
     <div className="w-full rounded flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
-       <section className="w-full grid md:grid-cols-3 gap-2 md:gap-4">
-          { data.posted && 
+       <section className="w-full grid md:grid-cols-3 gap-2 md:gap-4">{data.session.default && 'true'}
+          { data.session.default && data.posted && 
           <button onClick={revokeBill} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-red-200/10 border border-red-500/20 shadow">
             <FaMoneyCheckDollar className="text-red-400/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-red-500/40 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-red-700/70 font-noto">Revoke Bill</span>

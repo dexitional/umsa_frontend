@@ -43,17 +43,17 @@ export async function loader({ params }){
    return { data,programs,sessions,banks }
 }
 
-function PgFMSBillForm({}: Props) {
+function PgFMSVcostForm({}: Props) {
   
   const navigate = useNavigate()
   const { data,programs,sessions,banks }: any = useLoaderData();
   return (
     <main className="md:pl-10 p-2 md:p-6 space-y-4 md:space-y-10">
-      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Bill`} page="Student Bill" />
+      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Voucher Cost`} page="Voucher Costs" />
       <div className="p-2 md:p-6 border bg-slate-50/50 rounded-xl space-y-6">
          <section className="flex md:space-x-6">
            <div className="flex-1 flex flex-col space-y-1 md:space-y-3">
-              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Bill</h1>
+              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Voucher Cost</h1>
               <div className="flex items-center space-x-2 text-zinc-400 text-base">
                  <span className="text-xs md:text-base tracking-wider">Please provide neccessary information</span>
               </div>
@@ -154,4 +154,4 @@ function PgFMSBillForm({}: Props) {
   )
 }
 
-export default PgFMSBillForm
+export default PgFMSVcostForm

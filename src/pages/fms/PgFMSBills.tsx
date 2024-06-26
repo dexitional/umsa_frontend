@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/ais/PageTitle'
+import PageTitle from '../../components/fms/PageTitle'
 import Service from '../../utils/fmsService'
 import { redirect, useLoaderData } from 'react-router'
 import BillListView from '../../components/fms/BillListView'

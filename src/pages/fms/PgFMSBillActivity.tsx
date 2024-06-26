@@ -1,13 +1,14 @@
 import React from 'react'
-import Service from '../../utils/aisService'
+import Service from '../../utils/fmsService'
 import { useLoaderData } from 'react-router';
-import AISFinanceCard from '../../components/ais/AISFinanceCard';
+import FMSBillActivityCard from '../../components/fms/FMSBillActivityCard';
 
 
 type Props = {}
 
 export async function loader({ params }){
-   const data = await Service.fetchStudentFinance(params.studentId);
+   const data = await Service.fetchBillActivity(params.billId);
+   console.log(data)
    return { data }
 }
 
@@ -16,7 +17,7 @@ function PgFMSBillActivity({}: Props) {
   
   return (
     <div className="flex w-full flex-1 flex-col space-y-8 md:space-y-8 ">
-       <AISFinanceCard data={data} />
+       <FMSBillActivityCard data={data} />
     </div>
   )
 }
