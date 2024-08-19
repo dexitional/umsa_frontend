@@ -1,12 +1,11 @@
 import React, { useRef } from 'react'
-import { HiUserAdd } from "react-icons/hi";
 import { GoPasskeyFill } from "react-icons/go";
-import { FaMoneyCheckDollar, FaRegIdCard } from 'react-icons/fa6';
 import Service from '../../utils/aisService'
 import { useUserStore } from '../../utils/authService';
-import { TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb';
 import { redirect, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { IoLockClosedSharp } from 'react-icons/io5';
+import { MdAssignmentAdd, MdPublish, MdUnpublished } from 'react-icons/md';
 
 type Props = {
     data?: any;
@@ -16,98 +15,102 @@ type Props = {
 function AISSheetAccountCard({ data,isUser }: Props) {
   const navigate = useNavigate()
   const fileRef:any = useRef<HTMLInputElement>()
+  const { user } = useUserStore(state => state)
+  const aisRole:any =  user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ais');
   
-  const stageAccess = async () => {
-    const ok = window.confirm("Setup User Access ?")
-    if(ok){
-      alert(data?.staffNo)
-      const resp = await Service.stageStaffAccess(data?.staffNo);
-      toast(`Username: ${data?.staffNo}, Password: ${resp.password}`,{
-          duration: 20000,
-          className: "bg-green-50 border rounded text-base font-semibold text-primary-dark"
-      })
+  const assignSheet = async () => {
+    const inp = window.prompt("Provide Staff ID of Assessor!")
+    if(inp && inp != ''){
+      const resp = await Service.assignSheet(data?.id,inp);
+      
     }
   }
 
-  const resetAccess = async () => {
-    const ok = window.confirm("Reset User Account Password ?")
+  const publishSheet = async () => {
+    const ok = window.confirm("Publish Assessment Scores ?")
     if(ok){
-      await Service.resetStaffAccess(data?.staffNo);
+      await Service.publishSheet(data?.id);
+      navigate(0);
     }
   }
 
-  const clickPhoto = (e) => {
-    fileRef.current.click();
-  }
-
-  const changePhoto = async (e) => {
-    const file = e.target.files[0]
-    const formData = new FormData();
-      formData.append('photo',file);
-      formData.append('tag',data?.staffNo);
-    const resp = await Service.changePhoto(formData);
-    if(resp) setTimeout(() => navigate(0), 1000)
-  }
-
-  const removePhoto = async () => {
-    const ok = window.confirm("Remove User photo ?")
+  const unpublishSheet = async () => {
+    const ok = window.confirm("Unpublish Assessment Scores ?")
     if(ok){
-      const resp = await Service.removePhoto(data?.staffNo);
-      if(resp) setTimeout(() => navigate(0), 1000)
+      await Service.unpublishSheet(data?.id);
+      navigate(0);
     }
   }
+
+  const closeSheet = async () => {
+    const ok = window.confirm("Close & Finalize Assessment Scores ?")
+    if(ok){
+      await Service.closeSheet(data?.id);
+      navigate(0);
+    }
+  }
+
+  const submitSheet = async () => {
+    const ok = window.confirm("Submit Assessment Scores ?")
+    if(ok){
+      await Service.submitSheet(data?.id);
+      navigate(0);
+    }
+  }
+
 
   
   return (
     <div className="w-full rounded flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
-       <section className="w-full grid md:grid-cols-3 gap-2 md:gap-4">
+       <section className={`w-full grid  gap-2 md:gap-4 ${data.finalized ? 'md:grid-cols-1':'md:grid-cols-4'}`}>
          
-          {/* Stage Account */} 
-          { !isUser && 
-            <button onClick={stageAccess} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
-              <HiUserAdd className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
-              <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Setup User Account</span>
-            </button>
-          }
-          
-              {/* Reset Account */}
-              <button onClick={resetAccess} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
-                <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
-                <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Reset User Account</span>
-              </button>
-              
-              {/* Index Number
-              <button onClick={!data?.indexno ? generateIndex : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.indexno ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20' } border shadow`}>
-                <GoPasskeyFill className={`${data?.indexno ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-                <span className={`font-semibold text-sm md:text-base ${data?.indexno ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.indexno ? 'Index Number Activated':'Generate Index Number'}</span>
-              </button> */}
-          
-              {/* Stage Account */}
-              <form action="post" encType='multipart/form-data' className="w-full">
-                <button type="button" onClick={clickPhoto} className="w-full p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
-                  <TbPhotoEdit className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
-                  <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Change Profile Photo</span>
-                </button>
-                <input type="file" ref={fileRef} name="photo" onChange={changePhoto} className="hidden"/>
-              </form>
-              {/* Remove Photo */}
-              <button onClick={removePhoto} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
-                <TbPhotoCancel className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
-                <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Remove Profile Photo</span>
-              </button>
-              
-   
+        
+               {/* Publish Sheet  - Admin only, Disable futher editting */}
+               { ['ais admin','ais techlead'].includes(aisRole?.appRole?.title?.toLowerCase()) && !data?.finalized && data?.certified ?
+                <button onClick={closeSheet} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary/5 border border-primary/20 shadow">
+                  <IoLockClosedSharp className="text-primary/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary/20 rounded-full" />
+                  <span className="font-semibold text-sm md:text-base text-primary/70 font-noto">Close Sheet</span>
+                </button> : null
+               }
 
-          {/* Reset Account */}
-          {/* <button onClick={generateCard} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
-            <FaRegIdCard className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
-            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate ID Card</span>
-          </button> */}
-          {/* Pardon Registration */}
-          {/* <button onClick={!data?.flagPardon ? activatePardon : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.flagPardon ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20' } border shadow`}>
-            <FaMoneyCheckDollar className={`${data?.flagPardon ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-            <span className={`font-semibold text-sm md:text-base ${data?.flagPardon ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.flagPardon ? 'Pardon Activated':'Registration Pardon'}</span>
-          </button> */}
+              {/* Publish Sheet - Dean only, Publish All results except Late Registrations */}
+              { ['ais admin','ais techlead','ais dean'].includes(aisRole?.appRole?.title?.toLowerCase()) && !data?.finalized && !data?.certified && data?.assessed ? 
+              <button onClick={publishSheet} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-green-600/5 border border-green-600/20 shadow">
+                <MdPublish className="text-green-600/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-green-600/20 rounded-full" />
+                <span className="font-semibold text-sm md:text-base text-green-700/50 font-noto">Publish Sheet</span>
+              </button>: null
+               }
+
+               {/* UnPublish Sheet - Admin only, UnPublish All results for corrections */}
+               { ['ais admin','ais techlead'].includes(aisRole?.appRole?.title?.toLowerCase()) && !data?.finalized && data?.certified ? 
+              <button onClick={unpublishSheet} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-red-400/5 border border-red-400/20 shadow">
+                <MdUnpublished className="text-red-400/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-red-400/20 rounded-full" />
+                <span className="font-semibold text-sm md:text-base text-red-400/70 font-noto">Unpublish Sheet</span>
+              </button>: null
+               }
+              
+              {/* Submit Sheet - Assessor only, SUbmit All results For further publishing */}
+              { ['ais admin','ais techlead','ais assessor'].includes(aisRole?.appRole?.title?.toLowerCase()) && !data?.finalized && !data?.assessed ? 
+              <button onClick={submitSheet} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary/5 border border-primary/20 shadow">
+                <GoPasskeyFill className="text-primary/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary/20 rounded-full" />
+                <span className="font-semibold text-sm md:text-base text-primary/70 font-noto">Submit Sheet</span>
+              </button>: null
+               }
+              
+              {/* Assign Sheet - HOD, Admin only - Assign Sheet to Staff */}
+              { ['ais admin','ais techlead','ais head'].includes(aisRole?.appRole?.title?.toLowerCase()) && !data?.finalized && !data?.assessed ? 
+              <button onClick={assignSheet} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary/5 border border-primary/20 shadow">
+                <MdAssignmentAdd className="text-primary/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary/20 rounded-full" />
+                <span className="font-semibold text-sm md:text-base text-primary/70 font-noto">Assign Sheet</span>
+              </button>: null
+               }
+              
+              { data?.finalized ? 
+              <div className="px-3 py-1 w-fit rounded border text-sm font-medium text-gray-400 tracking-wider bg-slate-50">
+                Sheet is published and closed!  No futher editting is allowed.
+              </div>: null
+              }
+
        </section>
     </div>
   )

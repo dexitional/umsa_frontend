@@ -1,18 +1,19 @@
-import React from 'react'
-import { useUserStore } from '../utils/authService';
+import React from 'react';
 import AMSPLayout from '../components/amsp/AMSPLayout';
-import PgAMSPDash from '../pages/amsp/PgAMSPDash';
 import AMSPSwitcher, { loader as switchLoader } from '../components/amsp/AMSPSwitcher';
-import PgStepConfigure, { loader as stepConfigureLoader,action as stepConfigureAction     } from '../pages/amsp/PgStepConfigure';
-import PgStepProfile, { loader as stepProfileLoader, action as stepProfileAction } from '../pages/amsp/PgStepProfile';
-import PgStepGuardian, { loader as stepGuardianLoader, action as stepGuardianAction } from '../pages/amsp/PgStepGuardian';
-import PgStepEducation, { loader as stepEducationLoader, action as stepEducationAction } from '../pages/amsp/PgStepEducation';
-import PgStepResult, { loader as stepResultLoader, action as stepResultAction } from '../pages/amsp/PgStepResult';
-import PgStepChoice, { loader as stepChoiceLoader, action as stepChoiceAction } from '../pages/amsp/PgStepChoice';
-import PgStepDocument, { loader as stepDocumentLoader, action as stepDocumentAction } from '../pages/amsp/PgStepDocument';
-import PgStepReview, { loader as stepReviewLoader, action as stepReviewAction } from '../pages/amsp/PgStepReview';
+import PgStepChoice, { action as stepChoiceAction, loader as stepChoiceLoader } from '../pages/amsp/PgStepChoice';
+import PgStepConfigure, { action as stepConfigureAction, loader as stepConfigureLoader } from '../pages/amsp/PgStepConfigure';
+import PgStepDocument, { action as stepDocumentAction, loader as stepDocumentLoader } from '../pages/amsp/PgStepDocument';
+import PgStepEducation, { action as stepEducationAction, loader as stepEducationLoader } from '../pages/amsp/PgStepEducation';
+import PgStepEmployment, { action as stepEmploymentAction, loader as stepEmploymentLoader } from '../pages/amsp/PgStepEmployment';
+import PgStepGuardian, { action as stepGuardianAction, loader as stepGuardianLoader } from '../pages/amsp/PgStepGuardian';
 import PgStepPrintForm from '../pages/amsp/PgStepPrintForm';
 import PgStepPrintLetter, { loader as stepPrintLetterLoader } from '../pages/amsp/PgStepPrintletter';
+import PgStepProfile, { action as stepProfileAction, loader as stepProfileLoader } from '../pages/amsp/PgStepProfile';
+import PgStepReferee, { action as stepRefereeAction, loader as stepRefereeLoader } from '../pages/amsp/PgStepReferee';
+import PgStepResult, { action as stepResultAction, loader as stepResultLoader } from '../pages/amsp/PgStepResult';
+import PgStepReview, { action as stepReviewAction, loader as stepReviewLoader } from '../pages/amsp/PgStepReview';
+import { useUserStore } from '../utils/authService';
 
 const user = useUserStore.getState().user
 // const dricRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'dric')
@@ -73,11 +74,6 @@ const AMSPRoute:any =  {
             action: stepResultAction,
           },
           {  
-            path:'referee',
-            element: <PgAMSPDash />, 
-            loader: null,
-          },
-          {  
             path:'document',
             element: <PgStepDocument />, 
             loader: stepDocumentLoader,
@@ -91,8 +87,15 @@ const AMSPRoute:any =  {
           },
           {  
             path:'employment',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepEmployment />, 
+            loader: stepEmploymentLoader,
+            action: stepEmploymentAction,
+          },
+          {  
+            path:'referee',
+            element: <PgStepReferee />, 
+            loader: stepRefereeLoader,
+            action: stepRefereeAction,
           },
           {  
             path:'review',

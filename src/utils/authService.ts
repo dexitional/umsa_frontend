@@ -1,19 +1,19 @@
 import axios from "axios";
-import { JwtPayload, jwtDecode } from "jwt-decode"
-import { StoreState } from "./typings";
-import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
-import Cookies from 'universal-cookie';
-import Service from '../utils/evsService'
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import toast from 'react-hot-toast';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import Service from '../utils/evsService';
+import { StoreState } from "./typings";
 
-const cookies = new Cookies(null, { path: '/' });
+// const cookies = new Cookies(null, { path: '/' });
 const { REACT_APP_API_URL } = import.meta.env;
 
 export const useUserStore = create<StoreState>()(
   persist(
     (set, get) => ({
         user: null,
+        token: null,
         message: null, 
         loading: false,
         isLoggedIn : !!get()?.user,
@@ -24,7 +24,8 @@ export const useUserStore = create<StoreState>()(
         stepUrl: {},
         electionData: null,
         loadUserData: async() => {  
-          const storageToken = cookies.get("@Auth:token")
+          //const storageToken = cookies.get("@Auth:token")
+          const storageToken = localStorage.getItem("@Auth:token")
           if (storageToken) {
             const userData = await jwtDecode<JwtPayload>(storageToken)
             set({ user: userData })
@@ -49,7 +50,8 @@ export const useUserStore = create<StoreState>()(
         },
 
         logout: () => {
-          cookies.remove("@Auth:token");
+          localStorage.removeItem("@Auth:token");
+          //cookies.remove("@Auth:token");
           set({ user:null, lasChosen: null })
         }, 
 
@@ -62,9 +64,10 @@ export const useUserStore = create<StoreState>()(
               });
               const resp = res.data
               if(resp.success){
-                // localStorage.setItem("@Auth:token", resp.token);
-                cookies.set("@Auth:token", resp.token)
-                set({ user:resp.data, loading: false })
+                const token = await resp?.token;
+                 localStorage.setItem("@Auth:token", token);
+                //cookies.set("@Auth:token", token)
+                set({ user:resp.data, token, loading: false })
               } else {
                 set({ message:resp.message, loading: false })
                 setTimeout( async() => set({ message:null }), 4000)
@@ -87,9 +90,10 @@ export const useUserStore = create<StoreState>()(
             
             const resp = res.data
             if(resp.success){
-              // localStorage.setItem("@Auth:token", resp.token);
-              cookies.set("@Auth:token", resp.token)
-              set({ user:resp.data, loading: false })
+              const token = await resp?.token;
+              localStorage.setItem("@Auth:token", token);
+              //cookies.set("@Auth:token", token)
+              set({ user:resp.data, token, loading: false })
              
             } else {
               set({ message:resp.message, loading: false })
@@ -108,12 +112,11 @@ export const useUserStore = create<StoreState>()(
             const res = await axios.post(`${REACT_APP_API_URL}/auth/password`, {
                tag,oldpassword,newpassword
             });
-            console.log(res.status,res.data.message)
             if(res.status == 200){
               get()?.logout()
               // localStorage.setItem("@Auth:token", resp.token);
-              cookies.remove("@Auth:token")
-              set({ user:null, courses: [], loading: false })
+              //cookies.remove("@Auth:token")
+              set({ user:null, token: null, courses: [], loading: false })
               toast.success("Password changed!")
             } else if(res.status == 202)
               throw new(res.data.message)

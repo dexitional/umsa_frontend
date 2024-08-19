@@ -27,8 +27,7 @@ export async function loader({ params }){
 
 function PgAISPProfile({}: Props) {
   const { data,user }: any = useLoaderData();
-  console.log(data)
-
+  
   return (
     <section className="my-3 md:my-0 md:mx-10 md:pr-4 md:col-span-2 border-x bg-gradient-to-r from-white via-white to-primary/5">
       <div className="px-3 md:px-10 md:py-8 md:col-span-2 rounded-xl space-y-4">
@@ -36,7 +35,7 @@ function PgAISPProfile({}: Props) {
         <div className="min-h-fit py-1.5 px-3 md:py-2 md:px-4 bg-primary-dark/90 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-center rounded-md md:rounded-xl text-white flex items-center justify-center">
             <div className="w-full md:w-[90%] mx-auto flex items-center justify-between">
               <h1 className="md:text-2xl font-noto">My Profile</h1>
-              <Link to={`/aisp/profile/${encodeURIComponent(user?.user?.tag)}/edit`} className="px-2 py-1 md:px-4 md:py-1 border border-white hover:bg-primary-accent/60 shadow-md rounded-md md:rounded-full text-[0.65rem] md:text-sm font-medium tracking-wider cursor-pointer">
+              <Link to={`/aisp/profile/${encodeURIComponent(user?.user?.tag)}/edit`} className="px-2 py-1 md:px-4 md:py-1 bg-white text-primary-dark hover:border-2 hover:border-white hover:bg-primary-accent/60 hover:text-white shadow-md rounded-md md:rounded-full text-[0.65rem] md:text-sm font-medium tracking-wider cursor-pointer">
                  <span>EDIT PROFILE</span>
               </Link>
             </div>

@@ -13,7 +13,13 @@ function Error() {
   const { user, logout } = useUserStore(state => state)
   const navigate = useNavigate();
   let error:any = useRouteError();
-  console.error(error);
+  console.log(error);
+  
+  if(error.status == '401') {
+    // If token expired
+    logout();
+    navigate('/')
+  }
   
   return (
     <div className="w-full h-screen flex flex-col justify-between">

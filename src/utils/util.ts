@@ -32,7 +32,7 @@ export const getStudyMode = (tag) => {
       case 'M': return 'Morning'; break;
       case 'E': return 'Evening'; break;
       case 'W': return 'Weekend'; break;
-      default : 'Moring'; break;
+      default : 'Morning'; break;
    }
 }
 

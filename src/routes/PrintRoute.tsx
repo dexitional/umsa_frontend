@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
+import PrintAdmissionSlip, { loader as printAdmissionLoader } from '../components/print/PrintAdmissionSlip';
 import PrintLayout from '../components/print/PrintLayout';
 import PrintRegisterSlip, { loader as printRegLoader } from '../components/print/PrintRegisterSlip';
-import PrintAdmissionSlip, { loader as printAdmissionLoader } from '../components/print/PrintAdmissionSlip';
+import PrintTranscript, { loader as printTranscriptLoader } from '../components/print/PrintTranscript';
 import { useUserStore } from '../utils/authService';
 
 const user = useUserStore.getState().user
@@ -34,6 +35,21 @@ const PublicRoute:any =   {
          element: <PrintAdmissionSlip />,
          loader: printAdmissionLoader
       },
+
+      // Transwift
+      {  path:'transwift/:studentId/statement', 
+         element: <PrintTranscript />,
+         loader: printTranscriptLoader
+      },
+      {  path:'transwift/:studentId/proficiency', 
+         element: <PrintAdmissionSlip />,
+         loader: printAdmissionLoader
+      },
+      {  path:'transwift/:studentId/attestation', 
+         element: <PrintAdmissionSlip />,
+         loader: printAdmissionLoader
+      },
+      
    ]
 }
 

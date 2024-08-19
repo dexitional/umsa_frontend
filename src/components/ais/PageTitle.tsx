@@ -66,14 +66,14 @@ function PageTitle({ title,createtext,createlink, setView,view, pages }: Props) 
                 </div>
                 <div className="relative">
                     {/* <input type="search" name="search" placeholder="Search Record ..." onChange={searchRecord} className="w-40 md:h-8 h-6 bg-slate-50 border border-slate-100 placeholder:text-gray-400 focus:border-slate-50 focus:outline-none rounded " /> */}
-                    <input type="search" name="search" placeholder="Search Record ..." onChange={onSearchChange} className="w-[40vw] md:w-40 md:h-8 h-6 font-roboto text-sm md:text-base placeholder:text-sm md:placeholder:text-base text-gray-500 placeholder:text-gray-400/80 bg-slate-50 border border-slate-100  focus:ring-0 focus:border-slate-300 focus:outline-none rounded " />
+                    <input type="search" name="search" placeholder="Search Record ..." onChange={onSearchChange} className="w-[40vw] md:w-52 md:h-8 h-6 font-roboto text-sm md:text-base placeholder:text-sm md:placeholder:text-base text-gray-500 placeholder:text-gray-400/80 bg-slate-50 border border-slate-100  focus:ring-0 focus:border-slate-300 focus:outline-none rounded " />
                 </div>
-                <button onClick={() => setView('list')} className={`${view == 'list' ? 'bg-slate-200':'bg-slate-50'} md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
+                {/* <button onClick={() => setView('list')} className={`${view == 'list' ? 'bg-slate-200':'bg-slate-50'} md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
                     <GiHamburgerMenu className="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
                 </button>
                 <button onClick={() => setView('card')} className={`${view == 'card' ? 'bg-slate-200':'bg-slate-50'} md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
                     <MdDashboard className="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
-                </button>
+                </button> */}
             </div>
             ): null }
 

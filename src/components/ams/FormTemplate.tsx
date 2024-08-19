@@ -183,7 +183,7 @@ function FormTemplate({ data }: Props) {
                             
                             {/* Education */}
                             <tr><td colSpan={4}>&nbsp;</td></tr>
-                            { formData.education.map((row,i) => 
+                            { formData?.education?.map((row,i) => 
                              <Fragment key={i}> 
                               { row?.instituteCategory?.title?.toLowerCase() == 'tertiary' ?
                               <Fragment>
@@ -285,7 +285,7 @@ function FormTemplate({ data }: Props) {
                                   <td className="sbody">Employer Address</td>
                                   <td className="sbody">Duration</td>
                               </tr>
-                              { applicant.employment.map((row,i) => 
+                              { formData?.employment?.map((row,i) => 
                               <tr>
                                   <td className="shead uppercase">{row?.employerName || 'N/A'}</td>
                                   <td className="shead uppercase">{row?.jobTitle || 'N/A'}</td>

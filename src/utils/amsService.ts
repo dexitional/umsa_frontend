@@ -699,7 +699,64 @@ class Service {
         }
     }
 
-    // Education
+     // Employment
+     async fetchStepEmployment(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/employment/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async saveStepEmployment(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/employment`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    // Referee
+    async fetchStepReferee(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/referee/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async saveStepReferee(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/referee`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+    // Result
     async fetchStepResult(serial){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/ams/step/result/${serial}`)
@@ -842,6 +899,18 @@ class Service {
     async fetchGradeWeights(){
         try {
           const res = await axios.get(`${REACT_APP_API_URL}/ams/gradeweights/list`)
+          if(res.status == 200 || res.status == 204)
+              return res.data
+          else throw new(res.data.message)
+      
+        } catch (error) { 
+          toast.error(error.message)
+        }
+    }
+
+    async fetchAwardClasses(){
+        try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ams/awardclasses/list`)
           if(res.status == 200 || res.status == 204)
               return res.data
           else throw new(res.data.message)

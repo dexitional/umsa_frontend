@@ -25,6 +25,10 @@ function CalendarCardItem({ data }: Props) {
       </div>
     </div>
     <div className="space-y-1 font-roboto">
+        <div className="flex items-center space-x-4">
+            <span className={`px-2 py-0 ${data?.tag == 'MAIN' ? 'bg-green-50 shadow-green-900/50':'bg-amber-50 shadow-amber-900/50'}  rounded shadow-[0px_0px_4px_#aaa] text-sm text-gray-500`}><b>{data?.tag == 'MAIN' ? 'MAIN CALENDAR':'JANUARY/SUB CALENDAR'}</b></span>
+        </div>
+     
         { data.registerStart && 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />

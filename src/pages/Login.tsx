@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
-// import Logo from '../assets/img/logo_portalbr_.png'
+import Adinkra2 from '../assets/img/adinkra-bullet.png'
+import Adinkra from '../assets/img/logo/mlk/logo.png'
 import Logo from '../assets/img/logo_sso.png'
 // @ts-ignore
-// import Adinkra from '../assets/img/adinkra-bullet.png'
-import Adinkra from '../assets/img/logo/mlk/logo.png'
-import Adinkra2 from '../assets/img/adinkra-bullet.png'
-// @ts-ignore
+import { FaArrowLeft, FaLock } from 'react-icons/fa'
+import { FcLock } from 'react-icons/fc'
+import { ImProfile } from 'react-icons/im'
+import { MdWarning } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
 import SafeGuard from '../assets/img/icon-national-id.png'
-import { FcGoogle, FcLock, FcSupport } from 'react-icons/fc';
-import { FaArrowLeft, FaLinkedin, FaLock, FaLockOpen } from 'react-icons/fa';
-import { MdWarning } from 'react-icons/md';
-import { ImProfile } from 'react-icons/im';
-import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
 // import { useAuth } from '../utils/authService';
-import { GoogleLogin } from 'react-google-login'
-import { useUserStore } from '../utils/authService';
-import { PiStudentBold } from "react-icons/pi";
+import { PiStudentBold } from "react-icons/pi"
+import { useUserStore } from '../utils/authService'
 // @ts-ignore
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 

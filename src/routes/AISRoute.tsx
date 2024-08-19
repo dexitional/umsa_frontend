@@ -1,62 +1,68 @@
-import React from 'react'
+import React from 'react';
 
 import AISLayout from '../components/ais/AISLayout';
-import PgAISDash from '../pages/ais/PgAISDash';
-import PgAISRoles from '../pages/ais/PgAISRoles';
-import PgAISReport from '../pages/ais/PgAISReport';
-import PgAISStudents, { loader as studentsLoader } from '../pages/ais/PgAISStudents';
-import PgAISStudentForm, { loader as aisStudentFormLoader, action as aisStudentFormAction } from '../pages/ais/PgAISStudentForm';
-import PgAISStudent, { loader as studentLoader } from '../pages/ais/PgAISStudent';
-import PgAISStudentProfile from '../pages/ais/PgAISStudentProfile';
-import PgAISStudentTranscript, { loader as aisStudentTranscriptLoader } from '../pages/ais/PgAISStudentTranscript';
-import PgAISStudentFinance, { loader as aisStudentFinanceLoader } from '../pages/ais/PgAISStudentFinance';
-import PgAISStudentActivity from '../pages/ais/PgAISStudentActivity';
+import PgAISBacklog, { loader as backlogLoader } from '../pages/ais/PgAISBacklog';
+import PgAISBacklogForm, { action as backlogFormAction, loader as backlogFormLoader } from '../pages/ais/PgAISBacklogForm';
+import PgAISBacklogManager, { loader as backlogManagerLoader } from '../pages/ais/PgAISBacklogManager';
+import PgAISBacklogRecord, { loader as backlogRecordLoader } from '../pages/ais/PgAISBacklogRecord';
+import PgAISBacklogs, { loader as backlogsLoader } from '../pages/ais/PgAISBacklogs';
+import PgAISCalendar, { loader as aisCalendarLoader } from '../pages/ais/PgAISCalendar';
+import PgAISCalendarForm, { action as aisCalendarFormAction, loader as aisCalendarFormLoader } from '../pages/ais/PgAISCalendarForm';
+import PgAISCalendars, { action as aisCalendarDestroy, loader as calendarsLoader } from '../pages/ais/PgAISCalendars';
+import PgAISCourseForm, { action as aisCourseFormAction, loader as aisCourseFormLoader } from '../pages/ais/PgAISCourseForm';
 import PgAISCourses, { action as aisCourseDestroy, loader as coursesLoader } from '../pages/ais/PgAISCourses';
-import PgAISCourseForm, { loader as aisCourseFormLoader, action as aisCourseFormAction } from '../pages/ais/PgAISCourseForm';
-import PgAISProgramForm, { action as aisProgramFormAction, loader as aisProgramFormLoader} from '../pages/ais/PgAISProgramForm';
-import PgAISPrograms, { action as aisProgramDestroy,loader as aisProgramsLoader } from '../pages/ais/PgAISPrograms';
-import PgAISProgram, { loader as aisProgramLoader } from '../pages/ais/PgAISProgram';
-import PgAISProgramStructure, { loader as aisProgramStructureLoader } from '../pages/ais/PgAISProgramStructure';
-import PgAISProgramStudent, { loader as aisProgramStudentLoader } from '../pages/ais/PgAISProgramStudent';
-import PgAISProgramStatistics, { loader as aisProgramStatisticsLoader } from '../pages/ais/PgAISProgramStatistics';
+import PgAISDash from '../pages/ais/PgAISDash';
 import PgAISDepartments, { loader as departmentsLoader } from '../pages/ais/PgAISDepartments';
 import PgAISFaculties, { loader as facultiesLoader } from '../pages/ais/PgAISFaculties';
-import PgAISStructures, { action as aisCurriculumDestroy, loader as curriculumsLoader } from '../pages/ais/PgAISStructures';
-import PgAISStructureForm, { action as aisCurriculumFormAction, loader as aisCurriculumFormLoader } from '../pages/ais/PgAISStructureForm';
-import PgAISSchemes, { action as aisSchemeDestroy, loader as schemesLoader } from '../pages/ais/PgAISSchemes';
-import PgAISSchemeForm, { action as aisSchemeFormAction, loader as aisSchemeFormLoader } from '../pages/ais/PgAISSchemeForm';
-import PgAISScheme, { loader as aisSchemeLoader } from '../pages/ais/PgAISScheme';
-import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader} from '../pages/ais/PgAISRegistrations';
-import PgAISRegsitration, { loader as aisRegistrationLoader } from '../pages/ais/PgAISRegsitration';
-import PgAISStudentAccount, { loader as aisStudentAccountLoader } from '../pages/ais/PgAISStudentAccount';
-import { useUserStore } from '../utils/authService';
-import PgAISStudentIDCard, { loader as aisStudentIDCardLoader } from '../pages/ais/PgAISStudentIDCard';
-import PgAISCalendars,{ loader as calendarsLoader, action as aisCalendarDestroy } from '../pages/ais/PgAISCalendars';
-import PgAISCalendarForm, { loader as aisCalendarFormLoader, action as aisCalendarFormAction } from '../pages/ais/PgAISCalendarForm';
-import PgAISCalendar, { loader as aisCalendarLoader } from '../pages/ais/PgAISCalendar';
-import PgAISStaffs, { loader as staffsLoader } from '../pages/ais/PgAISStaffs';
-import PgAISStaff, { loader as staffLoader } from '../pages/ais/PgAISStaff';
-import PgAISStaffForm,{ loader as aisStaffFormLoader, action as aisStaffFormAction } from '../pages/ais/PgAISStaffForm';
-import PgAISStaffProfile from '../pages/ais/PgAISStaffProfile';
-import PgAISStaffIDCard from '../pages/ais/PgAISStaffIDCard';
-import PgAISStaffAccount, { loader as aisStaffAccountLoader } from '../pages/ais/PgAISStaffAccount';
-import PgAISStaffRole, { loader as aisStaffRoleLoader, action as aisStaffRoleDestroy } from '../pages/ais/PgAISStaffRole';
-import PgAISStaffRoleForm, { loader as aisStaffRoleFormLoader, action as aisStaffRoleFormAction } from '../pages/ais/PgAISStaffRoleForm';
-import Error from '../pages/Error';
-import PgAISJobs, { action as aisJobDestroy, loader as jobsLoader } from '../pages/ais/PgAISJobs';
-import PgAISJobForm, { action as aisJobFormAction, loader as aisJobFormLoader } from '../pages/ais/PgAISJobForm';
 import PgAISJob, { loader as aisJobLoader } from '../pages/ais/PgAISJob';
-import PgAISUnits, { action as aisUnitDestroy, loader as unitsLoader } from '../pages/ais/PgAISUnits';
-import PgAISUnitForm, { action as aisUnitFormAction, loader as aisUnitFormLoader } from '../pages/ais/PgAISUnitForm';
-import PgAISUnit, { loader as aisUnitLoader } from '../pages/ais/PgAISUnit';
-import PgAISSheets,{ loader as sheetsLoader} from '../pages/ais/PgAISSheets';
-import PgAISSheetForm,{ action as sheetFormAction, loader as sheetFormLoader } from '../pages/ais/PgAISSheetForm';
-import PgAISSheet,{ loader as sheetLoader} from '../pages/ais/PgAISSheet';
-import PgAISSheetScore,{ loader as sheetScoreLoader} from '../pages/ais/PgAISSheetScore';
-import PgAISSheetAccount,{ loader as sheetAccountLoader} from '../pages/ais/PgAISSheetAccount';
-import PgAISSheetActivity,{ loader as sheetActivityLoader} from '../pages/ais/PgAISSheetActivity';
-import PgAISSheetCapture,{ action as sheetCaptureAction, loader as sheetCaptureLoader} from '../pages/ais/PgAISSheetCapture';
+import PgAISJobForm, { action as aisJobFormAction, loader as aisJobFormLoader } from '../pages/ais/PgAISJobForm';
+import PgAISJobs, { action as aisJobDestroy, loader as jobsLoader } from '../pages/ais/PgAISJobs';
+import PgAISMySheets, { loader as mysheetsLoader } from '../pages/ais/PgAISMySheets';
+import PgAISProgram, { loader as aisProgramLoader } from '../pages/ais/PgAISProgram';
+import PgAISProgramForm, { action as aisProgramFormAction, loader as aisProgramFormLoader } from '../pages/ais/PgAISProgramForm';
+import PgAISPrograms, { action as aisProgramDestroy, loader as aisProgramsLoader } from '../pages/ais/PgAISPrograms';
+import PgAISProgramStatistics, { loader as aisProgramStatisticsLoader } from '../pages/ais/PgAISProgramStatistics';
+import PgAISProgramStructure, { loader as aisProgramStructureLoader } from '../pages/ais/PgAISProgramStructure';
+import PgAISProgramStudent, { loader as aisProgramStudentLoader } from '../pages/ais/PgAISProgramStudent';
+import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader } from '../pages/ais/PgAISRegistrations';
+import PgAISRegsitration, { loader as aisRegistrationLoader } from '../pages/ais/PgAISRegsitration';
+import PgAISReport from '../pages/ais/PgAISReport';
+import PgAISRoles from '../pages/ais/PgAISRoles';
+import PgAISScheme, { loader as aisSchemeLoader } from '../pages/ais/PgAISScheme';
+import PgAISSchemeForm, { action as aisSchemeFormAction, loader as aisSchemeFormLoader } from '../pages/ais/PgAISSchemeForm';
+import PgAISSchemes, { action as aisSchemeDestroy, loader as schemesLoader } from '../pages/ais/PgAISSchemes';
+import PgAISSheet, { loader as sheetLoader } from '../pages/ais/PgAISSheet';
+import PgAISSheetAccount, { loader as sheetAccountLoader } from '../pages/ais/PgAISSheetAccount';
+import PgAISSheetActivity, { loader as sheetActivityLoader } from '../pages/ais/PgAISSheetActivity';
+import PgAISSheetCapture, { action as sheetCaptureAction, loader as sheetCaptureLoader } from '../pages/ais/PgAISSheetCapture';
+import PgAISSheetForm, { action as sheetFormAction, loader as sheetFormLoader } from '../pages/ais/PgAISSheetForm';
+import PgAISSheets, { loader as sheetsLoader } from '../pages/ais/PgAISSheets';
+import PgAISSheetScore, { loader as sheetScoreLoader } from '../pages/ais/PgAISSheetScore';
 import PgAISSheetStudent, { loader as sheetStudentLoader } from '../pages/ais/PgAISSheetStudent';
+import PgAISStaff, { loader as staffLoader } from '../pages/ais/PgAISStaff';
+import PgAISStaffAccount, { loader as aisStaffAccountLoader } from '../pages/ais/PgAISStaffAccount';
+import PgAISStaffForm, { action as aisStaffFormAction, loader as aisStaffFormLoader } from '../pages/ais/PgAISStaffForm';
+import PgAISStaffIDCard from '../pages/ais/PgAISStaffIDCard';
+import PgAISStaffProfile from '../pages/ais/PgAISStaffProfile';
+import PgAISStaffRole, { action as aisStaffRoleDestroy, loader as aisStaffRoleLoader } from '../pages/ais/PgAISStaffRole';
+import PgAISStaffRoleForm, { action as aisStaffRoleFormAction, loader as aisStaffRoleFormLoader } from '../pages/ais/PgAISStaffRoleForm';
+import PgAISStaffs, { loader as staffsLoader } from '../pages/ais/PgAISStaffs';
+import PgAISStructureForm, { action as aisCurriculumFormAction, loader as aisCurriculumFormLoader } from '../pages/ais/PgAISStructureForm';
+import PgAISStructures, { action as aisCurriculumDestroy, loader as curriculumsLoader } from '../pages/ais/PgAISStructures';
+import PgAISStudent, { loader as studentLoader } from '../pages/ais/PgAISStudent';
+import PgAISStudentAccount, { loader as aisStudentAccountLoader } from '../pages/ais/PgAISStudentAccount';
+import PgAISStudentActivity from '../pages/ais/PgAISStudentActivity';
+import PgAISStudentFinance, { loader as aisStudentFinanceLoader } from '../pages/ais/PgAISStudentFinance';
+import PgAISStudentForm, { action as aisStudentFormAction, loader as aisStudentFormLoader } from '../pages/ais/PgAISStudentForm';
+import PgAISStudentIDCard, { loader as aisStudentIDCardLoader } from '../pages/ais/PgAISStudentIDCard';
+import PgAISStudentProfile from '../pages/ais/PgAISStudentProfile';
+import PgAISStudents, { loader as studentsLoader } from '../pages/ais/PgAISStudents';
+import PgAISStudentTranscript, { loader as aisStudentTranscriptLoader } from '../pages/ais/PgAISStudentTranscript';
+import PgAISUnit, { loader as aisUnitLoader } from '../pages/ais/PgAISUnit';
+import PgAISUnitForm, { action as aisUnitFormAction, loader as aisUnitFormLoader } from '../pages/ais/PgAISUnitForm';
+import PgAISUnits, { action as aisUnitDestroy, loader as unitsLoader } from '../pages/ais/PgAISUnits';
+import Error from '../pages/Error';
+import { useUserStore } from '../utils/authService';
 
 const user = useUserStore.getState().user
 const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')
@@ -413,10 +419,111 @@ const AISRoute:any =  {
       },
       { 
          path:'sheets/:sheetId/edit', 
-         element: <PgAISStaffForm />, 
-         loader: aisStaffFormLoader,
-         action: aisStaffFormAction
+         element: <PgAISSheetForm />,
+         loader: sheetFormLoader,
+         action: sheetFormAction
       },
+
+      
+      /* MySheet Module */
+      { 
+         path:'mysheets', 
+         element: <PgAISMySheets />,
+         loader: mysheetsLoader,
+      },
+      { 
+         path:'mysheets/create', 
+         element: <PgAISSheetForm />,
+         loader: sheetFormLoader,
+         action: sheetFormAction
+      },
+      { 
+         path:'mysheets/:sheetId', 
+         element: <PgAISSheet />,
+         loader: sheetLoader,
+         children: [
+            {
+               path:'students', 
+               element: <PgAISSheetStudent />,
+               loader: sheetStudentLoader,
+               index: true
+            },
+            {
+               path:'scores', 
+               element: <PgAISSheetScore />,
+               loader: sheetScoreLoader,
+            },
+            {
+               path:'capture', 
+               element: <PgAISSheetCapture />,
+               loader: sheetCaptureLoader,
+               action: sheetCaptureAction,
+            },
+            {
+               path:'account', 
+               element: <PgAISSheetAccount />,
+               loader: sheetAccountLoader,
+            },
+            {
+               path:'activity', 
+               element: <PgAISSheetActivity />,
+               loader: sheetActivityLoader,
+            }
+         ]
+      },
+      { 
+         path:'mysheets/:sheetId/destroy', 
+         // action: nssMainDestroy,
+      },
+      { 
+         path:'mysheets/:sheetId/edit', 
+         element: <PgAISSheetForm />,
+         loader: sheetFormLoader,
+         action: sheetFormAction
+      },
+
+
+       /* Backlog Module */
+       { 
+         path:'backlogs', 
+         element: <PgAISBacklogs />,
+         loader: backlogsLoader,
+      },
+      { 
+         path:'backlogs/create', 
+         element: <PgAISBacklogForm />,
+         loader: backlogFormLoader,
+         action: backlogFormAction
+      },
+      { 
+         path:'backlogs/:backlogId', 
+         element: <PgAISBacklog />,
+         loader: backlogLoader,
+         children: [
+            {
+               path:'records', 
+               element: <PgAISBacklogRecord />,
+               loader: backlogRecordLoader,
+               index: true
+            },
+            {
+               path:'manager', 
+               element: <PgAISBacklogManager />,
+               loader: backlogManagerLoader,
+            }
+         ]
+      },
+      { 
+         path:'backlogs/:backlog/destroy', 
+         // action: nssMainDestroy,
+      },
+      { 
+         path:'backlogs/:backlogId/edit', 
+         element: <PgAISBacklogForm />,
+         loader: backlogFormLoader,
+         action: backlogFormAction
+      },
+
 
       /* Staff Module */
       { 

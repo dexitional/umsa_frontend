@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import 'vite/client'
+import 'vite/client';
 export interface MainRoute {
     path?: string;
     element?: any;
@@ -26,6 +26,7 @@ export interface ImportMeta {
 
 export interface StoreState {
     user: any|null;
+    token: string|null,
     message: string|null;
     search: any;
     loading: boolean;

@@ -1,14 +1,8 @@
 import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { MdEditDocument, MdMessage, MdOutlinePayments } from 'react-icons/md'
+import { MdOutlinePayments } from 'react-icons/md'
 // @ts-ignore
-import Logo from '../../assets/img/logo/ucc/logo.png';
-import { Form, Link } from 'react-router-dom';
 import ListHeading from './ListHeading';
 import moment from 'moment';
-import { TbMessage2Check } from 'react-icons/tb';
-import { FaEnvelopeOpenText } from 'react-icons/fa6';
 
 type Props = {
     data: any;

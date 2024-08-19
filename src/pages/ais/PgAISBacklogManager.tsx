@@ -12,7 +12,7 @@ export async function loader({ params }){
    return { data,isUser }
 }
 
-function PgAISSheetAccount({}: Props) {
+function PgAISBacklogManager({}: Props) {
   const { data,isUser } :any = useLoaderData();
   console.log(isUser)
   return (
@@ -22,4 +22,4 @@ function PgAISSheetAccount({}: Props) {
   )
 }
 
-export default PgAISSheetAccount
+export default PgAISBacklogManager

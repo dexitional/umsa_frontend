@@ -27,7 +27,7 @@ function SubPageTitle({ title, page, link }: Props) {
             <div></div>
             <div className="p-1 rounded border-2 flex items-center space-x-1">
                 { link 
-                ? <Link to={link} onClick={() => navigate(-1)} className={`bg-slate-200 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
+                ? <Link to={link} className={`bg-slate-200 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>
                     <IoChevronBack className="h-3 w-3 md:h-5 md:w-5 text-gray-500" />
                 </Link>
                 : <button onClick={() => navigate(-1)} className={`bg-slate-200 md:h-8 md:w-8 h-6 w-6 rounded border flex items-center justify-center`}>

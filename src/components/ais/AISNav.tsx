@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaChartBar } from 'react-icons/fa'
 import { GrDashboard } from 'react-icons/gr'
-import { useUserStore } from '../../utils/authService'
 import AISNavItem from './AISNavItem'
 
 type Props = {
@@ -27,13 +26,13 @@ function AISNav({ user }: Props) {
         {['ais dean','ais head','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Scoresheets Module" url="sheets" Icon={GrDashboard} /> } 
         {['ais dean','ais head','ais assessor','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="MySheets&reg; Module" url="mysheets" Icon={GrDashboard} /> } 
         {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Backlogs Module" url="backlogs" Icon={GrDashboard} /> } 
-        {['ais clerk','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Pixo System &reg;" url="pixo" Icon={GrDashboard} /> }
+        {/* {['ais clerk','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Pixo System &reg;" url="pixo" Icon={GrDashboard} /> } */}
         
         
         {['ais clerk','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Deferment Module" url="deferments" Icon={GrDashboard} /> } 
         {['ais clerk','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Transwift Module" url="transwift" Icon={GrDashboard} /> } 
         {['ais clerk','ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Circular Module" url="notices" Icon={GrDashboard} /> } 
-        {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Services Module" url="services" Icon={GrDashboard} /> } 
+        {/* {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Services Module" url="services" Icon={GrDashboard} /> }  */}
         {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Resit Module" url="resits" Icon={GrDashboard} /> }
         {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Graduation Module" url="graduations" Icon={GrDashboard} /> } {/* Graduation Session, Graduation */}
         {/* {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Reports Module &reg;" url="reports" Icon={GrDashboard} /> } */}
