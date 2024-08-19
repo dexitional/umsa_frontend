@@ -8,7 +8,7 @@ import PgStepEducation, { action as stepEducationAction, loader as stepEducation
 import PgStepEmployment, { action as stepEmploymentAction, loader as stepEmploymentLoader } from '../pages/amsp/PgStepEmployment';
 import PgStepGuardian, { action as stepGuardianAction, loader as stepGuardianLoader } from '../pages/amsp/PgStepGuardian';
 import PgStepPrintForm from '../pages/amsp/PgStepPrintForm';
-import PgStepPrintLetter, { loader as stepPrintLetterLoader } from '../pages/amsp/PgStepPrintletter';
+import PgStepPrintLetter, { loader as stepPrintLetterLoader } from '../pages/amsp/PgStepPrintLetter';
 import PgStepProfile, { action as stepProfileAction, loader as stepProfileLoader } from '../pages/amsp/PgStepProfile';
 import PgStepReferee, { action as stepRefereeAction, loader as stepRefereeLoader } from '../pages/amsp/PgStepReferee';
 import PgStepResult, { action as stepResultAction, loader as stepResultLoader } from '../pages/amsp/PgStepResult';
