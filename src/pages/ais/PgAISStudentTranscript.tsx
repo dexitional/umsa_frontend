@@ -1,21 +1,9 @@
-import React from 'react'
-import AISPBioCard from '../../components/aisp/AISPBioCard';
-import { ImProfile } from 'react-icons/im';
-import { FaRegAddressCard, FaRegCalendar } from 'react-icons/fa6';
-import { FaPhoneAlt, FaTransgender } from 'react-icons/fa';
-import { TbHomeCheck } from 'react-icons/tb';
-import { MdOutlineFiberPin, MdOutlineMarkEmailUnread } from 'react-icons/md';
-import moment from 'moment';
-import { BsCalendarRange } from 'react-icons/bs';
-import { BiMoneyWithdraw } from 'react-icons/bi';
-import { RiCommunityLine } from 'react-icons/ri';
-import Service from '../../utils/aisService'
+import React from 'react';
 import { useLoaderData } from 'react-router';
 import AISResultCard from '../../components/ais/AISResultCard';
-
+import Service from '../../utils/aisService';
 
 type Props = {}
-
 
 export async function loader({ params }){
   const data = await Service.fetchStudentTranscript(params.studentId);

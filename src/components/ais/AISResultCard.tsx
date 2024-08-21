@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type Props = {
     data?: any;
@@ -12,8 +12,7 @@ function AISResultCard({ title,data,index,cgpa }: Props) {
   let credit = data.reduce((sum,cur) => cur.credit+sum, 0);
   let gradepoint = data.reduce((sum,cur) => (cur.credit*cur.gradepoint)+sum,0);
   let gpa = gradepoint/credit;
-  console.log(cgpa)
- 
+  
   return (
     <div className="w-full space-y-3 rounded">
     <h1 className="text-sm font-bold font-roboto tracking-wider text-primary-dark/60 flex flex-col md:flex-row justify-between">
@@ -34,16 +33,16 @@ function AISResultCard({ title,data,index,cgpa }: Props) {
               <span className="col-span-4 font-medium">{row.course?.title}</span>
               <span>{row.credit}</span>
               <span>{row.grade}</span>
-              <span>{(row.gradepoint * row.credit).toFixed(1)}</span>
+              <span>{isNaN(row.gradepoint * row.credit) ? '--': (row.gradepoint * row.credit).toFixed(1)}</span>
             </div>
           ))}
           {/* Totals */}
           <div className="px-3 py-2 border-b grid grid-cols-8 font-bold text-xs text-primary-accent/80">
             <span>&nbsp;</span>
-            <span className="col-span-4 font-bold">CGPA:&nbsp;&nbsp;&nbsp;{ cgpa && cgpa[index] || 0 }</span>
-            <span>GPA:&nbsp;&nbsp;&nbsp;{gpa?.toFixed(1)}</span>
-            <span>TCH:&nbsp;&nbsp;&nbsp;{ credit?.toFixed(1) }</span>
-            <span>TGP:&nbsp;&nbsp;&nbsp;{ gradepoint?.toFixed(1) }</span>
+            <span className="col-span-4 font-bold">CGPA:&nbsp;&nbsp;&nbsp;{isNaN(cgpa && cgpa[index]) ? '--' : cgpa && cgpa[index] || 0  }</span>
+            <span>GPA:&nbsp;&nbsp;&nbsp;{isNaN(gpa) ? '--' : gpa?.toFixed(1)}</span>
+            <span>TCH:&nbsp;&nbsp;&nbsp;{ isNaN(credit) ? '--' : credit?.toFixed(1) }</span>
+            <span>TGP:&nbsp;&nbsp;&nbsp;{ isNaN(gradepoint) ? '--' : gradepoint?.toFixed(1) }</span>
           </div>
     </div>
  </div>
