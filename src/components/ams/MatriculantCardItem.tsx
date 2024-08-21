@@ -1,11 +1,10 @@
-import React from 'react'
-import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
-import { Form, Link } from 'react-router-dom'
-import { TbHexagonNumber1, TbHexagonNumber2 } from 'react-icons/tb'
-import { TiDocumentText } from "react-icons/ti";import { MdFolderDelete, MdNumbers } from 'react-icons/md'
-import { HiAcademicCap } from 'react-icons/hi2'
-import { FaUserLock } from 'react-icons/fa6'
-import { RiLockPasswordFill } from 'react-icons/ri'
+import React from 'react';
+import { FaUserLock } from 'react-icons/fa6';
+import { HiAcademicCap } from 'react-icons/hi2';
+import { MdFolderDelete, MdNumbers } from 'react-icons/md';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { TiDocumentText } from "react-icons/ti";
+import { Form, Link } from 'react-router-dom';
 
 type Props = {
   data: any;
@@ -14,7 +13,7 @@ type Props = {
 function MatriculantCardItem({ data }: Props) {
   return (
     <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-sm md:text-sm font-semibold font-noto text-gray-500 uppercase">{data?.student?.fname}{data?.student?.mname && data?.student?.mname+' '} {data?.student?.lname}</h2>
+    <h2 className="text-sm md:text-sm font-semibold font-noto text-gray-500 uppercase">{data?.student?.fname} {data?.student?.mname && data?.student?.mname+' '} {data?.student?.lname}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
           <div className="flex-1 text-sm md:text-sm text-primary-dark/70 font-bold font-roboto uppercase">{data?.category?.title}</div>
@@ -24,19 +23,20 @@ function MatriculantCardItem({ data }: Props) {
     <div className="space-y-1 font-roboto">
         <div className="flex items-center space-x-2">
             <HiAcademicCap className="h-4 w-5 text-primary/70" />
-            <span className="capitalize px-2 py-0 bg-green-50 rounded border font-semibold text-sm text-gray-500">{data?.program?.longName?.toLowerCase()}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border font-semibold text-xs text-gray-500 uppercase">{data?.program?.longName?.toLowerCase()}</span>
         </div>
         <div className="flex items-center space-x-2">
             <MdNumbers className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border font-semibold text-sm text-gray-500">Level {Math.ceil(data?.semesterNum/2)*100}</span>
+            {/* <span className="px-2 py-0 bg-green-50 rounded border font-semibold text-xs text-gray-500 uppercase">Level {Math.ceil(data?.semesterNum/2)*100}</span> */}
+            <span className="px-2 py-0 bg-green-50 rounded border font-semibold text-xs text-gray-500 uppercase">YEAR {Math.ceil(data?.semesterNum/2)}</span>
         </div>
         <div className="flex items-center space-x-2">
             <FaUserLock className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0.5 bg-green-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide">Username: {data?.serial}</span>
+            <span className="px-2 py-0.5 bg-green-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide">USERNAME: &nbsp;&nbsp;&nbsp;&nbsp;{data?.serial}</span>
         </div>
         <div className="flex items-center space-x-2">
             <RiLockPasswordFill className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0.5 bg-green-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide">Password: {data.password}</span>
+            <span className="px-2 py-0.5 bg-green-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide">PASSWORD: &nbsp;&nbsp;&nbsp;&nbsp;{data.password}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </div>
         
     </div>

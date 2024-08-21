@@ -1,9 +1,9 @@
 import React from 'react'
-import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
-import { Form, Link } from 'react-router-dom'
-import { TbHexagonNumber1, TbHexagonNumber2 } from 'react-icons/tb'
-import { CgNotes, CgTemplate } from 'react-icons/cg'
 import { BiTrash } from 'react-icons/bi'
+import { CgNotes, CgTemplate } from 'react-icons/cg'
+import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
+import { TbHexagonNumber1, TbHexagonNumber2 } from 'react-icons/tb'
+import { Form, Link } from 'react-router-dom'
 
 type Props = {
   data: any;
@@ -12,7 +12,7 @@ type Props = {
 function ShortlistCardItem({ data }: Props) {
   return (
     <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-sm md:text-sm font-semibold font-noto text-gray-500 uppercase">{data?.profile?.fname}{data?.profile?.mname && data?.profile?.mname+' '} {data?.profile?.lname}</h2>
+    <h2 className="text-sm md:text-sm font-semibold font-noto text-gray-500 uppercase">{data?.profile?.fname} {data?.profile?.mname && data?.profile?.mname+' '} {data?.profile?.lname}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
           <div className="flex-1 text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{data?.title?.toUpperCase()}</div>

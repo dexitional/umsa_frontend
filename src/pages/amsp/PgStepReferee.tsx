@@ -97,7 +97,7 @@ function PgStepReferee({}: Props) {
                   <div className="px-2 space-y-4">
                       <label className="flex flex-col space-y-2">
                           <span className="text-sm md:text-base text-gray-500 font-medium">Title</span>
-                          <select arial-label="titleId" name={`titleId_${i}`} defaultValue={data?.titleId} required className="capitalize focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
+                          <select arial-label="titleId" name={`titleId_${i}`} defaultValue={rec?.titleId} required className="capitalize focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
                             <option selected disabled>-- Choose --</option>
                             { titles && titles?.map((row:any) =>(
                               <option key={row.id} value={row.id}>{row.label?.toLowerCase()}</option>

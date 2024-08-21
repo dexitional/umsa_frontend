@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom';
-import Login from './pages/Login';
+import Maintenance from './pages/Login';
+import Login from './pages/Maintenance';
 const Home = lazy(() => import('./pages/Home'));
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -27,6 +28,7 @@ function App() {
     { path: "/", element: <Navigate to={{ pathname: '/dash' }} replace />,  },
     // { path: "/login", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/evs/dash'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
     { path: "/login", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
+    { path: "/admin", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Maintenance /> },
     // Protected Routes
     { 
       element: isAuthenticated() ? <Outlet/> : <Navigate to={{ pathname:'/login'}} replace />,
