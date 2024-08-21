@@ -17,7 +17,7 @@ export async function action({ request, params }){
      return false;
   }
   const changePassword = useUserStore.getState().changePassword;
-  await changePassword(data.tag,data.oldpassword,data.newpassword);
+  await changePassword(data?.tag,data?.oldpassword,data?.newpassword);
   return redirect(`/aisp/profile`)
   
 } 
@@ -30,7 +30,7 @@ function PgAISPPasswordForm({}: Props) {
   
   return (
     <main className="p-2 md:pl-10 md:p-6 space-y-4 md:space-y-10">
-      <SubPageTitle title={`Password Change`} page="NSS USER ACCOUNT" />
+      <SubPageTitle title={`Password Change`} page="USER ACCOUNT" />
       <div className="p-2 md:p-6 border bg-slate-50/50 rounded-xl space-y-6">
          <section className="flex md:space-x-6">
            <div className="flex-1 flex flex-col space-y-1 md:space-y-3">

@@ -1,8 +1,8 @@
-import React from 'react'
-import RegistrationSlipItem from './RegistrationSlipItem';
 import moment from 'moment';
+import React from 'react';
 import { IoPrint } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import RegistrationSlipItem from './RegistrationSlipItem';
 
 type Props = { 
   data?: any;
@@ -31,15 +31,15 @@ function RegistrationSlipView({ title,data }: Props) {
   
   return (
     <div className="flex flex-col space-y-4">
-      <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-accent/80 flex flex-col md:flex-row justify-between">
-        <span>{title}</span>
+      <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-dark/80 flex flex-col md:flex-row justify-between">
+        <div className="py-1 px-5 bg-primary/90 md:rounded-l md:rounded-tr-3xl text-white">{title}</div>
         <div className="flex space-x-2">
-           <Link to="/print/registration" className="px-3 py-1 bg-primary/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoPrint className="h-6 w-6 text-white"/><span>PRINT SLIP</span></Link>
+           <Link to="/print/registration" className="px-3 py-1 bg-primary-dark/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoPrint className="h-6 w-6 text-white"/><span>PRINT SLIP</span></Link>
            {/* <button onClick={reset} className="px-3 py-1 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button> */}
         </div>
         
       </h1>
-      <div className="pt-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
+      <div className="pt-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl shadow-[0px_0px_8px_#ddd_inset]">
         <div className="px-6 pb-4  hidden md:grid grid-cols-5 place-items-center border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
             <div className="place-self-start">Code</div>
             <div className="col-span-2 place-self-start">Course</div>

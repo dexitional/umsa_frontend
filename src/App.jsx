@@ -27,14 +27,14 @@ function App() {
     // { path: "/", element: <Navigate to={{ pathname: isAuthenticated() ? '/dash' : '/login' }} replace />,  },
     { path: "/", element: <Navigate to={{ pathname: '/dash' }} replace />,  },
     // { path: "/login", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/evs/dash'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
-    { path: "/login", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
-    { path: "/admin", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Maintenance /> },
+    { path: "/login", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/profile'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
+    { path: "/admin", element: isAuthenticated() ? user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/profile'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Maintenance /> },
     // Protected Routes
     { 
       element: isAuthenticated() ? <Outlet/> : <Navigate to={{ pathname:'/login'}} replace />,
       children:[
         //  { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/evs/dash'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Suspense fallback={<Loader/>}><Home /></Suspense> },
-         { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Suspense fallback={<Loader/>}><Home /></Suspense> },
+         { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/profile'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Suspense fallback={<Loader/>}><Home /></Suspense> },
          /* ADMISSION PORTAL ROUTE */
          {...AMSPRoute },
          /* STUDENT PORTAL ROUTE */

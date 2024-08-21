@@ -1,19 +1,17 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom';
-import AISPPager from '../components/aisp/AISPPager';
+import React from 'react';
 import AISPLayout from '../components/aisp/AISPLayout';
-import PgAISPProfile,{ loader as aispProfileLoader} from '../pages/aisp/PgAISPProfile';
-import PgAISPProfileForm, {  loader as aispProfileFormLoader, action as aispProfileAction } from '../pages/aisp/PgAISPProfileForm';
+import AISPPager from '../components/aisp/AISPPager';
+import PgAISPDash from '../pages/aisp/PgAISPDash';
+import PgAISPFees, { loader as aispFeesLoader } from '../pages/aisp/PgAISPFees';
 import PgAISPNotices, { loader as nssNoticesLoader } from '../pages/aisp/PgAISPNotices';
-import PgAISPNotice, { loader as nssNoticeLoader } from '../pages/aisp/PgAISPNotice';
-import PgAISPServices, { loader as nssServicesLoader } from '../pages/aisp/PgAISPServices';
-import PgAISPService, { loader as nssServiceLoader } from '../pages/aisp/PgAISPService';
-import PgAISPServiceForm, { loader as nssServiceFormLoader, action as nssServiceFormAction } from '../pages/aisp/PgAISPServiceForm';
 import PgAISPPasswordForm, { action as nssPasswordFormAction } from '../pages/aisp/PgAISPPasswordForm';
-import PgAISPDash, { loader as nssDashLoader } from '../pages/aisp/PgAISPDash';
-import PgAISPFees,{ loader as aispFeesLoader } from '../pages/aisp/PgAISPFees';
-import PgAISPRegistrations,{ loader as aispRegistrationsLoader } from '../pages/aisp/PgAISPRegistrations';
+import PgAISPProfile, { loader as aispProfileLoader } from '../pages/aisp/PgAISPProfile';
+import PgAISPProfileForm, { action as aispProfileAction, loader as aispProfileFormLoader } from '../pages/aisp/PgAISPProfileForm';
+import PgAISPRegistrations, { loader as aispRegistrationsLoader } from '../pages/aisp/PgAISPRegistrations';
 import PgAISPResults, { loader as aispResultsLoader } from '../pages/aisp/PgAISPResults';
+import PgAISPService, { loader as nssServiceLoader } from '../pages/aisp/PgAISPService';
+import PgAISPServiceForm, { action as nssServiceFormAction, loader as nssServiceFormLoader } from '../pages/aisp/PgAISPServiceForm';
+import PgAISPServices, { loader as nssServicesLoader } from '../pages/aisp/PgAISPServices';
 
 import { useUserStore } from '../utils/authService';
 
@@ -53,34 +51,20 @@ const AISRoute:any =  {
          element: <PgAISPNotices />,
          loader: nssNoticesLoader,
       },
-      { 
-         path:'notices/:noticeId', 
-         element: <PgAISPNotice />,
-         loader: nssNoticeLoader
-      },
       
       // Fees & Charges
       {  path:'fees', 
          element: <PgAISPFees />,
          loader: aispFeesLoader,
       },
-      { 
-         path:'fees/:noticeId', 
-         element: <PgAISPNotice />,
-         loader: nssNoticeLoader
-      },
-
+      
       // Results
       {  path:'results', 
          element: <PgAISPResults />,
          loader: aispResultsLoader,
       },
-      // { 
-      //    path:'results/:resultsId', 
-      //    element: <PgAISPNotice />,
-      //    loader: aispResultLoader
-      // },
-       // Results
+      
+       // Registrations
       {  path:'registration', 
          element: <PgAISPRegistrations />,
          loader: aispRegistrationsLoader,

@@ -2,9 +2,9 @@ import React from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import { Outlet, useNavigation } from 'react-router'
-import NSSRoleNav from './AISPRoleNav'
-import NSSLogoBox from './AISPLogoBox'
-import NSSNav from './AISPNav'
+import AISPRoleNav from './AISPRoleNav'
+import AISPLogoBox from './AISPLogoBox'
+import AISPNav from './AISPNav'
 import Loading from '../Loader'
 import Loader from '../Loader'
 import { useUserStore } from '../../utils/authService'
@@ -21,14 +21,14 @@ function AISPLayout({ children }: Props) {
   return (
     <div className="w-full h-screen flex flex-col justify-between">
     <Header user={user} logout={logout}  />
-    <NSSRoleNav user={user} />
+    <AISPRoleNav user={user} />
     <main className="w-full flex-1 flex flex-col md:overflow-y-scroll">
       <section className="md:mx-auto w-full md:max-w-7xl flex">
-         <div className="my-8 py-10 z-20 w-56 h-fit rounded-[2rem] bg-primary/80 hidden md:flex flex-col space-y-3">
-           <NSSLogoBox />
-           <NSSNav user={user} />
+         <div className="md:fixed my-8 py-20 z-20 md:w-60 h-fit border-r-[12px] rounded-l-[4.5rem] rounded-r bg-primary/80 hidden md:flex flex-col space-y-3 overflow-hidden">
+           <AISPLogoBox />
+           <AISPNav user={user} />
          </div>
-         <div className={`${loading && 'overflow-hidden'} flex-1`}>
+         <div className={`${loading && 'overflow-hidden'} flex-1 md:ml-64`}>
            { loading && <Loader /> }
            <Outlet />
          </div>

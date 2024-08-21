@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ListHeading from './ListHeading';
 
 type Props = {
@@ -23,11 +23,11 @@ function ResultListItem({ row }: Props) {
         </div>
         <div className="capitalize flex flex-col space-y-2">
           <ListHeading title="GD"/>
-          <span className="px-2">{ (row.totalScore) ? row.grade : 'I'}</span>
+          <span className="px-2 font-black">{ (row.totalScore) ? row.grade : '--'}</span>
         </div>
         <div className="flex flex-col space-y-2 md:text-center">
           <ListHeading title="GP" />
-          <span className="px-2 capitalize">{row.totalScore ? (row.gradepoint * row.credit).toFixed(1) : ''}</span>
+          <span className="px-2 capitalize">{row.totalScore ? isNaN(row.gradepoint * row.credit) ? '--':(row.gradepoint * row.credit).toFixed(1) : '--'}</span>
         </div>
     </div>
   )

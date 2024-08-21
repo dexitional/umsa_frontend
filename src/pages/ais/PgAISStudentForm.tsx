@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/aisService'
 import moment from 'moment'
+import React from 'react'
+import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/ais/SubPageTitle'
+import Service from '../../utils/aisService'
 
 type Props = {}
 
@@ -119,7 +119,6 @@ function PgAISStudentForm({}: Props) {
                       <span className="text-sm md:text-base text-gray-500 font-medium">Disability</span>
                       <select arial-label="disabilityId" name="disabilityId" defaultValue={data?.disabilityId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option>-- NONE --</option>
                         { disabilities && disabilities?.map((row:any) =>(
                           <option key={row.id} value={row.id}>{row.title}</option>
                         ))}

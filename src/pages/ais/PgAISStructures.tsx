@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/ais/PageTitle'
-import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
-import StructureListView from '../../components/ais/StructureListView'
+import PageTitle from '../../components/ais/PageTitle'
 import StructureCardItem from '../../components/ais/StructureCardItem'
+import StructureListView from '../../components/ais/StructureListView'
+import Service from '../../utils/aisService'
 type Props = {}
 
-export async function action({ params }) {
-  await Service.deleteProgram(params.programId);
-  return redirect("/ais/curriculum");
+export async function action({ params,request }) {
+  const search = new URL(request.url).searchParams.get('search') || '';
+  await Service.deleteCurriculum(params.curriculumId);
+  return redirect(`/ais/curriculums?search=${search}`);
 }
 
 export async function loader({ request }) {

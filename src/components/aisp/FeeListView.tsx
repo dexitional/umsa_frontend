@@ -13,7 +13,7 @@ function FeeListView({ data }: Props) {
   }, 0) 
 
   return (
-    <div className="py-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
+    <div className="py-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl shadow-[0px_0px_8px_#ddd_inset]">
       <div className="px-6 pb-4  hidden md:grid grid-cols-6 place-items-center   border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
           <div className="col-span-2 place-self-start">Narrative</div>
           <div>Amount</div>

@@ -21,7 +21,6 @@ function AISPNav({ user }: Props) {
         {/* <AISPNavItem title="MLK Circulars" url="notices" Icon={MdOutlineAddTask} /> */}
         {/* <NSSNavItem title="Discipline Cases" url="disciplinary" Icon={GoBriefcase} /> */}
         {/* <AISPNavItem title="Service Requests" url="services" Icon={MdOutlineAddTask} /> */}
-        {/* <NSSNavItem title="Release Letter " url="release" Icon={SlEnvolopeLetter} /> */}
         <AISPNavItem title="Change Password" url="changepwd" Icon={PiLockKey} />
 
     </div>
