@@ -292,6 +292,23 @@ class Service {
         }
     }
 
+    async generateEmail(studentId){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/students/mailgen`, { studentId },{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+           })
+          if(res.status == 200){
+             const data = res.data;
+             toast.success(`${studentId} password is ${data}`);
+             return data;
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+  }
+
     async pardonStudent(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ais/students/pardon`, data,{

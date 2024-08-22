@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import toast from 'react-hot-toast';
 import { FaMoneyCheckDollar } from 'react-icons/fa6';
 import { GoPasskeyFill } from "react-icons/go";
 import { HiUserAdd } from "react-icons/hi";
@@ -65,6 +66,18 @@ function AISAccountCard({ data }: Props) {
     }
   }
 
+  const generateEmail = async () => {
+    const ok = window.confirm("Generate Student Mail ?")
+    if(ok){
+      try {
+        const resp = await Service.generateEmail(data?.id);
+        if(resp) navigate(0)
+      } catch (error) {
+        toast.error("Mail already exists !")
+      }
+    }
+  }
+
   const switchAccount = async (e) => {
     try {
         e.preventDefault();
@@ -124,6 +137,12 @@ function AISAccountCard({ data }: Props) {
           <button onClick={switchAccount} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
             <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Switch User Access</span>
+          </button>
+
+          {/* Generate Institutional Email  */}
+          <button onClick={generateEmail} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Student Email</span>
           </button>
        </section>
     </div>
