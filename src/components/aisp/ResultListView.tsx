@@ -13,8 +13,7 @@ function ResultListView({ title,data,index,cgpa }: Props) {
   let credit = data.reduce((sum,cur) => cur.credit+sum, 0);
   let gradepoint = data.reduce((sum,cur) => (cur.credit*cur.gradepoint)+sum,0);
   let gpa = gradepoint/credit;
-  console.log(cgpa)
-
+  
   return (
     <div className="space-y-4">
       <div className="flex flex-col md:flex-row items-center justify-between">

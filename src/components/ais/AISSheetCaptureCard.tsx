@@ -11,7 +11,7 @@ type Props = {
 function AISSheetCaptureCard({ title,data }: Props) {
   const state = useActionData()
   const formRef:any = useRef();
-  console.log(state)
+  console.log(data)
   return (
     <Form method="post"  className="w-full space-y-3 rounded">
     <h1 className="text-sm font-bold font-roboto tracking-wider text-primary-dark/60 flex flex-col md:flex-row justify-between">
@@ -32,7 +32,7 @@ function AISSheetCaptureCard({ title,data }: Props) {
             <span>CLASS-T</span>
             <span>EXAMS-T</span>
           </div>
-          { data?.filter((r:any) => r.status == 0).data?.map((row:any,i: number) => (
+          { data?.filter((r:any) => r.status == 0)?.map((row:any,i: number) => (
             <div className="px-3 py-2 border-b grid grid-cols-11 font-medium text-xs text-primary/80">
               <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${row?.student?.id}`} className="h-8 w-8 border rounded-md bg-white object-contain" />
               <span className="col-span-2 font-bold flex items-center">{row?.indexno}</span>
