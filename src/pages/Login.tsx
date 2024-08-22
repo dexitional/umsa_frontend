@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Adinkra2 from '../assets/img/adinkra-bullet.png'
-import Adinkra from '../assets/img/logo/mlk/logo.png'
+import Adinkra from '../assets/img/logo/aucc/logo.png'
 import Logo from '../assets/img/logo_sso.png'
 // @ts-ignore
 import { FaArrowLeft, FaLock } from 'react-icons/fa'
