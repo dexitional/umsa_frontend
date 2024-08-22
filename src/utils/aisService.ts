@@ -244,7 +244,10 @@ class Service {
     async changePhoto(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/auth/photos`,data,{
-                headers: { "x-access-token" : token }
+                headers: { 
+                  "Content-Type" : "multipart/form-data",
+                  "x-access-token" : token 
+                }
             })
             if(res.status == 200 || res.status == 202){
                toast.success("Photo updated!")
