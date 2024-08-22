@@ -832,7 +832,7 @@ class Service {
                toast.success("Scoresheets created!")
                return res.data
             } 
-            else throw new(res.data?.message)
+            else throw new(res.data.message)
         
         } catch (error) { 
           return checkSession(error)
