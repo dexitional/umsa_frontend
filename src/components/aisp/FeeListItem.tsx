@@ -20,7 +20,7 @@ function FeeListItem({ data }: Props) {
         </div>
         <div className="capitalize flex flex-col space-y-2">
           <ListHeading title="Amount"/>
-          <span className="px-2">{data?.currency} {data?.amount}</span>
+          <span className="px-2">{data?.currency} {Math.abs(data?.amount)}</span>
         </div>
         <div className="capitalize flex flex-col space-y-2">
           <ListHeading title="Type"/>

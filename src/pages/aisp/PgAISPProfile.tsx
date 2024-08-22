@@ -45,7 +45,7 @@ function PgAISPProfile({}: Props) {
              <div className='p-3 md:px-6 md:py-6 border bg-white rounded grid md:grid-cols-2 gap-6 shadow-[0px_0px_4px_#ddd_inset]'>
                  <img src={`${REACT_APP_API_URL}/auth/photos/?tag=${user?.user?.tag}`} className="w-80 h-40 rounded-lg bg-primary/10 object-contain flex items-center justify-center"/>
                  <div className="px-6 py-3 rounded font-poppins tracking-wide bg-primary-accent/5 text-primary-dark/70 col-auto gap-0.5 grid grid-cols-1">
-                   <p className="font-semibold">{`${data?.fname} ${data?.mname && data?.mname+' '}${data?.lname}`}</p>
+                   <p className="font-semibold">{`${data?.fname} ${data?.mname ? data?.mname+' ':''}${data?.lname}`}</p>
                    <p className="text-xs font-semibold">{data?.program?.longName || 'Not Set'}</p>
                    <p className="text-xs font-semibold">STUDENT ID: {`${data?.id}`}</p>
                    <p className="text-xs font-semibold">INDEX NUMBER: {data?.indexno || 'Not Set'}</p>

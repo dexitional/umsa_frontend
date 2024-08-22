@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import FeeListItem from './FeeListItem';
 
 type Props = { 
@@ -28,7 +28,7 @@ function FeeListView({ data }: Props) {
       { data.length ? (
       <div className={`${sum > 0 ? 'text-primary-accent/70' : 'text-primary/70'} px-6 pb-4 md:grid grid-cols-6 place-items-center border-slate-200 text-xs font-sans font-semibold uppercase tracking-widest`}>
           <div className="place-self-start">&nbsp;</div>
-          <div className="col-span-5 place-self-start flex items-center justify-between"><span>NET NET { sum > 0 ? 'DEBT':'BALANCE'}:</span>&nbsp;&nbsp;&nbsp;<span>{data && data[0]?.currency} { Math.abs(sum) }</span></div>
+          <div className="col-span-5 place-self-start flex items-center justify-between"><span>NET NET { sum > 0 ? 'DEBT':'BALANCE'}:</span>&nbsp;&nbsp;&nbsp;<span>{data && data[0]?.currency} { !isNaN ? Math.abs(sum) : 0 }</span></div>
       </div>
       ): null }
         
