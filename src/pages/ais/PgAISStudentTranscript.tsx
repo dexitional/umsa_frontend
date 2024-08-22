@@ -7,11 +7,11 @@ type Props = {}
 
 export async function loader({ params }){
   const data = await Service.fetchStudentTranscript(params.studentId);
-  
+  console.log(data)
   let credit = 0;
   let gradepoint = 0;
   const cgpa:any = [];
-  Array.from(data).map(([title,row]:any,i: number) => {
+  data && Array.from(data)?.map(([title,row]:any,i: number) => {
     credit += row.reduce((sum,cur) => cur.credit+sum, 0);
     gradepoint += row.reduce((sum,cur) => (cur.credit*cur.gradepoint)+sum,0);
     let gpa = gradepoint/credit;
@@ -29,7 +29,7 @@ function PgAISStudentTranscript({}: Props) {
     { data && Array.from(data).map(([title,row]:any,i: number) => (
       <AISResultCard index={i} cgpa={cgpa} key={title} title={title.toUpperCase()} data={row} />
     ))}
-    { !data.length ? (<div className="p-3 "><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Academic Statement ...</h1></div>) : null}
+    { !data?.length ? (<div className="p-3 "><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Academic Statement ...</h1></div>) : null}
   </div>
   )
 }

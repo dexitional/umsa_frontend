@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 import { Form, Link, useActionData, } from 'react-router-dom';
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -32,7 +32,7 @@ function AISSheetCaptureCard({ title,data }: Props) {
             <span>CLASS-T</span>
             <span>EXAMS-T</span>
           </div>
-          { data.map((row:any,i: number) => (
+          { data?.filter((r:any) => r.status == 0).data?.map((row:any,i: number) => (
             <div className="px-3 py-2 border-b grid grid-cols-11 font-medium text-xs text-primary/80">
               <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${row?.student?.id}`} className="h-8 w-8 border rounded-md bg-white object-contain" />
               <span className="col-span-2 font-bold flex items-center">{row?.indexno}</span>

@@ -1,14 +1,11 @@
 import React from 'react'
-import { FaEnvelope, FaFolder, FaPhone, FaTrash } from 'react-icons/fa'
+import { FaFolder, FaTrash } from 'react-icons/fa'
 import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFilePdf, FaTimeline } from 'react-icons/fa6'
-import { IoIosTime } from "react-icons/io";
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import { AiOutlineFieldNumber } from 'react-icons/ai'
+import { IoIosTime } from "react-icons/io"
 
 type Props = {
   data: any;
@@ -26,7 +23,7 @@ function CalendarCardItem({ data }: Props) {
     </div>
     <div className="space-y-1 font-roboto">
         <div className="flex items-center space-x-4">
-            <span className={`px-2 py-0 ${data?.tag == 'MAIN' ? 'bg-green-50 shadow-green-900/50':'bg-amber-50 shadow-amber-900/50'}  rounded shadow-[0px_0px_4px_#aaa] text-sm text-gray-500`}><b>{data?.tag == 'MAIN' ? 'MAIN CALENDAR':'JANUARY/SUB CALENDAR'}</b></span>
+            <span className={`px-3 py-0.5 ${data?.tag == 'MAIN' ? 'bg-green-50 ':'bg-amber-50 '}  rounded shadow-[0px_0px_4px_#aaa_inset] text-sm text-gray-500/80`}><b>{data?.tag == 'MAIN' ? 'MAIN CALENDAR':'JANUARY/SUB CALENDAR'}</b></span>
         </div>
      
         { data.registerStart && 

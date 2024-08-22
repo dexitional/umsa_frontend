@@ -52,7 +52,7 @@ function PgAISSheet({}: Props) {
                   <div className="block md:hidden p-2 md:p-4 h-16 w-16 border rounded-xl shadow-lg bg-white">
                     <img src={Logo} className="h-12 w-12 object-contain" />
                   </div>
-                  <h1 className="text-md md:text-3xl md:tracking-wide leading-5 font-semibold text-primary/70">{data?.course?.title?.toUpperCase()} {data?.course?.id}</h1>
+                  <h1 className="text-md md:text-3xl md:tracking-wide leading-5 font-semibold text-primary/70">{data?.course?.title?.toUpperCase()} - {data?.course?.id}</h1>
               </div>
               <div className="w-full flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2 text-zinc-400 text-lg">
                 <div className="flex items-center space-x-2 font-semibold"> 

@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { MdNumbers } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import Service from '../../utils/aisService'
-import { redirect, useLoaderData, useNavigate } from 'react-router'
 import moment from 'moment'
-import { TbEdit, TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb'
-import { FaMoneyCheckDollar, FaNewspaper } from 'react-icons/fa6'
-import { RiCommunityFill } from 'react-icons/ri'
-import { HiUserAdd } from 'react-icons/hi'
+import { FaMoneyCheckDollar } from 'react-icons/fa6'
 import { GoPasskeyFill } from 'react-icons/go'
+import { HiUserAdd } from 'react-icons/hi'
+import { MdNumbers } from 'react-icons/md'
+import { RiCommunityFill } from 'react-icons/ri'
+import { TbEdit } from 'react-icons/tb'
+import { redirect, useLoaderData, useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/img/logo/mlk/logo.png'
+import Service from '../../utils/aisService'
 
 type Props = {}
 
@@ -31,14 +31,13 @@ export async function loader({ params }){
 function PgAISCalendar({}: Props) {
   const navigate = useNavigate()
   const { data,params } :any = useLoaderData();
-  console.log(data)
   const fileRef:any = useRef(null)
   
   const stageSheet = async () => {
     const ok = window.confirm("Setup Scoresheets?")
     if(ok){
       const resp = await Service.stageSheet(params?.calendarId);
-      if(resp) navigate(0)
+      navigate(0)
     }
   }
 
@@ -63,7 +62,6 @@ function PgAISCalendar({}: Props) {
     const ok = window.confirm("Update Late Entry Status?")
     if(ok){
       const status = !!!data.assignLateSheet;
-      console.log(status)
       const resp = await Service.updateSession(params?.calendarId, { assignLateSheet: !!!data.assignLateSheet });
       if(resp) navigate(0)
     }

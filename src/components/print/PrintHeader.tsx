@@ -8,7 +8,7 @@ type Props = {}
 
 function PrintHeader({}: Props) {
 
-  return (<PrintHeaderMlk />)
+  return (<PrintHeaderAucc />)
 }
 
 export default PrintHeader

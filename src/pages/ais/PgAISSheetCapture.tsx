@@ -1,9 +1,8 @@
-import React from 'react'
-import Service from '../../utils/aisService'
-import { redirect, useLoaderData } from 'react-router';
+import React from 'react';
 import { BsActivity } from 'react-icons/bs';
-import AISStudentCard from '../../components/ais/AISStudentCard';
+import { redirect, useLoaderData } from 'react-router';
 import AISSheetCaptureCard from '../../components/ais/AISSheetCaptureCard';
+import Service from '../../utils/aisService';
 
 type Props = {}
 
@@ -16,7 +15,6 @@ export async function action({ request, params }){
       mdata.data = data;
       delete mdata?.data?.count;
      
-  console.log(mdata)
   let resp = await Service.saveSheet(mdata);
   if(resp) return redirect('.')
   //if(resp) return redirect(`../scores`)
@@ -34,7 +32,7 @@ function PgAISSheetCapture({}: Props) {
     <div className="flex w-full flex-1 flex-col items-center justify-center space-y-8 md:space-y-8 ">
        <div className="flex w-full flex-1 flex-col space-y-8 md:space-y-10 ">
           { data?.length ? <AISSheetCaptureCard title={ `Course Assessment`} data={data} /> : null }
-          { !data.length ? (
+          { !data?.filter((r:any) => r.status == 0)?.length ? (
               <div className="p-10 border border-primary/10 rounded-xl flex flex-col items-center justify-center space-y-3">
                 <BsActivity className="h-20 w-20 text-primary/30 border rounded-md" />
                 <span className="text-primary/40 font-medium">No Records ...</span>

@@ -27,6 +27,7 @@ export interface ImportMeta {
 export interface StoreState {
     user: any|null;
     token: string|null,
+    tag: string|null,
     message: string|null;
     search: any;
     loading: boolean;
@@ -43,6 +44,7 @@ export interface StoreState {
     logout: () => void;
     withCredential: (username:string, password: string) => void;
     withGoogle: (providerId:string, email: string) => void;
+    switchUser: (tag:string) => void;
     changePassword: (tag:string, oldpassword: string, newpassword: string) => void;
     
 

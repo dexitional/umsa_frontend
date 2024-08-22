@@ -1,12 +1,11 @@
-import React, { useRef } from 'react'
-import { HiUserAdd } from "react-icons/hi";
-import { GoPasskeyFill } from "react-icons/go";
-import { FaMoneyCheckDollar, FaRegIdCard } from 'react-icons/fa6';
-import Service from '../../utils/aisService'
-import { useUserStore } from '../../utils/authService';
-import { TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb';
-import { redirect, useNavigate } from 'react-router';
+import React, { useRef } from 'react';
 import toast from 'react-hot-toast';
+import { GoPasskeyFill } from "react-icons/go";
+import { HiUserAdd } from "react-icons/hi";
+import { TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb';
+import { useNavigate } from 'react-router';
+import Service from '../../utils/aisService';
+import { useUserStore } from '../../utils/authService';
 
 type Props = {
     data?: any;
@@ -16,6 +15,7 @@ type Props = {
 function AISStaffAccountCard({ data,isUser }: Props) {
   const navigate = useNavigate()
   const fileRef:any = useRef<HTMLInputElement>()
+  const { switchUser,user,message } = useUserStore(state => state);
   
   const stageAccess = async () => {
     const ok = window.confirm("Setup User Access ?")
@@ -57,6 +57,17 @@ function AISStaffAccountCard({ data,isUser }: Props) {
     }
   }
 
+  const switchAccount = async (e) => {
+    try {
+        e.preventDefault();
+        await switchUser(data?.staffNo);
+        window.location.href = '/'
+        //navigate("/")
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
   
   return (
     <div className="w-full rounded flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
@@ -96,6 +107,11 @@ function AISStaffAccountCard({ data,isUser }: Props) {
               <button onClick={removePhoto} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
                 <TbPhotoCancel className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
                 <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Remove Profile Photo</span>
+              </button>
+               {/* Switch Account */}
+              <button onClick={switchAccount} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+                <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+                <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Switch User Access</span>
               </button>
               
           </>}

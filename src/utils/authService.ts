@@ -14,6 +14,7 @@ export const useUserStore = create<StoreState>()(
     (set, get) => ({
         user: null,
         token: null,
+        tag: null,
         message: null, 
         loading: false,
         isLoggedIn : !!get()?.user,
@@ -67,7 +68,7 @@ export const useUserStore = create<StoreState>()(
                 const token = await resp?.token;
                  localStorage.setItem("@Auth:token", token);
                 //cookies.set("@Auth:token", token)
-                set({ user:resp.data, token, loading: false })
+                set({ user:resp.data, token, loading: false, tag: null })
               } else {
                 set({ message:resp.message, loading: false })
                 setTimeout( async() => set({ message:null }), 4000)
@@ -93,7 +94,7 @@ export const useUserStore = create<StoreState>()(
               const token = await resp?.token;
               localStorage.setItem("@Auth:token", token);
               //cookies.set("@Auth:token", token)
-              set({ user:resp.data, token, loading: false })
+              set({ user:resp.data, token, loading: false, tag: null })
              
             } else {
               set({ message:resp.message, loading: false })
@@ -104,6 +105,28 @@ export const useUserStore = create<StoreState>()(
             set({ message:err.message, loading: false })
             setTimeout( async() => set({ message:null }), 4000)
           }
+        },
+
+        switchUser : async (tag) => {
+            try {
+              const res = await axios.post(`${REACT_APP_API_URL}/auth/switch`, { tag });
+              const resp = res.data
+              if(resp.success){
+                const token = await resp?.token;
+                const user = get().user;
+                localStorage.setItem("@Auth:token", token);
+                if(user?.user?.group_id == 2)
+                  set({ user:resp.data, token, tag: user?.user?.tag })
+                else 
+                  set({ user:resp.data, token,tag: null })
+              } else {
+                set({ message:resp.message, tag: null })
+                setTimeout( async() => set({ message:null }), 1000)
+              }
+            } catch (err) {
+              set({ message:err.message, loading: false })
+              setTimeout( async() => set({ message:null }), 1000)
+            }
         },
         
         changePassword : async (tag, oldpassword, newpassword) => {
