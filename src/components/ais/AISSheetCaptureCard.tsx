@@ -11,7 +11,6 @@ type Props = {
 function AISSheetCaptureCard({ title,data }: Props) {
   const state = useActionData()
   const formRef:any = useRef();
-  console.log(data)
   return (
     <Form method="post"  className="w-full space-y-3 rounded">
     <h1 className="text-sm font-bold font-roboto tracking-wider text-primary-dark/60 flex flex-col md:flex-row justify-between">
