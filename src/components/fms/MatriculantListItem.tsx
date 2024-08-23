@@ -1,14 +1,9 @@
-import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { MdEditDocument, MdFolderDelete } from 'react-icons/md'
+import React from 'react';
+import { MdFolderDelete } from 'react-icons/md';
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png';
+import { TiDocumentText } from 'react-icons/ti';
 import { Form, Link } from 'react-router-dom';
 import ListHeading from './ListHeading';
-import { CgTemplate } from 'react-icons/cg';
-import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5';
-import { TiDocumentText } from 'react-icons/ti';
 
 type Props = {
     data: any;

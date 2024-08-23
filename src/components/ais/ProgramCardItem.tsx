@@ -1,14 +1,12 @@
 import React from 'react'
-import { FaEnvelope, FaFolder, FaPhone, FaTrash } from 'react-icons/fa'
+import { FaFolder, FaTrash } from 'react-icons/fa'
 import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFilePdf, FaTimeline } from 'react-icons/fa6'
-import { IoIosTime } from "react-icons/io";
-import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
+import { FaFilePdf, FaTimeline } from 'react-icons/fa6'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
 
 type Props = {
   data: any;

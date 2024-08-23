@@ -1,13 +1,11 @@
-import React, { useRef } from 'react'
-import { HiUserAdd } from "react-icons/hi";
-import Service from '../../utils/aisService'
-import { useUserStore } from '../../utils/authService';
-import {  useNavigate } from 'react-router';
-import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 import moment from 'moment';
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import StudentIDCard from './StudentIDCard';
+import React, { useRef } from 'react';
+import { HiUserAdd } from "react-icons/hi";
+import { useNavigate } from 'react-router';
+import Logo from '../../assets/img/logo/aucc/logo.png';
+import { useUserStore } from '../../utils/authService';
 const { REACT_APP_API_URL } = import.meta.env;
 
 

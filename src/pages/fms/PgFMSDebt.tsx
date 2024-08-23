@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SubPageTitle from '../../components/fms/SubPageTitle'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { Link } from 'react-router-dom'
-import Service from '../../utils/aisService'
-import { Outlet, redirect, useLoaderData } from 'react-router'
-import moment from 'moment'
-import { TbEdit } from 'react-icons/tb'
-import { FaNewspaper } from 'react-icons/fa6'
-import SubNavLink from '../../components/fms/SubNavLink'
-import { RiCommunityFill } from 'react-icons/ri'
 import { MdNumbers } from 'react-icons/md'
+import { RiCommunityFill } from 'react-icons/ri'
+import { TbEdit } from 'react-icons/tb'
+import { Outlet, redirect, useLoaderData } from 'react-router'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/img/logo/aucc/logo.png'
+import SubNavLink from '../../components/fms/SubNavLink'
+import Service from '../../utils/aisService'
 const { REACT_APP_API_URL } = import.meta.env;
  
 type Props = {}

@@ -1,10 +1,10 @@
-import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { MdEditDocument } from 'react-icons/md'
+import React from 'react';
+import { FaTrash } from 'react-icons/fa';
+import { FcViewDetails } from 'react-icons/fc';
+import { MdEditDocument } from 'react-icons/md';
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png';
 import { Form, Link } from 'react-router-dom';
+import Logo from '../../assets/img/logo/aucc/logo.png';
 import ListHeading from './ListHeading';
 const { REACT_APP_API_URL } = import.meta.env;
 

@@ -1,18 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { MdLocationOn, MdNumbers } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
-import Service from '../../utils/aisService'
-import { Outlet, redirect, useLoaderData } from 'react-router'
-import moment from 'moment'
-import { TbEdit } from 'react-icons/tb'
-import { FaNewspaper } from 'react-icons/fa6'
-import PgAISStudentProfile from './PgAISStudentProfile'
-import SubNavLink from '../../components/ais/SubNavLink'
-import { RiCommunityFill } from 'react-icons/ri'
 import { HiAcademicCap } from 'react-icons/hi2'
+import { MdNumbers } from 'react-icons/md'
+import { TbEdit } from 'react-icons/tb'
+import { useLoaderData } from 'react-router'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/img/logo/aucc/logo.png'
+import Service from '../../utils/aisService'
 
 type Props = {}
 

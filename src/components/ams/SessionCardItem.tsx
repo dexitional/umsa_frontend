@@ -1,16 +1,12 @@
 import React from 'react'
-import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { GiClockwork, GiTimeBomb } from 'react-icons/gi'
-import { IoTimer } from 'react-icons/io5'
-import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
+import { FaTrash } from 'react-icons/fa'
+import { GiClockwork } from 'react-icons/gi'
+import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFileInvoiceDollar, FaFilePdf, FaPeopleGroup } from 'react-icons/fa6'
-import { IoIosTime } from "react-icons/io";
+import { FaFileInvoiceDollar, FaPeopleGroup } from 'react-icons/fa6'
+import { IoIosTime } from "react-icons/io"
 
 type Props = {
   data: any;

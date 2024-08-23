@@ -1,15 +1,10 @@
 import React from 'react'
-import { FaEnvelope, FaPhone, FaTrash } from 'react-icons/fa'
-import { MdEditDocument } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
+import { FaPhone } from 'react-icons/fa'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFilePdf, FaFolder } from 'react-icons/fa6'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
-import { BsLightningChargeFill } from "react-icons/bs";
-import { BiRefresh } from 'react-icons/bi'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 const { REACT_APP_API_URL } = import.meta.env;
 

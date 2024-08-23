@@ -1,14 +1,8 @@
 import React from 'react'
 import { MdOutlineDateRange } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { HiHashtag, HiMiniAcademicCap } from 'react-icons/hi2'
-import { AiOutlineFieldNumber } from 'react-icons/ai'
-import { BsLightningChargeFill } from "react-icons/bs";
-import { BiHash, BiPhone, BiRefresh } from 'react-icons/bi'
-import { VscReferences } from "react-icons/vsc";
+import { BiHash, BiPhone } from 'react-icons/bi'
 
 const { REACT_APP_API_URL } = import.meta.env;
 

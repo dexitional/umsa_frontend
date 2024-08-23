@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SubPageTitle from '../../components/ams/SubPageTitle'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { Link } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import { redirect, useLoaderData } from 'react-router'
 import { HiAcademicCap } from 'react-icons/hi2'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
+import { redirect, useLoaderData } from 'react-router'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import FormTemplate from '../../components/ams/FormTemplate'
+import Service from '../../utils/amsService'
 
 type Props = {}
 

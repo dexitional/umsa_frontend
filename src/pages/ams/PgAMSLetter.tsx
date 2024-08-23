@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SubPageTitle from '../../components/ams/SubPageTitle'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { Form, Link } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import { Outlet, redirect, useLoaderData } from 'react-router'
-import moment from 'moment'
-import { TbEdit } from 'react-icons/tb'
-import SubNavLink from '../../components/ais/SubNavLink'
-import ReactHtml from "html-react-parser";
+import ReactHtml from "html-react-parser"
 import { PiSignatureBold } from 'react-icons/pi'
+import { TbEdit } from 'react-icons/tb'
+import { redirect, useLoaderData } from 'react-router'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import LetterTemplate from '../../components/ams/LetterTemplate'
+import Service from '../../utils/amsService'
 
 type Props = {}
 

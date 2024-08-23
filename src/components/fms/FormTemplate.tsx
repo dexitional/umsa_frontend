@@ -1,12 +1,10 @@
-import React, { Fragment, useRef } from 'react'
-import PrintHeader from '../print/PrintHeader'
-import { useReactToPrint } from "react-to-print";
-import ReactHtml from "html-react-parser";
-import { dummyAUCCApplicant, loadPlacerData } from '../../utils/util';
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useRef } from 'react';
 import { FaFilePdf } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useReactToPrint } from "react-to-print";
+import Logo from '../../assets/img/logo/aucc/logo.png';
+import PrintHeader from '../print/PrintHeader';
 
 type Props = {
     data: any;

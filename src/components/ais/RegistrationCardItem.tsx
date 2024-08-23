@@ -1,15 +1,13 @@
 import React from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { FaFilePdf } from 'react-icons/fa6'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
-import { LuFileSpreadsheet } from "react-icons/lu";
-import { GrDocumentTime } from 'react-icons/gr'
 import moment from 'moment'
 import { CgCalendarDates } from 'react-icons/cg'
+import { FaFilePdf } from 'react-icons/fa6'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
+import { LuFileSpreadsheet } from "react-icons/lu"
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 type Props = {
   data: any;

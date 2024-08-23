@@ -1,14 +1,10 @@
-import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { MdEditDocument, MdLockReset } from 'react-icons/md'
+import React from 'react';
+import { MdLockReset } from 'react-icons/md';
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png';
+import { BiSolidSend } from 'react-icons/bi';
+import { PiMoneyBold } from 'react-icons/pi';
 import { Form, Link } from 'react-router-dom';
 import ListHeading from './ListHeading';
-import moment from 'moment';
-import { PiMoneyBold } from 'react-icons/pi';
-import { BiSolidSend } from 'react-icons/bi';
 
 type Props = {
     data: any;

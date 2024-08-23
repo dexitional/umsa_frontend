@@ -1,13 +1,9 @@
 import React from 'react'
-import { FaEnvelope, FaPhone, FaTrash } from 'react-icons/fa'
 import { MdEditDocument } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaCalendarCheck, FaCalendarXmark, FaFilePdf, FaFolder } from 'react-icons/fa6'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
-import { AiOutlineFieldNumber } from 'react-icons/ai'
+import { FaCalendarCheck, FaCalendarXmark, FaFolder } from 'react-icons/fa6'
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {

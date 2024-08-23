@@ -1,18 +1,14 @@
 import React from 'react'
-import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcApprove, FcViewDetails } from 'react-icons/fc'
-import { GiTimeBomb } from 'react-icons/gi'
-import { IoCheckmarkDoneCircleSharp, IoTimer } from 'react-icons/io5'
-import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
+import { FaPhone } from 'react-icons/fa'
+import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
 import { Form, Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaCircleCheck, FaCreditCard, FaFilePdf, FaFolder } from 'react-icons/fa6'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
-import { AiOutlineFieldNumber, AiOutlineFileDone } from 'react-icons/ai'
+import { AiOutlineFileDone } from 'react-icons/ai'
 import { CgNotes, CgTemplate } from 'react-icons/cg'
+import { FaCircleCheck } from 'react-icons/fa6'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 type Props = {
   data: any;

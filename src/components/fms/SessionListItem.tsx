@@ -1,12 +1,11 @@
-import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { MdEditDocument } from 'react-icons/md'
+import React from 'react';
+import { FaTrash } from 'react-icons/fa';
+import { FcViewDetails } from 'react-icons/fc';
+import { MdEditDocument } from 'react-icons/md';
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png';
+import moment from 'moment';
 import { Form, Link } from 'react-router-dom';
 import ListHeading from './ListHeading';
-import moment from 'moment';
 
 type Props = {
     data: any;

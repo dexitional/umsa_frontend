@@ -1,14 +1,14 @@
-import React from 'react'
-import { FaPhone } from 'react-icons/fa'
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
+import React from 'react'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
+import { FaPhone } from 'react-icons/fa'
+import { FaMoneyBillTransfer } from "react-icons/fa6"
 import { GiMoneyStack } from 'react-icons/gi'
-import Service from '../../utils/fmsService'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { FaMoneyBillTransfer } from "react-icons/fa6";
+import Logo from '../../assets/img/logo/aucc/logo.png'
+import Service from '../../utils/fmsService'
 
 const { REACT_APP_API_URL } = import.meta.env;
 
