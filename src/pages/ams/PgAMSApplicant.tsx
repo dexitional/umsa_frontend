@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import None from '../../assets/img/none.png'
 import SubPageTitle from '../../components/ams/SubPageTitle'
-// @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
-import { Form, Link } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import { Outlet, redirect, useLoaderData } from 'react-router'
+
 import { HiAcademicCap } from 'react-icons/hi2'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
+import { redirect, useLoaderData } from 'react-router'
+import { Form } from 'react-router-dom'
 import FormTemplate from '../../components/ams/FormTemplate'
+import Service from '../../utils/amsService'
 
 type Props = {}
 
@@ -33,7 +33,7 @@ function PgAMSApplicant({}: Props) {
       <div className="relative p-3 md:p-6 w-full border bg-slate-50/50 rounded-xl md:space-y-6 space-y-4 ">
          <section className="flex flex-col md:flex-row md:space-y-0 space-y-3 space-x-2 md:space-x-6">
             <div className="hidden md:block p-2 md:p-2 h-16 w-16 md:h-24 md:w-24 border rounded-xl shadow-lg bg-white">
-              <img src={applicant?.photo || Logo} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
+              <img src={applicant?.photo || None} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
             </div>
              { !applicant?.sorted && applicant?.submitted ?
              <Form method="post" action={`/ams/applicants/${applicant?.serial}/shortlist`} onSubmit={(e)=> { if(!confirm("Shortlist Applicant?")) e.preventDefault(); return false; }}>
@@ -48,7 +48,7 @@ function PgAMSApplicant({}: Props) {
             <div className="flex-1 flex flex-col space-y-4 md:space-y-3">
               <div className="flex space-x-2">
                   <div className="block md:hidden p-2 md:p-4 h-16 w-16 border rounded-xl shadow-lg bg-white">
-                    <img src={applicant?.photo || Logo} className="h-12 w-12 object-contain" />
+                    <img src={applicant?.photo || None} className="h-12 w-12 object-contain" />
                   </div>
                   <h1 className="text-md md:text-3xl md:tracking-wide leading-5 font-semibold text-primary/70">{(applicant?.profile?.fname+' '+(applicant?.profile?.mname ? applicant?.profile?.mname+' ':'')+applicant?.profile?.lname).toUpperCase()}</h1>
               </div>
