@@ -151,6 +151,10 @@ function PgAISStudentForm({}: Props) {
                         ))}
                       </select>
                   </label>
+                  <label className="flex flex-col space-y-2">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Date of Admission</span>
+                      <input arial-label="entryDate" name="entryDate"type="date" defaultValue={moment(data?.entryDate).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
+                  </label>
                </div>
              </div>
 

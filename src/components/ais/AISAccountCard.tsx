@@ -88,7 +88,7 @@ function AISAccountCard({ data }: Props) {
       console.log(error)
       
     }
- }
+  }
   
   return (
     <div className="w-full rounded flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
