@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/img/logo_sso.png';
 import { useUserStore } from '../utils/authService';
+const { REACT_APP_API_URL } = import.meta.env;
 
 function Header({ user,logout }) {
   
