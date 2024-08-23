@@ -34,9 +34,9 @@ function Header({ user,logout }) {
     <header className="w-full">
         <div className="w-full bg-primary">
             <div className="px-3 md:px-0 md:mx-auto w-full h-14 md:max-w-6xl flex items-center">
-                <img src={`${REACT_APP_API_URL}/auth/photos/?tag=${user?.user?.tag}`} alt="Logo" className="h-6 md:h-12" />
+                <img src={Logo} alt="Logo" className="h-6 md:h-12" />
                 <div className="flex-1 flex items-center justify-end space-x-2">
-                    <img src={user?.photo ?? Logo} alt="" className="h-8 w-8 rounded-full object-cover bg-yellow-100/50 backdrop-blur-sm" />
+                    <img src={`${REACT_APP_API_URL}/auth/photos/?tag=${user?.user?.tag}`} alt="" className="h-8 w-8 rounded-full object-cover bg-yellow-100/50 backdrop-blur-sm" />
                     <div className="hidden md:flex px-3 py-1 rounded-md border border-gray-200  bg-primary/20 bg-opacity-50 backdrop-blur-sm text-white font-semibold capitalize">{user?.user?.fname?.toLowerCase()} { user?.user?.mname && user?.user?.mname?.toLowerCase()+' '}{user?.user?.lname?.toLowerCase()}</div>
                     <div className="p-1 rounded-md border md:border flex items-center space-x-1">
                         { tag && tag != user?.user?.tag ? 
