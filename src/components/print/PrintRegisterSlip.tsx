@@ -1,10 +1,10 @@
-import React from 'react'
-import { useUserStore } from '../../utils/authService';
-import Service from '../../utils/aisService'
-import PrintHeader from './PrintHeader';
-import RegistrationSlipItem from '../aisp/RegistrationSlipItem';
-import { useLoaderData } from 'react-router';
 import moment from 'moment';
+import React from 'react';
+import { useLoaderData } from 'react-router';
+import Service from '../../utils/aisService';
+import { useUserStore } from '../../utils/authService';
+import RegistrationSlipItem from '../aisp/RegistrationSlipItem';
+import PrintHeader from './PrintHeader';
 const { REACT_APP_API_URL } = import.meta.env;
 
 
@@ -30,12 +30,12 @@ function PrintRegisterSlip({}: Props) {
                   <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data[0]?.student?.id}`} className="h-32 w-32 print:w-20 print:h-20 object-contain" />
                 </div>
                 <div className="print:leading-4 space-y-1 print:space-y-0 text-sm print:text-[0.6rem] font-medium font-roboto uppercase">
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Full Name</span> <span className="uppercase text-primary/90 font-poppins">{data[0]?.student?.fname?.toLowerCase()} {data[0]?.student?.mname?.toLowerCase()} {data[0]?.student?.lname?.toLowerCase()}</span></div>
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Programme</span> <span className="uppercase text-primary/90 font-poppins">{data[0]?.student?.program?.longName.toLowerCase()}</span></div>
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Student ID</span> <span className="uppercase text-primary/90 font-poppins">{ data[0]?.student?.id  } </span></div>
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Index Number</span> <span className="uppercase text-primary/90 font-poppins">{ data[0]?.student?.indexno } </span></div>
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Department</span> <span className="uppercase text-primary/90 font-poppins">{data[0]?.student?.program?.department?.title.toLowerCase()}</span></div>
-                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Level</span> <span className="uppercase text-primary/90 font-poppins">{ (Math.ceil(data[0]?.student?.semesterNum / 2 ) * 100) ? (Math.ceil(data[0]?.student?.semesterNum / 2 ) * 100):'COMPLETED' } </span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Full Name</span> <span className="uppercase text-primary/90 font-roboto">{data[0]?.student?.fname?.toLowerCase()} {data[0]?.student?.mname?.toLowerCase()} {data[0]?.student?.lname?.toLowerCase()}</span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Programme</span> <span className="uppercase text-primary/90 font-roboto">{data[0]?.student?.program?.longName.toLowerCase()}</span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Student ID</span> <span className="uppercase text-primary/90 font-roboto">{ data[0]?.student?.id  } </span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Index Number</span> <span className="uppercase text-primary/90 font-roboto">{ data[0]?.student?.indexno } </span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Department</span> <span className="uppercase text-primary/90 font-roboto">{data[0]?.student?.program?.department?.title.toLowerCase()}</span></div>
+                  <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Level</span> <span className="uppercase text-primary/90 font-roboto">{ (Math.ceil(data[0]?.student?.semesterNum / 2 ) * 100) ? (Math.ceil(data[0]?.student?.semesterNum / 2 ) * 100):'COMPLETED' } </span></div>
                 </div>
             </div>
            

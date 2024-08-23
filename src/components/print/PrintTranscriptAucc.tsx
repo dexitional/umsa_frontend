@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 import Service from '../../utils/aisService';
 import { useUserStore } from '../../utils/authService';
-import PrintHeader from './PrintHeader';
+import PrintHeaderAucc from './PrintHeaderAucc';
 const { REACT_APP_API_URL } = import.meta.env;
 
 
@@ -14,7 +14,7 @@ export async function loader({ params }) {
     return { data,user }
   }
 
-function PrintTranscript({}: Props) {
+function PrintTranscriptAucc({}: Props) {
   const { data,user} :any = useLoaderData();
   console.log(data)
   const totalCredit  = data?.reduce((sum,cur) => sum+cur?.course.creditHour,0)
@@ -22,7 +22,7 @@ function PrintTranscript({}: Props) {
   return (
     <div className="w-full flex flex-col justify-center items-center bg-white print:m-0 print:scale-[85%]">
         <div className="my-20 mx-auto px-16 py-20 w-full rounded border shadow-sm shadow-slate-300 print:px-6 print:py-8 print:m-0 print:w-full print:max-w-screen print:shadow-none print:border-0 print:scale-100">
-            <PrintHeader /> 
+            <PrintHeaderAucc /> 
             <div className="my-4 print:px-2 print:py-2 w-full md:max-w-4xl mx-auto flex flex-col md:flex-row print:flex-row space-x-6">
                 {/* <div className="print:leading-4 space-y-1 print:space-y-0 text-sm print:text-[0.6rem] font-medium font-roboto uppercase">
                   <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Full Name</span> <span className="uppercase text-primary/90 font-poppins">{data[0]?.student?.fname?.toLowerCase()} {data[0]?.student?.mname?.toLowerCase()} {data[0]?.student?.lname?.toLowerCase()}</span></div>
@@ -147,4 +147,4 @@ function PrintTranscript({}: Props) {
   )
 }
 
-export default PrintTranscript
+export default PrintTranscriptAucc
