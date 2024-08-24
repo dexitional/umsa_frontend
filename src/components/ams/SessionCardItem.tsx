@@ -19,7 +19,7 @@ function SessionCardItem({ data }: Props) {
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
           <div className="flex-1 text-xs md:text-xs text-primary-dark/70 font-bold font-roboto capitalize">{ moment().isAfter(moment(data?.applyEnd)) ? 'CLOSED': data?.applyPause ? 'PAUSED': 'IN-PROGRESS' }</div>
-          {data?.default && <div className="py-0.5 px-2 w-fit text-xs rounded bg-primary-accent/70 text-white font-bold">DEFAULT</div>}
+          {data?.default && <div className="py-0.5 px-2 w-fit text-xs rounded bg-green-800/60 text-white font-bold">DEFAULT</div>}
       </div>
     </div>
     <div className="space-y-1 font-roboto">
@@ -69,7 +69,7 @@ function SessionCardItem({ data }: Props) {
             <button type="submit" className="text-sm text-white font-semibold">Delete</button>
           </Form>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`bg-primary-dark/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>STATUS</span>
+              <span className={`${ data?.status == 1 ? 'bg-primary/60':'bg-primary-dark/60' } py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>STATUS</span>
               <span className="font-semibold font-roboto text-sm text-primary/60">{ data?.status == 1 ? 'ENABLED':'DISABLED' }</span>
           </div>
         </div>

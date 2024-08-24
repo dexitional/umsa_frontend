@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import Helper from '../../utils/aisService'
 import moment from 'moment'
+import React from 'react'
+import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/ais/SubPageTitle'
+import Helper from '../../utils/aisService'
+import Service from '../../utils/amsService'
 
 type Props = {}
 
@@ -134,7 +134,7 @@ function PgAMSSessionForm({}: Props) {
                         ))}
                       </select>
                   </label>
-                  {/* <label className="flex flex-col space-y-2">
+                  <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Undergrad Admission Letter Template</span>
                       <select arial-label="ugletterId" name="ugletterId" defaultValue={data?.ugletterId}  className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
@@ -147,11 +147,11 @@ function PgAMSSessionForm({}: Props) {
                       <span className="text-sm md:text-base text-gray-500 font-medium">Postgrad Admission Letter Template</span>
                       <select arial-label="pgletterId" name="pgletterId" defaultValue={data?.pgletterId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        { sessions && sessions?.map((row:any) =>(
+                        { letters && letters?.map((row:any) =>(
                           <option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>
                         ))}
                       </select>
-                  </label> */}
+                  </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Voucher Generation Start Index</span>
                       <input arial-label="voucherIndex" name="voucherIndex" type="number" defaultValue={data?.voucherIndex} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
