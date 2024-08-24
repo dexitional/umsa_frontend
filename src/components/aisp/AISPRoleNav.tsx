@@ -3,11 +3,11 @@ import DricNav from './AISPNav'
 import { Menu } from '@headlessui/react'
 import { CgMenuGridO } from "react-icons/cg";
 import { GrDashboard } from 'react-icons/gr';
-import { TbReportMoney } from 'react-icons/tb';
+import { TbChecklist, TbReportMoney } from 'react-icons/tb';
 import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
-import { BsPersonCircle, BsPersonVcard } from 'react-icons/bs';
+import { BsPersonCircle, BsPersonVcard, BsReceipt } from 'react-icons/bs';
 import { VscAccount } from 'react-icons/vsc';
-import { FaChartBar } from 'react-icons/fa';
+import { FaAddressCard, FaChartBar, FaVoteYea } from 'react-icons/fa';
 import LASNavItem from './AISPNavItem';
 import { useUserStore } from '../../utils/authService';
 import NSSNavItem from './AISPNavItem';
@@ -15,6 +15,7 @@ import { MdOutlineAddTask, MdOutlineDashboard } from 'react-icons/md';
 import { CiUser } from 'react-icons/ci';
 import { PiLockKey } from 'react-icons/pi';
 import AISPNavItem from './AISPNavItem';
+import { BiSpreadsheet } from 'react-icons/bi';
 
 type Props = {
   user:any;
@@ -37,10 +38,11 @@ function AISPRoleNav({ user }: Props) {
         <Menu.Items className="z-20 absolute top-13 left-0 min-h-max w-full rounded-b-[2.5rem] md:rounded-none border-b-8 border-blue-100/90 bg-primary backdrop-blur-lg backdrop-opacity-50 bg-opacity-95">
           <div className="py-4 px-6 pr-0  flex-1 flex flex-col space-y-1 md:space-y-4">
             {/* <Menu.Item as={AISPNavItem} title="Dashboard" url="dash" Icon={MdOutlineDashboard}></Menu.Item> */}
-            <Menu.Item as={AISPNavItem} title="My Profile" url="profile" Icon={CiUser}></Menu.Item>
-            <Menu.Item as={AISPNavItem} title="Fees & Charges" url="fees" Icon={MdOutlineAddTask}></Menu.Item>
-            <Menu.Item as={AISPNavItem} title="Results Statement" url="results" Icon={MdOutlineAddTask}></Menu.Item>
-            <Menu.Item as={AISPNavItem} title="Registration" url="registration" Icon={MdOutlineAddTask}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="My Profile" url="profile" Icon={FaAddressCard}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="Fees & Charges" url="fees" Icon={BsReceipt}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="Course Registration" url="registration" Icon={TbChecklist}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="Academic Results" url="results" Icon={BiSpreadsheet}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="Elections Portal" url="/evs/dash" Icon={FaVoteYea}></Menu.Item>
             {/* <Menu.Item as={AISPNavItem} title="MLK Circulars" url="notices" Icon={MdOutlineAddTask}></Menu.Item> */}
             {/* <Menu.Item as={AISPNavItem} title="Service Requests" url="services" Icon={MdOutlineAddTask}></Menu.Item> */}
             <Menu.Item as={AISPNavItem} title="Change Password" url="changepwd" Icon={PiLockKey}></Menu.Item>

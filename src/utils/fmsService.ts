@@ -276,6 +276,18 @@ class FmsService {
 
     /* Services */
 
+    async fetchServiceList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/fms/services/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
     async fetchServices(keyword,page){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/fms/services?keyword=${keyword}&page=${page}`)

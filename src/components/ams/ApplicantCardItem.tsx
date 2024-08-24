@@ -96,8 +96,8 @@ function ApplicantCardItem({ data }: Props) {
           </button>
           
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-accent/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
-              <span className={`${data?.sorted ? 'text-primary-dark/60':'text-primary-accent/70'} font-semibold font-roboto text-sm `}>{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
+              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-dark/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
+              <span className={`${data?.sorted ? 'text-primary-dark/60':'text-primary-dark/70'} font-semibold font-roboto text-sm `}>{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
           </div>
           { data?.sorted ? <FaCircleCheck className="w-10 h-6 text-primary/60"/>: null}
         </div>

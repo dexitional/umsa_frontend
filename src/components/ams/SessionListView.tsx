@@ -8,7 +8,7 @@ type Props = {
 function SessionListView({ data }: Props) {
   return (
     <div className="py-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
-      <div className="px-6 pb-4 hidden md:grid grid-cols-7 place-items-center border-b border-slate-200 text-xs text-primary-dark/80 font-sans font-semibold uppercase tracking-widest">
+      <div className="px-6 pb-4 hidden md:grid grid-cols-7 place-items-center border-b border-slate-200 text-xs text-primary/80 font-sans font-semibold uppercase tracking-widest">
           <div className="col-span-2 place-self-start">Title</div>
           <div>Apply Start</div>
           <div>Apply End</div>

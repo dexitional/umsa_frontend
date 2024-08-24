@@ -14,7 +14,7 @@ function AISPNavItem({ title, url = '/', Icon }: Props) {
   return (
     <NavLink 
     to={url} 
-    className={({ isActive, isPending }) => isActive ? `md:ml-6 px-10 md:px-4 py-1 flex items-center space-x-2 bg-white shadow-xl rounded-l-3xl rounded-r ring-1 ring-offset-8 ring-primary/50`: `ml-6 px-4 py-2 flex items-center space-x-2`}
+    className={({ isActive, isPending }) => isActive ? `md:ml-6 px-10 md:px-2 py-0.5 flex items-center space-x-2 bg-white shadow-xl rounded-l-3xl rounded-r ring-1 ring-offset-8 ring-primary/50`: `ml-6 px-4 py-2 flex items-center space-x-2`}
     children={({ isActive }) => {
       return(
         <>

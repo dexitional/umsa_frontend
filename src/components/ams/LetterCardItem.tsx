@@ -16,7 +16,7 @@ function LetterCardItem({ data }: Props) {
     {/* <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.id}</h2> */}
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
-          <div className="flex-1 text-sm md:text-sm text-primary-accent/70 font-bold font-roboto capitalize">{(data?.title).toUpperCase()}</div>
+          <div className="flex-1 text-sm md:text-sm text-primary/70 font-bold font-roboto capitalize">{(data?.title).toUpperCase()}</div>
           <div className="py-0.5 px-2 w-fit text-xs rounded bg-primary/60 text-white font-bold">{data?.category.id}</div>
       </div>
     </div>

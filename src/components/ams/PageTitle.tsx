@@ -49,7 +49,7 @@ function PageTitle({ title,createtext,createlink, setView,view, pages }: Props) 
 
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-2 md:space-y-0">
-        <h1 className="text-sm md:text-xl text-primary-accent/80 font-medium uppercase tracking-widest">{title}</h1>
+        <h1 className="text-sm md:text-xl text-primary-dark/80 font-medium uppercase tracking-widest">{title}</h1>
         <div className="flex items-center space-x-2">
             { view ? (
             <div className="p-1 w-fit rounded border md:border-2 flex items-center justify-between space-x-1">
@@ -78,7 +78,7 @@ function PageTitle({ title,createtext,createlink, setView,view, pages }: Props) 
             ): null }
 
             { createlink && createtext ? (
-            <Link to={createlink || '#'} className="py-0 md:py-2 px-3 md:px-4 h-9 md:h-10 rounded-md border bg-primary-accent/90 flex items-center space-x-3">
+            <Link to={createlink || '#'} className="py-0 md:py-2 px-3 md:px-4 h-9 md:h-10 rounded-md border bg-primary/90 flex items-center space-x-3">
                 <ImPlus className="text-white h-3 w-3 md:h-4 md:w-4" />
                 <span className="hidden md:flex text-white text-sm md:text-base font-medium">{createtext}</span>
             </Link>

@@ -116,13 +116,13 @@ function PgAISStudentForm({}: Props) {
                       <textarea arial-label="address" name="address" defaultValue={data?.address} rows={5} className="focus:ring-0 border focus:border-slate-300 border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md"></textarea>
                   </label>
                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Disability</span>
-                      <select arial-label="disabilityId" name="disabilityId" defaultValue={data?.disabilityId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        { disabilities && disabilities?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.title}</option>
-                        ))}
-                      </select>
+                    <span className="text-sm md:text-base text-gray-500 font-medium">Disability</span>
+                    <select arial-label="disabilityId" name="disabilityId" defaultValue={data?.disabilityId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <option selected disabled>-- Choose --</option>
+                      { disabilities && disabilities?.map((row:any) =>(
+                        <option key={row.id} value={row.id}>{row.title}</option>
+                      ))}
+                    </select>
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Religion</span>

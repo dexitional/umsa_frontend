@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { useLoaderData } from 'react-router'
 import PageTitle from '../../components/fms/PageTitle'
-import Service from '../../utils/fmsService'
-import { redirect, useLoaderData } from 'react-router'
-import ScostListView from '../../components/fms/ScostListView'
 import ScostCardItem from '../../components/fms/ScostCardItem'
+import ScostListView from '../../components/fms/ScostListView'
+import Service from '../../utils/fmsService'
 type Props = {}
 
 
@@ -28,7 +28,7 @@ function PgFMSScosts({}: Props) {
   
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">
-      <PageTitle title="Services" createtext="Create" createlink="create" pages={totalPages} setView={setView} view={view} />
+      <PageTitle title="Services" createtext="" createlink="" pages={totalPages} setView={setView} view={view} />
       <div className="">
          { view == 'card' && (
             <div className="grid md:grid-cols-3 gap-3 md:gap-6">

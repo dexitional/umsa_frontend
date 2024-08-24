@@ -19,18 +19,18 @@ function VoucherCardItem({ data }: Props) {
     
     <div className="flex items-center space-x-4">
       <h2 className="text-sm md:text-base font-semibold font-noto text-gray-500 uppercase tracking-wider">{data?.serial}</h2>
-      <div className="py-0.5 px-2 w-fit text-sm rounded bg-primary-accent/70 text-white font-medium tracking-widest">{data.pin}</div>
+      <div className="py-0.5 px-2 w-fit text-sm rounded bg-primary/60 text-white font-medium tracking-widest">{data.pin}</div>
       { data.soldAt && <div className="flex-1 text-xs md:text-xs text-primary-dark/70 font-semibold font-roboto capitalize">SOLD</div>}
     </div>
     
     <div className="space-y-1 font-roboto">
         <div className="flex items-center space-x-2">
             <TbNotes className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-primary-dark/50 font-medium">{data?.category?.title}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-primary/60 font-medium">{data?.category?.title}</span>
         </div>
         <div className="flex items-center space-x-2">
             <TbNotes className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border border-primary-accent/20 text-sm text-primary-dark/50 font-medium"> {data?.sellType == 0 ? 'General':data?.sellType == 1 ? 'Matured': 'International'}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border border-primary-accent/20 text-sm text-primary/60 font-medium"> {data?.sellType == 0 ? 'General':data?.sellType == 1 ? 'Matured': 'International'}</span>
         </div>
         
         {/* <div className="flex items-center space-x-4">

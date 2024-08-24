@@ -57,8 +57,8 @@ function VcostCardItem({ data }: Props) {
           </>
           }
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`${data.posted ? 'bg-green-800/80': 'bg-primary/80' } py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>COST</span>
-              <span className="font-bold font-roboto text-base text-primary/80">{data.currency} {data.amount}</span>
+              <span className={`${data.posted ? 'bg-green-800/80': 'bg-primary-dark/60' } py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>COST</span>
+              <span className="font-bold font-roboto text-base text-primary/60">{data.currency} {data.amount}</span>
           </div>
         </div>
     </div>
