@@ -29,7 +29,7 @@ function AISAccountCard({ data }: Props) {
   const resetAccess = async () => {
     const ok = window.confirm("Reset Student Portal Password ?")
     if(ok){
-      await Service.resetStudentAccess(data?.id);
+      await Service.resetStudentAccess(data?.id,data?.instituteEmail);
     }
   }
 

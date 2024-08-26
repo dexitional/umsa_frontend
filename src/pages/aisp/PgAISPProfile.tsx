@@ -84,12 +84,14 @@ function PgAISPProfile({}: Props) {
               <AISPBioCard label="Student Number" value={`${data?.id}`} Icon={ImProfile} />
               <AISPBioCard label="Index Number" value={data?.indexno || 'Not Set'} Icon={TbHomeCheck} />
               <AISPBioCard label="Programme" value={data?.program?.longName || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
+              <AISPBioCard label="Major" value={data?.major?.longName || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
               <AISPBioCard label="Level" value={Math.ceil(data?.semesterNum/2)*100 ? (Math.ceil(data?.semesterNum/2)*100).toString() : 'COMPLETED' || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
               <AISPBioCard label="Department" value={data?.program?.department?.title || 'Not Set'} Icon={FaPhoneAlt} />
             </div>
             <div className="flex-1 space-y-2">
               <AISPBioCard label="Institutional Email" value={data?.instituteEmail?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
               <AISPBioCard label="Date of Admission" value={data?.entryDate && moment(data?.entryDate).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
+              <AISPBioCard label="Study Mode" value={data?.studyMode == 'W' ? 'WEEKEND': data?.studyMode == 'E' ? 'EVENING':'MORNING' || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
               <AISPBioCard label="Student Category" value={data?.entryGroup == 'GH' ? 'GHANAIAN': 'INTERNATIONAL'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Academic Status" value={data?.completeStatus ? 'COMPLETED': 'ACTIVE STUDENT'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Residential Status" value={data?.residentialStatus?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />

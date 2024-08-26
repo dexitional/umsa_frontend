@@ -224,7 +224,7 @@ class Service {
         }
     }
 
-    async resetStudentAccess(studentId){
+    async resetStudentAccess(studentId,email){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ais/students/reset`,{ studentId },{
                 headers: { "x-access-token" : token }
@@ -232,7 +232,7 @@ class Service {
             if(res.status == 200 || res.status == 202){
                 const data = res?.data
                 console.log(data)
-                toast(`Password changed to: \t${data?.password}`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
+                toast(`Password changed to: \t${data?.password} for ${email}`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
             }
             else throw new(res.data.message)
         
