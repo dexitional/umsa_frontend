@@ -48,8 +48,8 @@ function PgAISStudentProfile({}: Props) {
       <AISPBioCard label="Level" value={Math.ceil(data?.semesterNum/2)*100 ? (Math.ceil(data?.semesterNum/2)*100).toString() : 'COMPLETED' || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
       <AISPBioCard label="Department" value={data?.program?.department?.title || 'Not Set'} Icon={FaPhoneAlt} />
       <AISPBioCard label="Institutional Email" value={data?.instituteEmail?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
-      <AISPBioCard label="Ghana Card Number" value={data?.end_date && moment(data?.end_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
-      <AISPBioCard label="Date of Admission" value={data?.dob && moment(data?.dob).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
+      <AISPBioCard label="Ghana Card Number" value={data?.ghcardNo || 'Not Set'} Icon={BsCalendarRange} />
+      <AISPBioCard label="Date of Admission" value={data?.entryDate && moment(data?.entryDate).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
       <AISPBioCard label="Student Category" value={data?.entryGroup == 'GH' ? 'GHANAIAN': 'INTERNATIONAL'} Icon={MdOutlineFiberPin} />
       <AISPBioCard label="Academic Status" value={data?.completeStatus ? 'COMPLETED': 'ACTIVE STUDENT'} Icon={MdOutlineFiberPin} />
     </div>
