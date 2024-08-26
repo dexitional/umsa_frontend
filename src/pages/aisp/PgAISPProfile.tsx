@@ -55,7 +55,7 @@ function PgAISPProfile({}: Props) {
         </div>
         <div className="flex w-full flex-1 flex-col md:flex-row space-between space-y-2 md:space-y-0 md:space-x-10">
             <div className="flex-1 space-y-2">
-              <AISPBioCard label="Full Name" value={`${data?.fname} ${data?.mname && data?.mname+' '}${data?.lname}`} Icon={ImProfile} />
+              <AISPBioCard label="Full Name" value={`${data?.fname} ${data?.mname ? data?.mname+' ': ''}${data?.lname}`} Icon={ImProfile} />
               <AISPBioCard label="Gender" value={data?.gender == 'M' ? 'MALE':'FEMALE'} Icon={FaTransgender} />
               <AISPBioCard label="Date of Birth" value={data?.dob && moment(data?.dob).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
               <AISPBioCard label="Hometown" value={data?.hometown || 'Not Set'} Icon={TbHomeCheck} />
