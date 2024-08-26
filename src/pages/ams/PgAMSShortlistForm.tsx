@@ -17,7 +17,6 @@ export async function action({ request, params }){
    let resp = await Service.postMatriculant(data);
    
     if(resp){
-      // return redirect(`/ais/courses/${encodeURIComponent(resp.id)}/profile`)
       return redirect(`/ams/shortlists`)
     }
 } 

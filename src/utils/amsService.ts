@@ -483,13 +483,14 @@ class Service {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record saved!")
+               toast.success("Applicant admitted, Institutional email and credential generated !")
                return res.data
             } 
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            toast.error("Applicant already admitted or staged as student ! \n Check student module for confirmation !")
+            //toast.error(error.message)
         }
     }
 
