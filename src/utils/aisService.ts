@@ -1125,6 +1125,148 @@ class Service {
      }
 
 
+      /* Deferments */
+    
+      async fetchDeferments(keyword,page){
+         try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/deferments?keyword=${keyword}&page=${page}`,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200 || res.status == 202)
+               return res.data
+            else throw new(res.data.message)
+         
+         } catch (error) { 
+            return checkSession(error)
+         }
+      }
+
+      async fetchDeferment(defermentId){
+         try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/deferments/${encodeURIComponent(defermentId)}`,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200 || res.status == 202)
+               return res.data
+            else throw new(res.data.message)
+         
+         } catch (error) {
+            return checkSession(error)
+         }
+      }
+
+      async approveDeferment(defermentId){
+         try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/deferments/approve`, { defermentId } ,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200 || res.status == 202)
+               return res.data
+            else throw new(res.data.message)
+         
+         } catch (error) {
+            return checkSession(error)
+         }
+      }
+
+      async postDeferment(data){
+         try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/deferments`, data,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+         
+         } catch (error) { 
+            return checkSession(error)
+         }
+      }
+
+      async updateDeferment(defermentId,data){
+         try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/deferments/${encodeURIComponent(defermentId)}`, data,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+         
+         } catch (error) { 
+            return checkSession(error)
+         }
+      }
+
+      async deleteDeferment(defermentId){
+         try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/deferments/${encodeURIComponent(defermentId)}`,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+         
+         } catch (error) { 
+            return checkSession(error)
+         }
+      }
+
+    
+     /* Progressions */
+    
+     async fetchProgression(keyword,page){
+         try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/progression?keyword=${keyword}&page=${page}`,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200 || res.status == 202)
+               return res.data
+            else throw new(res.data.message)
+         
+         } catch (error) { 
+            return checkSession(error)
+         }
+    }
+
+    async progressStudents(sessionId){
+         try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/progression`, { sessionId },{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            console.log(res.data)
+            if(res.status == 200){
+               toast.success("Progression completed!")
+               return res.data
+            } 
+            else throw(res.data.message)
+         
+         } catch (error) { 
+            toast.error("Progression incomplete !")
+         }
+    }
+
+    async progressStudent(data){
+         try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/progression/student`, data,{
+               headers: { "Content-Type" : "application/json", "x-access-token" : token }
+            })
+            if(res.status == 200){
+               toast.success("Student progressed!")
+               return res.data
+            } 
+            else throw(res.data.message)
+         
+         } catch (error) { 
+            toast.error("Student already progressed !")
+         }
+    }
+
 
     /* Registrations */
     async fetchRegistrationList(){

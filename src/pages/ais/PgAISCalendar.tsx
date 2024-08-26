@@ -43,10 +43,10 @@ function PgAISCalendar({}: Props) {
 
   const stageProgression = async () => {
     const ok = window.confirm("Setup Semester Progressions?")
-    // if(ok){
-    //   const resp = await Service.stageProgression(params?.calendarId);
-    //   if(resp) navigate(0)
-    // }
+    if(ok){
+      const resp = await Service.progressStudents(params?.calendarId);
+      if(resp) navigate(0)
+    }
   }
 
  

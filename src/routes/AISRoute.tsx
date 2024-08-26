@@ -12,6 +12,9 @@ import PgAISCalendars, { action as aisCalendarDestroy, loader as calendarsLoader
 import PgAISCourseForm, { action as aisCourseFormAction, loader as aisCourseFormLoader } from '../pages/ais/PgAISCourseForm';
 import PgAISCourses, { action as aisCourseDestroy, loader as coursesLoader } from '../pages/ais/PgAISCourses';
 import PgAISDash from '../pages/ais/PgAISDash';
+import PgAISDeferment, { loader as aisDefermentLoader } from '../pages/ais/PgAISDeferment';
+import PgAISDefermentForm, { action as aisDefermentFormAction, loader as aisDefermentFormLoader } from '../pages/ais/PgAISDefermentForm';
+import PgAISDeferments, { action as aisDefermentDestroy, loader as defermentsLoader } from '../pages/ais/PgAISDeferments';
 import PgAISDepartments, { loader as departmentsLoader } from '../pages/ais/PgAISDepartments';
 import PgAISFaculties, { loader as facultiesLoader } from '../pages/ais/PgAISFaculties';
 import PgAISJob, { loader as aisJobLoader } from '../pages/ais/PgAISJob';
@@ -24,6 +27,7 @@ import PgAISPrograms, { action as aisProgramDestroy, loader as aisProgramsLoader
 import PgAISProgramStatistics, { loader as aisProgramStatisticsLoader } from '../pages/ais/PgAISProgramStatistics';
 import PgAISProgramStructure, { loader as aisProgramStructureLoader } from '../pages/ais/PgAISProgramStructure';
 import PgAISProgramStudent, { loader as aisProgramStudentLoader } from '../pages/ais/PgAISProgramStudent';
+import PgAISProgressions, { loader as progressionsLoader } from '../pages/ais/PgAISProgressions';
 import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader } from '../pages/ais/PgAISRegistrations';
 import PgAISRegsitration, { loader as aisRegistrationLoader } from '../pages/ais/PgAISRegsitration';
 import PgAISReport from '../pages/ais/PgAISReport';
@@ -339,6 +343,14 @@ const AISRoute:any =  {
       },
 
 
+      /* Progression Module */
+      { 
+         path:'progression', 
+         element: <PgAISProgressions />,
+         loader: progressionsLoader,
+      },
+
+
       /* Registrations Module */
       { 
          path:'registrations', 
@@ -365,6 +377,34 @@ const AISRoute:any =  {
          element: <PgAISSchemeForm />, 
          loader: aisSchemeFormLoader,
          action: aisSchemeFormAction
+      },
+
+      /* Deferment Module */
+      { 
+         path:'deferments', 
+         element: <PgAISDeferments />,
+         loader: defermentsLoader,
+      },
+      { 
+         path:'deferments/create', 
+         element: <PgAISDefermentForm />,
+         loader: aisDefermentFormLoader,
+         action: aisDefermentFormAction
+      },
+      { 
+         path:'deferments/:defermentId', 
+         element: <PgAISDeferment />,
+         loader: aisDefermentLoader,
+      },
+      { 
+         path:'deferments/:defermentId/destroy', 
+         action: aisDefermentDestroy,
+      },
+      { 
+         path:'deferments/:defermentId/edit', 
+         element: <PgAISDefermentForm />, 
+         loader: aisDefermentFormLoader,
+         action: aisDefermentFormAction
       },
 
       /* Sheet Module */

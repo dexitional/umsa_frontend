@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/aisService'
 import moment from 'moment'
+import React from 'react'
+import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/ais/SubPageTitle'
+import Service from '../../utils/aisService'
 
 type Props = {}
 
@@ -98,7 +98,7 @@ function PgAISCalendarForm({}: Props) {
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Admission Prefix</span>
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Admission Prefix <em><sub>( Must be Set for January/Sub Sessions )</sub></em></span>
                       <input arial-label="admissionPrefix" name="admissionPrefix" defaultValue={data?.admissionPrefix} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
                   <label className="flex flex-col space-y-2">

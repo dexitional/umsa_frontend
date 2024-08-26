@@ -44,17 +44,17 @@ export async function loader({ params }){
    return { data,countries,regions,religions,disabilities,titles,programs }
 }
 
-function PgAISStudentForm({}: Props) {
+function PgAISDefermentForm({}: Props) {
   
   const navigate = useNavigate()
   const { data,countries,regions,religions,disabilities,titles,programs }: any = useLoaderData();
   return (
     <main className="md:pl-10 p-2 md:p-6 space-y-4 md:space-y-10">
-      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Student`} page="Student Profile" />
+      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Deferment Profile`} page="Deferment" />
       <div className="p-2 md:p-6 border bg-slate-50/50 rounded-xl space-y-6">
          <section className="flex md:space-x-6">
            <div className="flex-1 flex flex-col space-y-1 md:space-y-3">
-              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Student</h1>
+              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Deferment Profile</h1>
               <div className="flex items-center space-x-2 text-zinc-400 text-base">
                  <span className="text-xs md:text-base tracking-wider">Please provide neccessary information</span>
               </div>
@@ -213,8 +213,8 @@ function PgAISStudentForm({}: Props) {
                         <option value={4}>LEVEL 200, SEMESTER 2</option>
                         <option value={5}>LEVEL 300, SEMESTER 1</option>
                         <option value={6}>LEVEL 300, SEMESTER 2</option>
-                        <option value={7}>LEVEL 400, SEMESTER 1</option>
-                        <option value={8}>LEVEL 400, SEMESTER 2</option>
+                        {/* <option value={7}>LEVEL 400, SEMESTER 1</option>
+                        <option value={8}>LEVEL 400, SEMESTER 2</option> */}
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
@@ -290,4 +290,4 @@ function PgAISStudentForm({}: Props) {
   )
 }
 
-export default PgAISStudentForm
+export default PgAISDefermentForm

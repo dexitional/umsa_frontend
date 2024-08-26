@@ -8,23 +8,24 @@ import { FaFilePdf } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { LuFileSpreadsheet } from "react-icons/lu"
 import Logo from '../../assets/img/logo/aucc/logo.png'
+const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
   data: any;
 }
 
-function RegistrationCardItem({ data }: Props) {
+function ProgressionCardItem({ data }: Props) {
   return (
   <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
     <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.student?.id}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
-          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.student?.fname+' '+(data?.student?.mname && data?.student?.mname+' ')+data?.student?.lname).toUpperCase()}</div>
+          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.student?.fname+' '+(data?.student?.mname ? data?.student?.mname+' ':'')+data?.student?.lname).toUpperCase()}</div>
           <div className="py-0.5 px-2 text-sm rounded bg-primary/60 text-white font-bold">{data?.student?.gender}</div>
       </div>
-      <img src={`https://cdn.ucc.edu.gh/photos/?tag=${data?.student?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
+      <img src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.student?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
     </div>
-    <div className="space-y-1 font-roboto">
+    <div className="space-y-2 font-roboto">
         <div className="flex items-center space-x-4">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`${data?.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data?.student?.program?.longName || 'Not assigned' }</span>
@@ -36,11 +37,11 @@ function RegistrationCardItem({ data }: Props) {
        
         <div className="flex items-center space-x-4">
             <FaFilePdf className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">Courses: {data?.courses}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-xs text-gray-500">COURSES: {data?.courses}</span>
         </div>
         <div className="flex items-center space-x-4">
             <FaFilePdf className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">Credits: {data?.credits}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-xs text-gray-500">CREDITS: {data?.credits}</span>
         </div>
         
     </div>
@@ -76,4 +77,4 @@ function RegistrationCardItem({ data }: Props) {
   )
 }
 
-export default RegistrationCardItem
+export default ProgressionCardItem

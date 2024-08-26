@@ -1,8 +1,8 @@
-import React from 'react'
-import { MdOutlineDateRange } from 'react-icons/md'
+import React from 'react';
+import { MdOutlineDateRange } from 'react-icons/md';
 // @ts-ignore
-import moment from 'moment'
-import { BiHash, BiPhone } from 'react-icons/bi'
+import moment from 'moment';
+import { BiHash, BiPhone } from 'react-icons/bi';
 
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -11,12 +11,13 @@ type Props = {
 }
 
 function VoucherCardItem({ data }: Props) {
+  console.log(data)
   return (
   <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-2 md:group">
     <h2 className="text-base md:text-base font-semibold font-noto text-gray-500 uppercase">{data?.transtag}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="w-full flex items-center justify-between space-x-2">
-          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{ data?.activityFinanceVoucher?.buyerName?.toUpperCase() }</div>
+          <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{ data?.activityFinanceVoucher[0]?.buyerName?.toUpperCase() }</div>
           {/* <div className="py-0.5 px-2 text-sm rounded bg-primary/60 text-white font-bold">{data?.activityFinanceVoucher?.buyerPhone}</div> */}
       </div>
    </div>
@@ -26,11 +27,11 @@ function VoucherCardItem({ data }: Props) {
         </div>
         <div className="flex items-center space-x-4">
             <BiHash className="h-4 w-5 text-primary/70" />
-            <span className="text-xs text-gray-500 font-semibold tracking-wide">SERIAL NUMBER:&nbsp;&nbsp; {data?.activityFinanceVoucher?.serial || 'NOT ASSIGNED'}</span>
+            <span className="text-xs text-gray-500 font-semibold tracking-wide">SERIAL NUMBER:&nbsp;&nbsp; {data?.activityFinanceVoucher[0]?.serial || 'NOT ASSIGNED'}</span>
         </div>
         <div className="flex items-center space-x-4">
             <BiPhone className="h-4 w-5 text-primary/70" />
-            <span className="text-xs text-gray-500 font-semibold tracking-wide">BUYER PHONE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {data?.activityFinanceVoucher?.buyerPhone || 'NOT ASSIGNED'}</span>
+            <span className="text-xs text-gray-500 font-semibold tracking-wide">BUYER PHONE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {data?.activityFinanceVoucher[0]?.buyerPhone || 'NOT ASSIGNED'}</span>
         </div>
         <div className="mt-10 flex items-center space-x-4">
             <MdOutlineDateRange className="h-4 w-5 text-primary/70" />

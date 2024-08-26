@@ -1,14 +1,11 @@
-import React,{useState,useEffect,useRef} from 'react'
-import '../admission/FormPrint.css'
-import Logo from '../../assets/img/logo.png'
+import ReactHtml from "html-react-parser"
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import moment from 'moment'
-import { fetchSemesterSlip } from '../../store/utils/ssoApi'
-import { useReactToPrint } from 'react-to-print';
+import { useReactToPrint } from 'react-to-print'
+import { helperData } from '../../store/utils/helperData'
 import { getLevelSemester } from '../../store/utils/util'
-import ReactHtml from "html-react-parser";
+import '../admission/FormPrint.css'
 import TranscriptHeader from './TranscriptHeader'
-import { helperData }  from '../../store/utils/helperData'
 
 const PaperTranscriptView = () => {
     const { sso } = useSelector(state=>state)
@@ -33,7 +30,6 @@ const PaperTranscriptView = () => {
             if(data && data.length > 0){
                 let cct = 0, cgt = 0;
                 data.map((row,i) => {
-                    console.log(row)
                     cgp += helperData.getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
                     ccs += helperData.isCreditPassed(row.total_score,JSON.parse(row.grade_meta)) ? row.credit : 0;
                     ccr += row.credit

@@ -79,6 +79,18 @@ function AISAccountCard({ data }: Props) {
     }
   }
 
+  const progressStudent = async () => {
+    const ok = window.confirm("Progress Student for Academic Session ?")
+    if(ok){
+      try {
+        const resp = await Service.progressStudent({ indexno: data?.indexno });
+        if(resp) navigate(0)
+      } catch (error) {
+        toast.error("Student already progressed !")
+      }
+    }
+  }
+
   const switchAccount = async (e) => {
     try {
         e.preventDefault();
@@ -150,6 +162,11 @@ function AISAccountCard({ data }: Props) {
             <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Transcript</span>
           </Link>
+          {/* Progress Student  */}
+          <button onClick={progressStudent} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Progress Student</span>
+          </button>
        </section>
     </div>
   )

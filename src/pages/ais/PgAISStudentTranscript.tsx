@@ -7,7 +7,6 @@ type Props = {}
 
 export async function loader({ params }){
   const data = await Service.fetchStudentTranscript(params.studentId);
-  console.log(data)
   let credit = 0;
   let gradepoint = 0;
   const cgpa:any = [];
