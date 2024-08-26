@@ -68,7 +68,7 @@ function PgAISPProfile({}: Props) {
               <AISPBioCard label="Country" value={data?.country?.longName || 'Not Set'} Icon={RiCommunityLine} />
               <AISPBioCard label="Religion" value={data?.religion?.title || 'Not Set'} Icon={BiMoneyWithdraw} />
               <AISPBioCard label="Disability" value={data?.disability?.title || 'None'} Icon={BiMoneyWithdraw} />
-              <AISPBioCard label="Ghana Card Number" value={data?.end_date && moment(data?.end_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
+              <AISPBioCard label="Ghana Card Number" value={data?.ghcardNo || 'Not Set'} Icon={BsCalendarRange} />
               <AISPBioCard label="Guardian Name" value={data?.guardianName || 'Not Set'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Guardian Contact" value={data?.guardianPhone || 'Not Set'} Icon={BsCalendarRange} />
             </div>
@@ -88,8 +88,8 @@ function PgAISPProfile({}: Props) {
               <AISPBioCard label="Department" value={data?.program?.department?.title || 'Not Set'} Icon={FaPhoneAlt} />
             </div>
             <div className="flex-1 space-y-2">
-              <AISPBioCard label="Institutional Email" value={data?.address?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
-              <AISPBioCard label="Date of Admission" value={data?.dob && moment(data?.dob).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
+              <AISPBioCard label="Institutional Email" value={data?.instituteEmail?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
+              <AISPBioCard label="Date of Admission" value={data?.entryDate && moment(data?.entryDate).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
               <AISPBioCard label="Student Category" value={data?.entryGroup == 'GH' ? 'GHANAIAN': 'INTERNATIONAL'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Academic Status" value={data?.completeStatus ? 'COMPLETED': 'ACTIVE STUDENT'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Residential Status" value={data?.residentialStatus?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
