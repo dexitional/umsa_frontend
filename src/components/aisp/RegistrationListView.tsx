@@ -71,7 +71,7 @@ function RegistrationListView({ title,data }: Props) {
         { courses && 
         <div className="px-6 pb-4 grid grid-cols-1 md:grid-cols-6 gap-y-4 md:place-items-center border-slate-200 text-xs text-primary/70 font-roboto font-semibold uppercase tracking-widest">
             <div className="pb-4 md:pb-0 border-b md:border-b-0 md:col-span-2 md:place-self-start flex items-center justify-between">
-               { courses?.length ? <button onClick={submit} className="px-5 py-2 w-full bg-primary/70 rounded text-white font-roboto font-medium text-xs tracking-[0.17rem] uppercase">Submit Registration</button>: null }
+               { courses?.length ? <button onClick={submit} className="px-5 py-2 w-full bg-green-700/70 rounded text-white font-roboto font-medium text-xs tracking-[0.17rem] uppercase">Submit Registration</button>: null }
             </div>
             <div className="md:col-span-2 flex items-center justify-between"><span>Chosen Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{chosenCredit}</span></span></div>
             <div className="md:col-span-2 flex items-center justify-between"><span>Maximum Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">Not Set</span></span></div>

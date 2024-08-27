@@ -1368,7 +1368,7 @@ class Service {
                 headers: { "Content-Type" : "application/json", "x-access-token" : token }
             })
             if(res.status == 200){
-               toast.success("Record deleted!")
+               toast.success("Registration deleted!")
                return res.data
             } 
             else throw new(res.data.message)

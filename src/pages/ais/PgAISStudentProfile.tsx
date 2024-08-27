@@ -38,10 +38,10 @@ function PgAISStudentProfile({}: Props) {
       <AISPBioCard label="Guardian Contact" value={data?.guardianPhone || 'Not Set'} Icon={BsCalendarRange} />
       <AISPBioCard label="Region" value={data?.region?.title || 'Not Set'} Icon={BiMoneyWithdraw} />
       <AISPBioCard label="Country" value={data?.country?.longName || 'Not Set'} Icon={RiCommunityLine} />
+      <AISPBioCard label="Religion" value={data?.religion?.title || 'Not Set'} Icon={BiMoneyWithdraw} />
     </div>
     <div className="flex-1 space-y-2">
-       <AISPBioCard label="Religion" value={data?.religion?.title || 'Not Set'} Icon={BiMoneyWithdraw} />
-      <AISPBioCard label="Disability" value={data?.disability?.title || 'None'} Icon={BiMoneyWithdraw} />
+       <AISPBioCard label="Disability" value={data?.disability?.title || 'None'} Icon={BiMoneyWithdraw} />
        <AISPBioCard label="Student Number" value={`${data?.id}`} Icon={ImProfile} />
       <AISPBioCard label="Index Number" value={data?.indexno || 'Not Set'} Icon={TbHomeCheck} />
       <AISPBioCard label="Programme" value={data?.program?.longName || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />

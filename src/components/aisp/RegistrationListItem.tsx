@@ -45,7 +45,7 @@ function RegistrationListItem({ row }: Props) {
           <ListHeading title="Action" />
           <div>
             { hasCode 
-            ? <div className="px-3 py-1 w-fit border border-primary-accent rounded-full text-primary-accent">CHOSEN</div>
+            ? <div className="px-3 py-1 w-fit border border-primary-accent rounded-full text-primary-accent cursor-not-allowed">CHOSEN</div>
             : <button onClick={() => choose(row?.code)} className="px-3 py-1 bg-primary/70 text-white font-bold rounded-full tracking-widest ">CHOOSE</button>
             }
           </div>

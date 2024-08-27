@@ -1,7 +1,9 @@
 import moment from 'moment';
 import React from 'react';
-import { IoPrint } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { IoPrint, IoRefreshSharp } from 'react-icons/io5';
+import { Link, useNavigate } from 'react-router-dom';
+import Service from '../../utils/aisService';
 import RegistrationSlipItem from './RegistrationSlipItem';
 
 type Props = { 
@@ -13,19 +15,17 @@ type Props = {
 
 function RegistrationSlipView({ title,data }: Props) {
   
+  const navigate = useNavigate();
   const totalCredit  = data.reduce((sum,cur) => sum+cur.course.creditHour,0)
   
   const reset = async () => {
-    //  const cdata = data.courses?.filter((row:any) => {
-    //     const isChosen = courses.find((course:any) => course == row.code);
-    //     return !!isChosen 
-    //  })
-    //  if(cdata.length){
-    //     const resp = await Service.deleteRegistration(cdata)
-    //     console.log(resp);
-    //  } else{
-    //    toast.error("Please select your courses")
-    //  }
+     if(data?.length){
+        const resp = await Service.deleteRegistration(data[0].indexno)
+        if(resp) navigate(0);
+       
+     } else{
+       toast.error("Please select your courses")
+     }
   }
 
   
@@ -35,7 +35,7 @@ function RegistrationSlipView({ title,data }: Props) {
         <div className="py-1 px-5 bg-primary/90 md:rounded-l md:rounded-tr-3xl text-white">{title}</div>
         <div className="flex space-x-2">
            <Link to="/print/registration" className="px-3 py-1 bg-primary-dark/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoPrint className="h-6 w-6 text-white"/><span>PRINT SLIP</span></Link>
-           {/* <button onClick={reset} className="px-3 py-1 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button> */}
+           <button onClick={reset} className="px-3 py-1 bg-red-400 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button>
         </div>
         
       </h1>
