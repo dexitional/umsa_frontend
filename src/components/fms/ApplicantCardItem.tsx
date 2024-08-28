@@ -8,7 +8,7 @@ import { AiOutlineFileDone } from 'react-icons/ai'
 import { CgNotes, CgTemplate } from 'react-icons/cg'
 import { FaCircleCheck } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 
 type Props = {
   data: any;

@@ -7,7 +7,7 @@ import moment from 'moment'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
 import { FaFilePdf, FaFolder } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {

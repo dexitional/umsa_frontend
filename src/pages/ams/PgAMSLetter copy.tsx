@@ -6,7 +6,7 @@ import { PiSignatureBold } from 'react-icons/pi'
 import { TbEdit } from 'react-icons/tb'
 import { redirect, useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 import LetterTemplate from '../../components/ams/LetterTemplate'
 import Service from '../../utils/amsService'
 

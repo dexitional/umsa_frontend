@@ -5,7 +5,7 @@ import { HiAcademicCap } from 'react-icons/hi2'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
 import { redirect, useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 import FormTemplate from '../../components/ams/FormTemplate'
 import Service from '../../utils/amsService'
 

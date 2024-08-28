@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 
 type Props = {}
 

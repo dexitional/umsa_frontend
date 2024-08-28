@@ -6,7 +6,7 @@ import { MdNumbers } from 'react-icons/md'
 import { TbEdit } from 'react-icons/tb'
 import { useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 import Service from '../../utils/aisService'
 
 type Props = {}

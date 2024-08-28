@@ -7,7 +7,7 @@ import { GiMoneyStack } from 'react-icons/gi'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 import Service from '../../utils/fmsService'
 
 const { REACT_APP_API_URL } = import.meta.env;

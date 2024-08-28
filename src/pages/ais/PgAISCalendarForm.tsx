@@ -11,7 +11,7 @@ export async function action({ request, params }){
    const id = params?.calendarId || 0;
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
-       data.year = +data.year
+       data.year = data.year
        data.registerStart = moment(data.registerStart)
        data.registerEnd = moment(data.registerEnd)
        data.registerEndLate = moment(data.registerEndLate)
@@ -93,8 +93,8 @@ function PgAISCalendarForm({}: Props) {
                       <span className="text-sm md:text-base text-gray-500 font-medium">Calendar Stream</span>
                       <select arial-label="tag" name="tag" defaultValue={data?.tag} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option value="main">MAIN STREAM</option>
-                        <option value="sub">SUB STREAM</option>
+                        <option value="MAIN">MAIN STREAM</option>
+                        <option value="SUB">SUB STREAM</option>
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">

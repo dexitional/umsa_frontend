@@ -3,7 +3,7 @@ import React, { Fragment, useRef } from 'react';
 import { FaFilePdf } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useReactToPrint } from "react-to-print";
-import Logo from '../../assets/img/logo/aucc/logo.png';
+import Logo from '../../assets/img/logo/mlk/logo.png';
 import PrintHeader from '../print/PrintHeader';
 
 type Props = {

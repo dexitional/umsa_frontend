@@ -4,7 +4,7 @@ import { FaLevelUpAlt } from 'react-icons/fa'
 import moment from 'moment'
 import { CgCalendarDates } from 'react-icons/cg'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {

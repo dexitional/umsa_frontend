@@ -51,7 +51,7 @@ function PrintTranscript({}: Props) {
   )
   
   // Student Bio Profile
-  const [_,mdata] = data && data[1];
+  const [_,mdata] = data && data[0];
   const student = mdata && mdata[0]?.student;
   
   return (

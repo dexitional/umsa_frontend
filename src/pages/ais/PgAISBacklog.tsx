@@ -6,7 +6,7 @@ import { HiAcademicCap } from 'react-icons/hi2'
 import { TbEdit } from 'react-icons/tb'
 import { redirect, useLoaderData, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/aucc/logo.png'
+import Logo from '../../assets/img/logo/mlk/logo.png'
 import Service from '../../utils/aisService'
 import PgAISBacklogRecord from './PgAISBacklogRecord'
 
