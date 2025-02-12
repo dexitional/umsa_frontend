@@ -63,7 +63,7 @@ function BillCardItem({ data }: Props) {
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">
           <div className="flex group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`bg-green-800/80 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
-              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GHC'} {data?.amount}</span>
+              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GH₵'} {data?.amount}</span>
           </div>
         </div>
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-between space-x-2 group">
@@ -86,7 +86,7 @@ function BillCardItem({ data }: Props) {
           }
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`${data.posted ? 'bg-green-800/80': 'bg-primary/80' } py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
-              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GHC'} {data?.amount}</span>
+              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GH₵'} {data?.amount}</span>
           </div>
         </div>
     </div>

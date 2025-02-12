@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import toast from 'react-hot-toast';
 import Cookies from 'universal-cookie';
 import { useUserStore } from './authService';
 const { REACT_APP_API_URL } = import.meta.env;
@@ -25,6 +26,11 @@ axios.interceptors.response.use(
             useUserStore.setState({ user: null, token: null })
             return window.location.reload; 
         }
+
+        if (error.response && error.response.status === 500) {
+          return toast.error(error?.response?.data)
+        }
+
         // Handle other errors here
         return Promise.reject(error);
     }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/ais/SubPageTitle'
 import Service from '../../utils/aisService'
-import moment from 'moment'
 
 type Props = {}
 
@@ -68,7 +67,7 @@ function PgAISSheetForm({}: Props) {
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Calendar</span>
                       <select arial-label="sessionId" name="sessionId" defaultValue={data?.sessionId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
+                        <option selected disabled value="">-- Choose --</option>
                         { sessions && sessions?.map((row:any) =>(
                           <option key={row.id} value={row.id}>{row.title?.toUpperCase()} &nbsp; ( {row.tag} {row.default && ` - DEFAULT`} )</option>
                         ))}
@@ -77,7 +76,7 @@ function PgAISSheetForm({}: Props) {
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Course</span>
                       <select arial-label="courseId" name="courseId" defaultValue={data?.courseId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
+                        <option selected disabled value="">-- Choose --</option>
                         { courses && courses?.map((row:any) =>(
                           <option key={row.id} value={row.id}>{row.title?.toUpperCase()} &nbsp; ( {row.id} )</option>
                         ))}
@@ -94,13 +93,13 @@ function PgAISSheetForm({}: Props) {
                   </label>
                   { form.programId ? 
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Major</span>
-                      <select arial-label="majorId" name="majorId" defaultValue={data?.majorId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected>-- NONE --</option>
-                        { majors && majors?.filter(r => r.programId == form?.programId).map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.shortName?.toUpperCase()}</option>
-                        ))}
-                      </select>
+                    <span className="text-sm md:text-base text-gray-500 font-medium">Major</span>
+                    <select arial-label="majorId" name="majorId" defaultValue={data?.majorId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <option selected  value="">-- NONE --</option>
+                      { majors && majors?.filter(r => r.programId == form?.programId).map((row:any) =>(
+                        <option key={row.id} value={row.id}>{row.shortName?.toUpperCase()}</option>
+                      ))}
+                    </select>
                   </label> : null
                   }
                   <label className="flex flex-col space-y-2">
@@ -125,7 +124,7 @@ function PgAISSheetForm({}: Props) {
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Mode of Study</span>
                       <select arial-label="studyMode" name="studyMode" defaultValue={data?.studyMode} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected>-- NONE --</option>
+                        <option selected disabled value="">-- NONE --</option>
                         <option value="M">MORNING</option>
                         <option value="E">EVENING</option>
                         <option value="W">WEEKEND</option>
@@ -134,7 +133,7 @@ function PgAISSheetForm({}: Props) {
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Department In Charge</span>
                       <select arial-label="unitId" name="unitId" defaultValue={data?.unitId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
+                        <option selected disabled value="">-- Choose --</option>
                         { departments && departments?.map((row:any) =>(
                           <option key={row.id} value={row.id}>{row.title?.toUpperCase()} ( {row.code} )</option>
                         ))}

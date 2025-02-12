@@ -4,7 +4,7 @@ import { FaPhone } from 'react-icons/fa'
 import moment from 'moment'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -54,7 +54,7 @@ function DebtCardItem({ data }: Props) {
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-start space-x-2 group">
           <div className="hidden md:flex items-center justify-center space-x-3 text-center">
               <span className={`bg-red-800/80 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>{ data?.accountNet > 0 ? 'DEBT':'BAL' }</span>
-              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GHC'} {Math.abs(data?.accountNet)}</span>
+              <span className="font-bold font-roboto text-base text-primary/80">  {data.entryGroup == 'INT' ? 'USD':'GH₵'} {Math.abs(data?.accountNet)}</span>
           </div>
         </div>
     </div>

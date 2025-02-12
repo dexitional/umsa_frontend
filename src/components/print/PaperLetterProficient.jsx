@@ -1,11 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import "../admission/FormPrint.css";
-import Logo from "../../assets/img/logo.png";
-import Signature from "../../assets/img/signature.png";
-import { useReactToPrint } from "react-to-print";
-import { useSelector } from "react-redux";
-import moment from "moment";
 import ReactHtml from "html-react-parser";
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
+import Logo from "../../assets/img/logo.png";
+import Signature from "../../assets/img/thumb.png";
+import "./FormPrint.css";
+import Service from '../../utils/aisService'
+
+// Loader for Single Project
+export async function loader({ params }){
+  const data = await Service.fetchTranswift(params.transwiftId)
+  return { data }
+}
 
 const PaperLetterProficient = () => {
   const { sso } = useSelector((state) => state);

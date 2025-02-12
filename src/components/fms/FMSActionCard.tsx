@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 import { FaMoneyCheckDollar } from 'react-icons/fa6';
-import Service from '../../utils/fmsService'
 import { useNavigate } from 'react-router';
+import Service from '../../utils/fmsService';
 
 type Props = {
     data?: any;
@@ -50,18 +50,18 @@ function FMSActionCard({ data }: Props) {
   
   return (
     <div className="w-full rounded flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
-       <section className="w-full grid md:grid-cols-3 gap-2 md:gap-4">{data.session.default && 'true'}
-          { data.session.default && data.posted && 
+       <section className="w-full grid md:grid-cols-3 gap-2 md:gap-4">
+          { data.session.default && data.posted ?
           <button onClick={revokeBill} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-red-200/10 border border-red-500/20 shadow">
             <FaMoneyCheckDollar className="text-red-400/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-red-500/40 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-red-700/70 font-noto">Revoke Bill</span>
-          </button>
+          </button>: null
           }
-          { !data.posted && 
+          { !data.posted ? 
           <button onClick={publishBill} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-green-200/10 border border-green-500/20 shadow">
             <FaMoneyCheckDollar className="text-green-400/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-green-500/40 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-green-800/70 font-noto">Publish Bill </span>
-          </button>
+          </button>: null
           }
 
           <button onClick={revokeStudent} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-red-200/10 border border-red-500/20 shadow">

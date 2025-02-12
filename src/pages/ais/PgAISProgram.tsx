@@ -7,7 +7,7 @@ import { RiCommunityFill } from 'react-icons/ri'
 import { TbEdit } from 'react-icons/tb'
 import { Outlet, redirect, useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import SubNavLink from '../../components/ais/SubNavLink'
 import Service from '../../utils/aisService'
 
@@ -51,9 +51,9 @@ function PgAISProgram({}: Props) {
               </div>
               <div className="w-full flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2 text-zinc-400 text-lg">
                 <div className="flex items-center space-x-2"> 
-                    <span className="px-3 py-0.5 text-xs md:text-sm font-medium tracking-wider capitalize bg-primary rounded-md text-white">{data?.shortName}</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
-                    <span className="tracking-wider text-xs md:text-base capitalize">{ data?.category == 'CP' ? 'CERTIFICATE': data?.category == 'DP' ? 'DIPLOMA':'DEGREE' }</span>
+                    <span className="px-3 py-0.5 text-xs md:text-sm font-medium tracking-wider capitalize bg-primary rounded-md text-white">{ data?.category == 'CP' ? 'CERTIFICATE': data?.category == 'DP' ? 'DIPLOMA':'DEGREE' }</span>
+                    {/* <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                    <span className="tracking-wider text-xs md:text-base capitalize">{ data?.category == 'CP' ? 'CERTIFICATE': data?.category == 'DP' ? 'DIPLOMA':'DEGREE' }</span> */}
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
                  </div>
                  <div className="flex items-center space-x-2">

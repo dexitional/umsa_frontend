@@ -7,7 +7,7 @@ import { CgCalendarDates } from 'react-icons/cg'
 import { FaFilePdf } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { LuFileSpreadsheet } from "react-icons/lu"
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
@@ -30,6 +30,10 @@ function ProgressionCardItem({ data }: Props) {
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`${data?.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data?.student?.program?.longName || 'Not assigned' }</span>
         </div>
+         <div className="flex items-center space-x-4">
+            <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
+            <span className={`text-gray-500 text-xs  font-bold capitalize`}>{data?.session?.title} {data?.session?.tag == 'SUB' ? '- JAN': '- MAIN'}</span>
+        </div>
         <div className="flex items-center space-x-4">
             <CgCalendarDates className="h-4 w-5 text-primary/70" />
             <span className="text-xs text-gray-500 font-semibold tracking-wider">{data?.createdAt && moment(data?.createdAt).format("MMM DD, YYYY").toUpperCase() || 'Not Set'}</span>
@@ -49,7 +53,7 @@ function ProgressionCardItem({ data }: Props) {
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">
           <div className="flex group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`bg-green-950/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>Level</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.student?.semesterNum/2) * 100}</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.semesterNum/2) * 100}</span>
           </div>
         </div>
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center space-x-2 group">
@@ -68,7 +72,7 @@ function ProgressionCardItem({ data }: Props) {
           </Form>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`${!data?.completeStatus ? 'bg-primary-dark/60':'bg-primary-accent/60'} py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>LEVEL</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{(Math.ceil(data?.student?.semesterNum/2) * 100)}</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{(Math.ceil(data?.semesterNum/2) * 100)}</span>
           </div>
         </div>
     </div>

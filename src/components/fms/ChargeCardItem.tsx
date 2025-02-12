@@ -5,7 +5,7 @@ import { FaTrash } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { MdEditDocument, MdOutlineDateRange } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -56,7 +56,7 @@ function ChargeCardItem({ data }: Props) {
           </Form>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`bg-green-800/70 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency } { data?.amount }</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency == 'GHC' ? 'GH₵': data?.currency} { data?.amount }</span>
           </div>
         </div>
     </div>

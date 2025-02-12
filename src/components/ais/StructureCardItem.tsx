@@ -22,11 +22,9 @@ function StructureCardItem({ data }: Props) {
     <div className="space-y-1 font-roboto">
         <div className="flex items-center space-x-2">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
-            <span className={`text-primary-accent/80 text-xs  font-medium capitalize tracking-wider`}>{data.type == 'C' ? ' COMPULSORY': data.type == 'E' ? 'ELECTIVE':'OPTIONAL' }</span>
+            <span className={`text-primary/60 text-xs  font-semibold capitalize tracking-wider`}>{data.type == 'C' ? ' COMPULSORY': data.type == 'E' ? 'ELECTIVE':'OPTIONAL' }</span>
         </div>
-        <div>
-            <span className="px-2 py-1 bg-green-50 rounded border text-xs font-medium text-gray-500 tracking-wider">{data.program?.longName}</span>
-        </div>
+        <div className="py-1 px-2 bg-green-50 rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider">{data.program?.longName}</div>
     </div>
     <div className="flex flex-col space-y-1">
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">

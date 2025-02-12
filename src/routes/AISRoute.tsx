@@ -20,6 +20,9 @@ import PgAISFaculties, { loader as facultiesLoader } from '../pages/ais/PgAISFac
 import PgAISJob, { loader as aisJobLoader } from '../pages/ais/PgAISJob';
 import PgAISJobForm, { action as aisJobFormAction, loader as aisJobFormLoader } from '../pages/ais/PgAISJobForm';
 import PgAISJobs, { action as aisJobDestroy, loader as jobsLoader } from '../pages/ais/PgAISJobs';
+import PgAISLetter, { loader as aisLetterLoader } from '../pages/ais/PgAISLetter';
+import PgAISLetterForm, { action as aisLetterFormAction, loader as aisLetterFormLoader } from '../pages/ais/PgAISLetterForm';
+import PgAISLetters, { action as aisLetterDestroy, loader as lettersLoader } from '../pages/ais/PgAISLetters';
 import PgAISMySheets, { loader as mysheetsLoader } from '../pages/ais/PgAISMySheets';
 import PgAISProgram, { loader as aisProgramLoader } from '../pages/ais/PgAISProgram';
 import PgAISProgramForm, { action as aisProgramFormAction, loader as aisProgramFormLoader } from '../pages/ais/PgAISProgramForm';
@@ -65,6 +68,35 @@ import PgAISStudentTranscript, { loader as aisStudentTranscriptLoader } from '..
 import PgAISUnit, { loader as aisUnitLoader } from '../pages/ais/PgAISUnit';
 import PgAISUnitForm, { action as aisUnitFormAction, loader as aisUnitFormLoader } from '../pages/ais/PgAISUnitForm';
 import PgAISUnits, { action as aisUnitDestroy, loader as unitsLoader } from '../pages/ais/PgAISUnits';
+
+
+import PgAISResitForm, { action as resitFormAction, loader as resitFormLoader } from '../pages/ais/PgAISResitForm';
+import PgAISResits, { loader as resitsLoader } from '../pages/ais/PgAISResits';
+
+import PgAISResitSession, { action as resitSessionDestroy, loader as resitSessionLoader } from '../pages/ais/PgAISResitSession';
+import PgAISResitSessionForm, { action as resitSessionFormAction, loader as resitSessionFormLoader } from '../pages/ais/PgAISResitSessionForm';
+import PgAISResitSessions, { loader as resitSessionsLoader } from '../pages/ais/PgAISResitSessions';
+
+import PaperLetterAttest, { loader as attestLoader } from '../components/print/PaperLetterAttest';
+import PaperLetterIntro, { loader as introLoader } from '../components/print/PaperLetterIntro';
+import PaperLetterProficient, { loader as proficientLoader } from '../components/print/PaperLetterProficient';
+import PaperTranscriptView, { loader as transcriptLoader } from '../components/print/PaperTranscriptView';
+import PgAISCircularForm, { action as noticeFormAction, loader as noticeFormLoader } from '../pages/ais/PgAISCircularForm';
+import PgAISCirculars, { action as noticesAction, loader as noticesLoader } from '../pages/ais/PgAISCirculars';
+import PgAISGraduateForm, { action as graduateFormAction, loader as graduateFormLoader } from '../pages/ais/PgAISGraduateForm';
+import PgAISGraduates, { loader as graduatesLoader } from '../pages/ais/PgAISGraduates';
+import PgAISGraduateSession, { action as graduateSessionDestroy, loader as graduateSessionLoader } from '../pages/ais/PgAISGraduateSession';
+import PgAISGraduateSessionAction, { loader as graduateSessionActionLoader } from '../pages/ais/PgAISGraduateSessionAction';
+import PgAISGraduateSessionForm, { action as graduateSessionFormAction, loader as graduateSessionFormLoader } from '../pages/ais/PgAISGraduateSessionForm';
+import PgAISGraduateSessions, { loader as graduateSessionsLoader } from '../pages/ais/PgAISGraduateSessions';
+import PgAISGraduateSessionStudent, { loader as graduateSessionStudentLoader } from '../pages/ais/PgAISGraduateSessionStudent';
+import PgAISResitSessionAction, { loader as resitSessionActionLoader } from '../pages/ais/PgAISResitSessionAction';
+import PgAISResitSessionCapture, { action as resitSessionCaptureAction, loader as resitSessionCaptureLoader } from '../pages/ais/PgAISResitSessionCapture';
+import PgAISResitSessionScore, { loader as resitSessionScoreLoader } from '../pages/ais/PgAISResitSessionScore';
+import PgAISResitSessionStudent, { loader as resitSessionStudentLoader } from '../pages/ais/PgAISResitSessionStudent';
+import PgAISTranswift, { action as transwiftDestroy, loader as transwiftLoader } from '../pages/ais/PgAISTranswift';
+import PgAISTranswiftForm, { action as transwiftFormAction, loader as transwiftFormLoader } from '../pages/ais/PgAISTranswiftForm';
+import PgAISTranswifts, { loader as transwiftsLoader } from '../pages/ais/PgAISTranswifts';
 import Error from '../pages/Error';
 import { useUserStore } from '../utils/authService';
 
@@ -407,6 +439,35 @@ const AISRoute:any =  {
          action: aisDefermentFormAction
       },
 
+
+       /* Service Letters Module */
+       { 
+         path:'letters', 
+         element: <PgAISLetters />,
+         loader: lettersLoader,
+      },
+      { 
+         path:'letters/create', 
+         element: <PgAISLetterForm />,
+         loader: aisLetterFormLoader,
+         action: aisLetterFormAction
+      },
+      { 
+         path:'letters/:letterId', 
+         element: <PgAISLetter />,
+         loader: aisLetterLoader,
+      },
+      { 
+         path:'letters/:letterId/destroy', 
+         action: aisLetterDestroy,
+      },
+      { 
+         path:'letters/:letterId/edit', 
+         element: <PgAISLetterForm />, 
+         loader: aisLetterFormLoader,
+         action: aisLetterFormAction
+      },
+
       /* Sheet Module */
       { 
          path:'sheets', 
@@ -565,6 +626,234 @@ const AISRoute:any =  {
       },
 
 
+      /* Resit Session Module */
+      { 
+         path:'resit-sessions', 
+         element: <PgAISResitSessions />,
+         loader: resitSessionsLoader,
+      },
+      { 
+         path:'resit-sessions/create', 
+         element: <PgAISResitSessionForm />,
+         loader: resitSessionFormLoader,
+         action: resitSessionFormAction
+      },
+      { 
+         path:'resit-sessions/:sessionId', 
+         element: <PgAISResitSession />,
+         loader: resitSessionLoader,
+         children: [
+            {
+               path:'students', 
+               element: <PgAISResitSessionStudent />,
+               loader: resitSessionStudentLoader,
+               index: true
+            },
+            {
+               path:'scores', 
+               element: <PgAISResitSessionScore />,
+               loader: resitSessionScoreLoader,
+            },
+            {
+               path:'capture', 
+               element: <PgAISResitSessionCapture />,
+               loader: resitSessionCaptureLoader,
+               action: resitSessionCaptureAction,
+            },
+            {
+               path:'action', 
+               element: <PgAISResitSessionAction />,
+               loader: resitSessionActionLoader,
+            }
+         ]
+      },
+      { 
+         path:'resit-sessions/:sessionId/destroy', 
+         action: resitSessionDestroy,
+      },
+      { 
+         path:'resit-sessions/:sessionId/edit', 
+         element: <PgAISResitSessionForm />,
+         loader: resitSessionFormLoader,
+         action: resitSessionFormAction
+      },
+
+
+       /* Resit Module */
+       { 
+         path:'resits', 
+         element: <PgAISResits />,
+         loader: resitsLoader,
+      },
+      { 
+         path:'resits/create', 
+         element: <PgAISResitForm />,
+         loader: resitFormLoader,
+         action: resitFormAction
+      },
+      // { 
+      //    path:'resits/:resitId', 
+      //    element: <PgAISResit />,
+      //    loader: resitLoader,
+      // },
+      { 
+         path:'resits/:resit/destroy', 
+         // action: nssMainDestroy,
+      },
+      { 
+         path:'resits/:resitId/edit', 
+         element: <PgAISResitForm />,
+         loader: resitFormLoader,
+         action: resitFormAction
+      },
+
+
+       /* Graduation Session Module */
+       { 
+         path:'graduate-sessions', 
+         element: <PgAISGraduateSessions />,
+         loader: graduateSessionsLoader,
+      },
+      { 
+         path:'graduate-sessions/create', 
+         element: <PgAISGraduateSessionForm />,
+         loader: graduateSessionFormLoader,
+         action: graduateSessionFormAction
+      },
+      { 
+         path:'graduate-sessions/:sessionId', 
+         element: <PgAISGraduateSession />,
+         loader: graduateSessionLoader,
+         children: [
+            {
+               path:'graduants', 
+               element: <PgAISGraduateSessionStudent />,
+               loader: graduateSessionStudentLoader,
+               index: true
+            },
+            {
+               path:'action', 
+               element: <PgAISGraduateSessionAction />,
+               loader: graduateSessionActionLoader,
+            }
+         ]
+      },
+      { 
+         path:'graduate-sessions/:sessionId/destroy', 
+         action: graduateSessionDestroy,
+      },
+      { 
+         path:'graduate-sessions/:sessionId/edit', 
+         element: <PgAISGraduateSessionForm />,
+         loader: graduateSessionFormLoader,
+         action: graduateSessionFormAction
+      },
+
+
+       /* Graduation Module */
+       { 
+         path:'graduates', 
+         element: <PgAISGraduates />,
+         loader: graduatesLoader,
+      },
+      { 
+         path:'graduates/create', 
+         element: <PgAISGraduateForm />,
+         loader: graduateFormLoader,
+         action: graduateFormAction
+      },
+      { 
+         path:'graduates/:graduate/destroy', 
+         // action: nssMainDestroy,
+      },
+      { 
+         path:'graduates/:graduateId/edit', 
+         element: <PgAISGraduateForm />,
+         loader: graduateFormLoader,
+         action: graduateFormAction
+      },
+
+
+       /* Transwift Module */
+       { 
+         path:'transwifts', 
+         element: <PgAISTranswifts />,
+         loader: transwiftsLoader,
+      },
+      { 
+         path:'transwifts/create', 
+         element: <PgAISTranswiftForm />,
+         loader: transwiftFormLoader,
+         action: transwiftFormAction
+      },
+      { 
+         path:'transwifts/:transwiftId', 
+         element: <PgAISTranswift  />,
+         loader: transwiftLoader,
+         children: [
+            {
+               path:'transcript', 
+               element: <PaperTranscriptView />,
+               loader: transcriptLoader,
+               index: true
+            },
+            {
+               path:'proficiency', 
+               element: <PaperLetterProficient />,
+               loader: proficientLoader,
+            }, 
+            {
+               path:'attestation', 
+               element: <PaperLetterAttest />,
+               loader: attestLoader,
+            },
+            {
+               path:'introduction', 
+               element: <PaperLetterIntro />,
+               loader: introLoader,
+            }
+         ]
+      },
+      { 
+         path:'transwifts/:transwiftId/destroy', 
+         action: transwiftDestroy,
+      },
+      { 
+         path:'transwifts/:transwiftId/edit', 
+         element: <PgAISTranswiftForm />, 
+         loader: transwiftFormLoader,
+         action: transwiftFormAction
+      },
+
+       /* Circular Module */
+       { 
+         path:'notices', 
+         element: <PgAISCirculars />,
+         loader: noticesLoader,
+         action: noticesAction
+      },
+      { 
+         path:'notices/create', 
+         element: <PgAISCircularForm />,
+         loader: noticeFormLoader,
+         action: noticeFormAction
+      },
+      { 
+         path:'notices/:noticeId/send', 
+         action: noticesAction,
+      },
+      { 
+         path:'notices/:noticeId/destroy', 
+         action: noticesAction,
+      },
+      { 
+         path:'notices/:noticeId/edit', 
+         element: <PgAISCircularForm />, 
+         loader: noticeFormLoader,
+         action: noticeFormAction
+      },
+
+
       /* Staff Module */
       { 
          path:'staff', 
@@ -655,8 +944,8 @@ const AISRoute:any =  {
       },
 
 
-       /* Units Module */
-       { 
+      /* Units Module */
+      { 
          path:'units', 
          element: <PgAISUnits />,
          loader: unitsLoader,

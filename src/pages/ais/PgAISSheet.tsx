@@ -1,13 +1,11 @@
 import React from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 // @ts-ignore
-import moment from 'moment'
-import { FaNewspaper } from 'react-icons/fa6'
 import { HiAcademicCap } from 'react-icons/hi2'
 import { TbEdit } from 'react-icons/tb'
 import { Outlet, redirect, useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import SubNavLink from '../../components/ais/SubNavLink'
 import Service from '../../utils/aisService'
 import { getStudyMode } from '../../utils/util'
@@ -75,7 +73,7 @@ function PgAISSheet({}: Props) {
                  </div>
                  <div className="flex items-center space-x-2">
                     <HiAcademicCap className="md:h-5 md:w-5 text-primary/70" />
-                    <span className="text-xs md:text-base tracking-wider font-medium uppercase">{data?.session?.tag == 'main' ? 'MAIN STREAM' :'JANUARY/SUB STREAM'}</span>
+                    <span className="text-xs md:text-base tracking-wider font-medium uppercase">{data?.session?.tag?.toLowerCase() == 'main' ? 'MAIN STREAM' :'JANUARY/SUB STREAM'}</span>
                 </div>
               </div>
               
@@ -121,28 +119,6 @@ function PgAISSheet({}: Props) {
              </div>
          </section>
 
-         { data?.projects?.length ? (
-         <section>
-            {/* Project History */}
-            <div className="p-2 md:py-4 md:px-6 flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-10 border rounded-md md:rounded-xl bg-white">
-               <h1 className="py-0.5 px-2 md:px-3 w-fit text-xs md:text-base font-semibold rounded-md bg-blue-950/60 text-white tracking-widest uppercase -skew-x-6">PROJECTS FUNDED</h1>
-               <div className="md:pl-6 space-y-4">
-                { data?.projects?.map((row:any) => (
-                  <div key={row.id} className="flex md:items-center space-x-6">
-                      <FaNewspaper className="w-3 h-3 md:h-5 md:w-6 text-primary/70" />
-                      <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2">
-                         <pre className="text-xs md:text-base text-gray-500">{row.title}</pre>
-                         <span className="py-0.5 px-2 w-fit bg-slate-200 font-semibold text-[0.6rem] md:text-xs text-gray-500 rounded uppercase">START - { moment(row.start).format('MMM DD, YYYY') }</span>
-                         <span className="py-0.5 px-2 w-fit bg-slate-200 font-semibold text-[0.6rem] md:text-xs text-gray-500 rounded uppercase">END - { moment(row.end).format('MMM DD, YYYY') }</span>
-                      </div>
-                  </div>
-                ))}
-                </div>
-             </div>
-         </section>
-         ): null }
-         
-        
       </div>
     </main>
   )

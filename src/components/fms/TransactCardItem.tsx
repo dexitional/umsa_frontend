@@ -6,7 +6,7 @@ import { AiOutlineFieldNumber } from 'react-icons/ai'
 import { BiRefresh } from 'react-icons/bi'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { VscReferences } from "react-icons/vsc"
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -32,11 +32,11 @@ function TransactCardItem({ data }: Props) {
     </div>
     <div className="space-y-2 font-roboto">
         <div className="mb-4 px-4 py-1 w-fit flex items-center space-x-4 rounded bg-primary-dark/10">
-            <span className={`text-gray-500 text-sm  font-bold capitalize`}>{data.transtype?.title || 'Not assigned' }</span>
+            <span className={`text-gray-500 text-sm  font-bold capitalize`}>{data?.transtype?.title || 'Not assigned' }</span>
         </div>
         <div className="flex items-center space-x-4">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
-            <span className={`${data.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data.student.program?.longName || 'Not assigned' }</span>
+            <span className={`${data?.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data?.student?.program?.longName || 'Not assigned' }</span>
         </div>
         {/* <div className="flex items-center space-x-4">
             <TbListNumbers className="rotate-90 h-4 w-5 text-primary/70" />
@@ -73,7 +73,7 @@ function TransactCardItem({ data }: Props) {
           </button>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`bg-green-800/70 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency } { data?.amount }</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency == 'GHC'? 'GH₵': data?.currency } { data?.amount }</span>
           </div>
         </div>
     </div>

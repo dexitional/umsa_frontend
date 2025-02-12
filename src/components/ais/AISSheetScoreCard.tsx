@@ -32,7 +32,7 @@ function AISSheetScoreCard({ title,data }: Props) {
             <div className="px-3 py-2 border-b grid grid-cols-10 font-medium text-xs text-primary/80">
               <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${row?.student?.id}`} className="h-8 w-8 border rounded-md bg-white object-contain" />
               <span className="col-span-2 font-bold self-center">{row.indexno}</span>
-              <span className="col-span-3 font-bold self-center">{(row.student?.fname+' '+(row.student?.mname && row.student?.mname+' ')+row.student?.lname).toUpperCase()} </span>
+              <span className="col-span-3 font-bold self-center">{(row.student?.fname+' '+(row.student?.mname ? row.student?.mname+' ':'')+row.student?.lname).toUpperCase()} </span>
               <span className="font-medium text-sm self-center">{row.classScore}</span>
               <span className="font-medium text-sm self-center">{row.examScore}</span>
               <span className="font-bold text-sm self-center">{row.totalScore}</span>

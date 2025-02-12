@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React from 'react'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import SubPageTitle from '../../components/ais/SubPageTitle'
@@ -8,46 +7,38 @@ type Props = {}
 
 // Save Form
 export async function action({ request, params }){
-   const id = params?.studentId || 0;
+   const id = params?.defermentId || 0;
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
-       data.dob = moment(data.dob)
-       data.semesterNum = Number(data.semesterNum)
-       data.entryDate = moment(data.entryDate)
-       data.completeStatus = data.completeStatus == 1
-       data.deferStatus = data.deferStatus == 1
-       data.graduateStatus = data.graduateStatus == 1
+       data.semesterNum = Number(data.semesterNum);
+       data.durationInYears = Number(data.durationInYears);
+     
     
    let resp;
     if(id != 0) 
-      resp = await Service.updateStudent(id,data);
+      resp = await Service.updateDeferment(id,data);
     else
-      resp = await Service.postStudent(data);
+      resp = await Service.postDeferment(data);
    
     if(resp){
-      return redirect(`/ais/students/${encodeURIComponent(resp.id)}/profile`)
+      return redirect(`/ais/deferments`)
     }
 } 
 // Load Data of Single 
 export async function loader({ params }){
    let data = { id: 0 };
-   const countries = await Service.fetchCountries()
-   const regions = await Service.fetchRegions()
-   const religions = await Service.fetchReligions()
-   const disabilities = await Service.fetchDisabilities()
-   const titles = await Service.fetchTitles()
-   const programs = await Service.fetchProgramList()
+   const sessions = await Service.fetchSessionList()
   
-   const id = params?.studentId || 0;
+   const id = params?.defermentId || 0;
    if(id != 0)
-     data = await Service.fetchStudent(id)
-   return { data,countries,regions,religions,disabilities,titles,programs }
+     data = await Service.fetchDeferment(id)
+   return { data,sessions }
 }
 
 function PgAISDefermentForm({}: Props) {
   
   const navigate = useNavigate()
-  const { data,countries,regions,religions,disabilities,titles,programs }: any = useLoaderData();
+  const { data,sessions }: any = useLoaderData();
   return (
     <main className="md:pl-10 p-2 md:p-6 space-y-4 md:space-y-10">
       <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Deferment Profile`} page="Deferment" />
@@ -67,144 +58,20 @@ function PgAISDefermentForm({}: Props) {
                <h1 className="py-0.5 px-2 md:px-4 w-fit text-xs md:text-base font-semibold rounded-md bg-primary-dark/60 text-white tracking-widest uppercase -skew-x-6">Personal Information</h1>
                <div className="md:pl-6 space-y-4">
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Title</span>
-                      <select arial-label="titleId" name="titleId" defaultValue={data?.titleId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Deferred Academic Session</span>
+                      <select arial-label="sessionId" name="sessionId" defaultValue={data?.sessionId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        { titles && titles?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.label}</option>
+                        { sessions?.map((row:any) =>(
+                          <option key={row.id} value={row.id}>{row.title} - {row.tag}</option>
                         ))}
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">First Name</span>
-                      <input arial-label="fname" name="fname" defaultValue={data?.fname} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Index Number of Student</span>
+                      <input arial-label="indexno" name="indexno" defaultValue={data?.indexno} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Middle Name(s)</span>
-                      <input arial-label="mname" name="mname" defaultValue={data?.mname} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Last Name</span>
-                      <input arial-label="lname" name="lname" defaultValue={data?.lname} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Date of Birth</span>
-                      <input arial-label="dob" name="dob" type="date" defaultValue={data?.dob && moment(data?.dob).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Gender</span>
-                      <select arial-label="gender" name="gender" defaultValue={data?.gender} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="M">MALE</option>
-                        <option value="F">FEMALE</option>
-                      </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Phone Number</span>
-                      <input arial-label="phone" name="phone" type="tel" minLength={10} maxLength={10} defaultValue={data?.phone} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Email Address</span>
-                      <input arial-label="email" name="email" type="email" defaultValue={data?.email} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Hometown</span>
-                      <input arial-label="hometown" name="hometown" defaultValue={data?.hometown} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Residential Address</span>
-                      <textarea arial-label="address" name="address" defaultValue={data?.address} rows={5} className="focus:ring-0 border focus:border-slate-300 border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md"></textarea>
-                  </label>
-                 <label className="flex flex-col space-y-2">
-                    <span className="text-sm md:text-base text-gray-500 font-medium">Disability</span>
-                    <select arial-label="disabilityId" name="disabilityId" defaultValue={data?.disabilityId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                      <option selected disabled>-- Choose --</option>
-                      { disabilities && disabilities?.map((row:any) =>(
-                        <option key={row.id} value={row.id}>{row.title}</option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Religion</span>
-                      <select arial-label="religionId" name="religionId" defaultValue={data?.religionId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        { religions && religions?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.title}</option>
-                        ))}
-                      </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Region</span>
-                      <select arial-label="regionId" name="regionId" defaultValue={data?.regionId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        { regions && regions?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.title}</option>
-                        ))}
-                      </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Country of Citizenship</span>
-                      <select arial-label="countryId" name="countryId" defaultValue={data?.countryId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        { countries && countries?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.longName}</option>
-                        ))}
-                      </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Date of Admission</span>
-                      <input arial-label="entryDate" name="entryDate"type="date" defaultValue={moment(data?.entryDate).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-               </div>
-             </div>
-
-             <div className="p-3 md:py-6 md:pb-10 md:px-6 w-full border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
-               {/* <h1 className="py-0.5 px-4 w-fit text-base font-semibold rounded-md bg-blue-950/60 text-white tracking-widest uppercase -skew-x-6">SECURE PORTAL</h1> */}
-               <h1 className="py-0.5 px-2 md:px-4 w-fit text-xs md:text-base font-semibold rounded-md bg-primary-dark/60 text-white tracking-widest uppercase -skew-x-6">Emergency Information</h1>
-               <div className="md:pl-6 space-y-4">
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Guardian Name</span>
-                      <input arial-label="guardianName" name="guardianName" defaultValue={data?.guardianName} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Guardian Phone</span>
-                      <input arial-label="guardianPhone" name="guardianPhone" defaultValue={data?.guardianPhone} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Ghana Card Number</span>
-                      <input arial-label="ghcardNo" name="ghcardNo" defaultValue={data?.ghcardNo} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-               </div>  
-                  
-               
-               <h1 className="py-0.5 px-2 md:px-4 w-fit text-xs md:text-base font-semibold rounded-md bg-primary-dark/60 text-white tracking-widest uppercase -skew-x-6">Academic Information</h1>
-               <div className="md:pl-6 space-y-4">
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Student Number</span>
-                      <input arial-label="id" name="id" defaultValue={data?.id} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Index Number</span>
-                      <input arial-label="indexno" name="indexno" defaultValue={data?.indexno} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Programme</span>
-                      <select arial-label="programId" name="programId" defaultValue={data?.programId} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        { programs && programs?.map((row:any) => {
-                          const category = row.category == 'CP' ? 'CERTIFICATE' : row.category == 'DP' ? 'DIPLOMA': 'DEGREE';
-                          return (<option key={row.id} value={row.id}>{row.longName} {category ? `( ${category} )`: ''}</option>
-                        )})}
-                      </select>
-                  </label>
-                  {/* <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Major</span>
-                      <select arial-label="majorId" name="majorId" defaultValue={data?.majorId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                      </select>
-                  </label> */}
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Program Level</span>
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Current Level & Semester</span>
                       <select arial-label="semesterNum" name="semesterNum" defaultValue={Number(data?.semesterNum)} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value={1}>LEVEL 100, SEMESTER 1</option>
@@ -213,67 +80,38 @@ function PgAISDefermentForm({}: Props) {
                         <option value={4}>LEVEL 200, SEMESTER 2</option>
                         <option value={5}>LEVEL 300, SEMESTER 1</option>
                         <option value={6}>LEVEL 300, SEMESTER 2</option>
-                        {/* <option value={7}>LEVEL 400, SEMESTER 1</option>
-                        <option value={8}>LEVEL 400, SEMESTER 2</option> */}
+                        <option value={7}>LEVEL 400, SEMESTER 1</option>
+                        <option value={8}>LEVEL 400, SEMESTER 2</option>
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Residential Status</span>
-                      <select arial-label="residentialStatus" name="residentialStatus" defaultValue={data?.residentialStatus} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Duration of Deferment</span>
+                      <select arial-label="durationInYears" name="durationInYears" defaultValue={data?.durationInYears} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option value="RESIDENTIAL">RESIDENTIAL</option>
-                        <option value="NON_RESIDENTIAL">NON-RESIDENTIAL</option>
+                        <option value="1">One (1) Year</option>
+                        <option value="2">Two (2) Year</option>
                       </select>
                   </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Date of Admission</span>
-                      <input arial-label="entryDate" name="entryDate" type="date" defaultValue={data?.entryDate && moment(data?.entryDate).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Institutional Email Address</span>
-                      <input arial-label="hometown" name="hometown" defaultValue={data?.hometown} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Deferred Status</span>
-                      <select arial-label="deferStatus" name="deferStatus" defaultValue={data?.deferStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="0">NOT DEFFERED</option>
-                        <option value="1">DEFFERED</option>
-                      </select>
-                  </label>
+                 
+               </div>
+             </div>
 
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Completed Status</span>
-                      <select arial-label="completeStatus" name="completeStatus" defaultValue={data?.completeStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+             <div className="p-3 md:py-6 md:pb-10 md:px-6 w-full border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
+               {/* <h1 className="py-0.5 px-4 w-fit text-base font-semibold rounded-md bg-blue-950/60 text-white tracking-widest uppercase -skew-x-6">SECURE PORTAL</h1> */}
+               <div className="md:pl-6 space-y-4">
+                  {/* <label className="flex flex-col space-y-2">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Status of Deferment</span>
+                      <select arial-label="status" name="status" defaultValue={data?.status} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option value="0">NOT COMPLETED</option>
-                        <option value="1">COMPLETED</option>
+                        <option value="1">One (1) Year</option>
+                        <option value="2">Two (2) Year</option>
                       </select>
-                  </label>
+                  </label> */}
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Completed Mode</span>
-                      <select arial-label="completeType" name="completeType" defaultValue={data?.completeType} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="GRADUATION">GRADUATION</option>
-                        <option value="RASTICATED">RASTICATED</option>
-                        <option value="FORFEITED">FORFEITED</option>
-                        <option value="DISMISSED">RASTICATED</option>
-                        <option value="DEAD">DEAD</option>
-                      </select>
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Deferment Reason</span>
+                      <textarea arial-label="reason" name="reason" rows={10} defaultValue={data?.reason} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Graduated Status</span>
-                      <select arial-label="graduateStatus" name="graduateStatus" defaultValue={data?.graduateStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="0">NOT GRADUATED</option>
-                        <option value="1">GRADUATED</option>
-                      </select>
-                  </label>
-                  <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Certificate Number</span>
-                      <input arial-label="graduateCertNo" name="graduateCertNo" defaultValue={data?.graduateCertNo} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
-                  
+                 
                   <div className="flex items-center">
                     {/* <input type="hidden" name="studentId" defaultValue={data?.id} /> */}
                     <button className="mr-4 py-1 px-4 w-4/5 rounded-md bg-primary/70 text-white font-semibold" type="submit">SAVE</button>

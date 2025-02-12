@@ -23,6 +23,8 @@ export default {
       }
     },
     fontFamily: {
+      'serif': [...defaultTheme.fontFamily.serif],
+      'sans': [...defaultTheme.fontFamily.sans],
       'poppins': ["'Poppins'", 'sans-serif'],
       'roboto': ["'Roboto'", 'sans-serif'],
       'noto': ["'Noto Sans'", 'sans-serif'],

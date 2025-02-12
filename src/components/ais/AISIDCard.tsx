@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useRef } from 'react';
 import { HiUserAdd } from "react-icons/hi";
 import { useNavigate } from 'react-router';
-import Logo from '../../assets/img/logo/mlk/logo.png';
+import Logo from '../../assets/img/logo/aucc/logo.png';
 import { useUserStore } from '../../utils/authService';
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -50,28 +50,30 @@ function AISIDCard({ data }: Props) {
                 <div>
                     <div className="px-2 py-1 flex items-center">
                         <img src={Logo} className="w-[60px] h-[60px]" />
-                        <div className="flex-1 flex flex-col -space-y-1 items-center font-roboto">
+                        <div className="flex-1 flex flex-col space-y-1 items-center font-roboto">
+                          <div className="-space-y-1">
                             <h1 className="m-0 text-black text-xl font-bold font-roboto tracking-wider">AFRICAN UNIVERSITY</h1>
-                            <h2 className="m-0 text-black text-[0.8rem] font-medium font-roboto tracking-widest">COLLEGE OF COMMUNICATIONS</h2>
-                            <h2 className="m-0 text-black text-[0.65rem] font-medium tracking-widest">( AUCC )</h2>
+                            <h2 className="m-0 text-black text-[0.55rem] font-bold font-roboto tracking-widest">COLLEGE OF COMMUNICATIONS AND BUSINESS</h2>
+                          </div>
+                          <h2 className="print:m-0 m-0 text-black text-[0.65rem] font-medium tracking-widest">( AUCB )</h2>
                         </div>
                     </div>
-                    <div className="mb-10 w-full border-b-4 border-[#b76118] flex">
+                    <div className="mb-10 w-full border-[#b76118] flex">
                         <div className="p-1 w-1/3 h-[7.8rem] bg-[#b76118]">
-                            <div className="w-24 h-24 flex items-center bg-white overflow-hidden">
-                              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}`} loading="eager"  className="w-20 h-20 object-fit" />
+                            <div className="w-24 h-24 flex justify-center items-center bg-white overflow-hidden rounded">
+                              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}`} loading="eager"  className="w-20 h-20 object-cover rounded" />
                             </div>
                             <div className="px-2 py-1 text-[0.6rem] text-[#f1f2f3] bg-gray-700 font-semibold text-center">{ [2].includes(data.stype) ? 'POSTGRAD':'UNDERGRAD' }</div>
                         </div>
 
                         <div className="w-full flex flex-col bg-white font-roboto">
-                            <div className="w-full font-bold border-b-2 border-b-[#b76118] border-t-2 border-t-[#b76118] bg-[#333] text-[0.65rem] text-white flex items-center justify-center">
-                              <span className="bg-black px-2 py-0.5">STUDENT IDENTIFICATION CARD</span>
+                            <div className="w-full font-bold border-b-2  bg-[#333] text-[0.65rem] text-white flex items-center justify-center">
+                              <span className="print:px-2 -print:py-2 px-2 py-0.5">STUDENT IDENTIFICATION CARD</span>
                             </div>
-                            <div className="px-2 w-full flex flex-col space-y-0 text-black text-[0.6rem] font-roboto">
-                                <div className="-space-y-2.5">
-                                  <div className="m-2 font-semibold tracking-wide">{(data?.fname+' '+(data?.mname && data?.mname+' ')+data?.lname).toUpperCase()}</div>
-                                  <div className="m-2 font-semibold tracking-wide text-[0.55rem] text-gray-600">{ data?.program?.longName?.toUpperCase() }</div>
+                            <div className="px-2 w-full flex flex-col -space-y-0.5 text-black text-[0.6rem] font-roboto">
+                                <div className="-space-y-1.5">
+                                  <div className="m-2 font-semibold tracking-wide">{(data?.fname+' '+(data?.mname ? data?.mname+' ':'')+data?.lname).toUpperCase()}</div>
+                                  <div className="m-2 font-semibold tracking-wide text-[0.5rem] text-gray-600">{ data?.program?.longName?.toUpperCase() }</div>
                                 </div>
                                 <div className="flex justify-between text-[0.55rem]">
                                   <div className="m-2 font-semibold flex flex-col"><span className="font-semibold text-[#b76118] text-[0.5rem]">INDEX NO </span><span>{ data && data?.indexno }</span></div>

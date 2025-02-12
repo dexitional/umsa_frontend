@@ -29,7 +29,7 @@ function PgAISStudents({}: Props) {
          { view == 'card' && (
             <div className="grid md:grid-cols-3 gap-3 md:gap-6">
               { data && data?.data?.map((row:any) => (<StudentCardItem key={row.id} data={row} /> ))}
-              { !data?.data && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
+              { !data?.data?.length && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
             </div>
           )}
 

@@ -90,8 +90,8 @@ function PgAISCalendarForm({}: Props) {
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Calendar Stream</span>
-                      <select arial-label="tag" name="tag" defaultValue={data?.tag} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Calendar Stream {data?.tag}</span>
+                      <select arial-label="tag" name="tag" defaultValue={data?.tag?.toUpperCase()} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value="MAIN">MAIN STREAM</option>
                         <option value="SUB">SUB STREAM</option>

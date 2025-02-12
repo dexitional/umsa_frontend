@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/ais/PageTitle'
-import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
-import ProgramListView from '../../components/ais/ProgramListView'
+import PageTitle from '../../components/ais/PageTitle'
 import ProgramCardItem from '../../components/ais/ProgramCardItem'
+import ProgramListView from '../../components/ais/ProgramListView'
+import Service from '../../utils/aisService'
 type Props = {}
 
 export async function action({ params }) {
@@ -29,13 +29,13 @@ function PgAISPrograms({}: Props) {
          { view == 'card' && (
             <div className="grid md:grid-cols-3 gap-3 md:gap-6">
               { data && data?.map((row:any) => (<ProgramCardItem key={row.id} data={row} /> ))}
-              { !data && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
+              { !data?.data?.length && (<div className="p-3 border rounded-xl"><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1></div>)}
             </div>
           )}
 
-         { view == 'list' && (
+         {/* { view == 'list' && (
            <ProgramListView data={data} />
-         )}
+         )} */}
          
       </div>
     </div>

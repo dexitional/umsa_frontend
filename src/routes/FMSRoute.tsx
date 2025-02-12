@@ -1,32 +1,27 @@
-import React from 'react'
-import { useUserStore } from '../utils/authService';
-import PgAMSVouchers, {  action as amsVoucherRecover } from '../pages/ams/PgAMSVouchers';
-import PgAMSShortlists, { loader as shortlistsLoader, action as amsShortlistDestroy } from '../pages/ams/PgAMSShortlists';
-import PgAMSShortlist, { loader as shortlistLoader } from '../pages/ams/PgAMSShortlist';
-import PgAMSShortlistForm, { loader as amsShortlistFormLoader, action as amsShortlistFormAction } from '../pages/ams/PgAMSShortlistForm';
-import PgAMSMatriculants, { loader as matriculantsLoader, action as amsMatriculantDestroy } from '../pages/ams/PgAMSMatriculants';
-import PgAMSMatriculant, { loader as amsMatriculantLoader } from '../pages/ams/PgAMSMatriculant';
+import React from 'react';
 import FMSLayout from '../components/fms/FMSLayout';
+import { action as amsVoucherRecover } from '../pages/ams/PgAMSVouchers';
 import PgFMSAccounts, { loader as accountsLoader } from '../pages/fms/PgFMSAccounts';
-import PgFMSAccount from '../pages/fms/PgFMSAccount';
-import PgFMSStudentFinance, { loader as accountLoader } from '../pages/fms/PgFMSStudentFinance';
-import PgFMSDebts, { loader as debtsLoader } from '../pages/fms/PgFMSDebts';
-import PgFMSPayments, { loader as paymentsLoader } from '../pages/fms/PgFMSPayments';
-import PgFMSPaymentForm, { loader as paymentFormLoader, action as paymentFormAction} from '../pages/fms/PgFMSPaymentForm';
-import PgFMSTransacts, { loader as transactsLoader } from '../pages/fms/PgFMSTransacts';
-import PgFMSBills, { loader as billsLoader, action as billsDestroy } from '../pages/fms/PgFMSBills';
-import PgFMSBillForm, { loader as billFormLoader, action as billFormAction } from '../pages/fms/PgFMSBillForm';
-import PgFMSBill, { loader as billLoader, action as billAction } from '../pages/fms/PgFMSBill';
+import PgFMSBill, { loader as billLoader } from '../pages/fms/PgFMSBill';
+import PgFMSBillAccount, { loader as fmsActionLoader } from '../pages/fms/PgFMSBillAccount';
+import PgFMSBillActivity, { loader as fmsActivityLoader } from '../pages/fms/PgFMSBillActivity';
+import PgFMSBillForm, { action as billFormAction, loader as billFormLoader } from '../pages/fms/PgFMSBillForm';
 import PgFMSBillReceiver, { loader as fmsReceiverLoader } from '../pages/fms/PgFMSBillReceiver';
-import PgFMSBillActivity, { loader as  fmsActivityLoader } from '../pages/fms/PgFMSBillActivity';
-import PgFMSBillAccount, { loader as  fmsActionLoader } from '../pages/fms/PgFMSBillAccount';
-import PgFMSCharges, { loader as chargesLoader, action as chargeDestroy } from '../pages/fms/PgFMSCharges';
-import PgFMSChargeForm, { loader as chargeFormLoader, action as chargeFormAction } from '../pages/fms/PgFMSChargeForm';
+import PgFMSBills, { action as billsDestroy, loader as billsLoader } from '../pages/fms/PgFMSBills';
+import PgFMSChargeForm, { action as chargeFormAction, loader as chargeFormLoader } from '../pages/fms/PgFMSChargeForm';
+import PgFMSCharges, { action as chargeDestroy, loader as chargesLoader } from '../pages/fms/PgFMSCharges';
+import PgFMSDebts, { loader as debtsLoader } from '../pages/fms/PgFMSDebts';
+import PgFMSPaymentForm, { action as paymentFormAction, loader as paymentFormLoader } from '../pages/fms/PgFMSPaymentForm';
+import PgFMSPayments, { loader as paymentsLoader } from '../pages/fms/PgFMSPayments';
+import PgFMSScostForm, { action as serviceFormAction, loader as serviceFormLoader } from '../pages/fms/PgFMSScostForm';
+import PgFMSScosts, { action as serviceDestroy, loader as servicesLoader } from '../pages/fms/PgFMSScosts';
+import PgFMSStudentFinance, { loader as accountLoader } from '../pages/fms/PgFMSStudentFinance';
+import PgFMSTransactForm, { action as transactFormAction, loader as transactFormLoader } from '../pages/fms/PgFMSTransactForm';
+import PgFMSTransacts, { loader as transactsLoader } from '../pages/fms/PgFMSTransacts';
+import PgFMSVcostForm, { action as vcostFormAction, loader as vcostFormLoader } from '../pages/fms/PgFMSVcostForm';
+import PgFMSVcosts, { action as vcostDestroy, loader as vcostsLoader } from '../pages/fms/PgFMSVcosts';
 import PgFMSVouchers, { loader as vouchersLoader } from '../pages/fms/PgFMSVouchers';
-import PgFMSScosts, { loader as servicesLoader, action as serviceDestroy } from '../pages/fms/PgFMSScosts';
-import PgFMSScostForm, { loader as serviceFormLoader, action as serviceFormAction } from '../pages/fms/PgFMSScostForm';
-import PgFMSVcosts, { loader as vcostsLoader, action as vcostDestroy } from '../pages/fms/PgFMSVcosts';
-import PgFMSVcostForm, { loader as vcostFormLoader, action as vcostFormAction } from '../pages/fms/PgFMSVcostForm';
+import { useUserStore } from '../utils/authService';
 
 const user = useUserStore.getState().user
 const fmsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'fms')
@@ -149,21 +144,21 @@ const FMSRoute:any =  {
          loader: paymentFormLoader,
          action: paymentFormAction
       },
-      { 
-         path:'payments/:paymentId', 
-         element: <PgAMSShortlist />,
-         loader: shortlistLoader,
-      },
-      { 
-         path:'payments/:paymentId/destroy', 
-         action: amsShortlistDestroy,
-      },
-      { 
-         path:'payments/:paymentId/process', 
-         element: <PgAMSShortlistForm />, 
-         loader: amsShortlistFormLoader,
-         action: amsShortlistFormAction
-      },
+      // { 
+      //    path:'payments/:paymentId', 
+      //    element: <PgAMSShortlist />,
+      //    loader: shortlistLoader,
+      // },
+      // { 
+      //    path:'payments/:paymentId/destroy', 
+      //    action: amsShortlistDestroy,
+      // },
+      // { 
+      //    path:'payments/:paymentId/process', 
+      //    element: <PgAMSShortlistForm />, 
+      //    loader: amsShortlistFormLoader,
+      //    action: amsShortlistFormAction
+      // },
 
        /* Other Payments Module */
        { 
@@ -172,14 +167,20 @@ const FMSRoute:any =  {
          loader: transactsLoader,
       },
       { 
-         path:'transacts/:transactId', 
-         element: <PgAMSMatriculant />,
-         loader: amsMatriculantLoader,
+         path:'transacts/create', 
+         element: <PgFMSTransactForm />,
+         loader: transactFormLoader,
+         action: transactFormAction
       },
-      { 
-         path:'transacts/:transactId/destroy', 
-         action: amsMatriculantDestroy,
-      },
+      // { 
+      //    path:'transacts/:transactId', 
+      //    element: <PgAMSMatriculant />,
+      //    loader: amsMatriculantLoader,
+      // },
+      // { 
+      //    path:'transacts/:transactId/destroy', 
+      //    action: amsMatriculantDestroy,
+      // },
 
       /* Voucher Payments/Sales Module */
       { 

@@ -1,11 +1,16 @@
 import ReactHtml from "html-react-parser"
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useReactToPrint } from 'react-to-print'
-import { helperData } from '../../store/utils/helperData'
-import { getLevelSemester } from '../../store/utils/util'
-import '../admission/FormPrint.css'
+import './FormPrint.css'
 import TranscriptHeader from './TranscriptHeader'
+import { getPoint, isCreditPassed } from "../../utils/util"
+import Service from '../../utils/aisService'
+
+// Loader for Single Project
+export async function loader({ params }){
+  const data = await Service.fetchTranswift(params.transwiftId)
+  return { data }
+}
 
 const PaperTranscriptView = () => {
     const { sso } = useSelector(state=>state)
@@ -30,11 +35,11 @@ const PaperTranscriptView = () => {
             if(data && data.length > 0){
                 let cct = 0, cgt = 0;
                 data.map((row,i) => {
-                    cgp += helperData.getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
-                    ccs += helperData.isCreditPassed(row.total_score,JSON.parse(row.grade_meta)) ? row.credit : 0;
+                    cgp += getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
+                    ccs += isCreditPassed(row.total_score,JSON.parse(row.grade_meta)) ? row.credit : 0;
                     ccr += row.credit
                     
-                    cgt += helperData.getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
+                    cgt += getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
                     //ccp += helperData.getPoint(row.total_score,JSON.parse(row.grade_meta)) * row.credit
                     cct += row.credit
                     if( i == 0 ) setUser({ indexno: row.indexno, refno: row.refno, name: row.name, fname:row.fname, mname: row.mname, lname: row.lname, program_name: row.program_name, major_name: row.major_name,gender: row.gender, stype:row.stype, template: row.template  })
@@ -82,7 +87,8 @@ const PaperTranscriptView = () => {
                  const sem = getLevelSemester(data[0].session_sem)
                 return (
                 <div key={i}>
-                { i%2 == 0 && <div style={{ pageBreakBefore: 'left', margin: i == 0 ? '330pt auto 70px':'350pt auto 70px'}}><TranscriptHeader user={user} fgpa={fgpa} cgpa={cgpa} /></div>}
+                { i%2 == 0 && <div style={{ pageBreakBefore: 'left', margin: i == 0 ? '330pt auto 70px':'350pt auto 70px'}}><TranscriptHeader user={user} fgpa={fgpa} cgpa={cgpa} />
+                </div>}
                 <div className={ i%2 == 0 && ``} style={{ marginBottom:'20px',marginTop:'10px', fontFamily:'monospace'}}>
                     <h1 className="h1title page-mono p0" style={{ textAlign:'left', textIndent: '3.2rem', margin:'-10px', fontWeight:'bolder' }}>ACADEMIC YEAR: &nbsp;{ data[0].session_year }</h1>
                     <table className="stable2">

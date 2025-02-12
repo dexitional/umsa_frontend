@@ -2,15 +2,14 @@ import React, { useRef } from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 // @ts-ignore
 import moment from 'moment'
-import { FaMoneyCheckDollar } from 'react-icons/fa6'
-import { GoPasskeyFill } from 'react-icons/go'
-import { HiUserAdd } from 'react-icons/hi'
+import { CiWarning } from 'react-icons/ci'
 import { MdNumbers } from 'react-icons/md'
+import { PiNumberCircleOneBold, PiNumberCircleThreeBold, PiNumberCircleTwoBold } from 'react-icons/pi'
 import { RiCommunityFill } from 'react-icons/ri'
 import { TbEdit } from 'react-icons/tb'
 import { redirect, useLoaderData, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import Service from '../../utils/aisService'
 
 type Props = {}
@@ -105,25 +104,25 @@ function PgAISCalendar({}: Props) {
          </section>
          <section className="w-full">
             <div className="p-3 md:p-6 grid md:grid-cols-3 gap-2 md:gap-4 border bg-white rounded-xl">
-              {/* Stage Account */}
-              <button onClick={!data?.stageSheet ? stageSheet : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.stageSheet ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
-                <HiUserAdd className={`${data?.stageSheet ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-                <span className={`font-semibold text-sm md:text-base ${data?.stageSheet ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.stageSheet ? 'Scoresheets Generated':'Setup Scoresheets'}</span>
+              {/* Session Activation */}
+              <button onClick={!data?.default ? activateSession : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.default ? 'bg-green-500/5 border-green-500/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
+                <PiNumberCircleOneBold className={`${data?.default ? 'text-green-900/60 border-green-900/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
+                <span className={`font-semibold text-sm md:text-base ${data?.default ? 'text-green-950/50':'text-primary-accent/70'} font-noto`}>{data?.default ? 'Session Activated':'Activate Session'}</span>
               </button>
-              {/* Reset Account */}
-              <button onClick={!data?.progressStudent ? stageProgression : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.progressStudent ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
-                <GoPasskeyFill className={`${data?.progressStudent ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-                <span className={`font-semibold text-sm md:text-base ${data?.progressStudent ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.progressStudent ? 'Students Progressed':'Setup Progressions'}</span>
+              {/* Level Progression  */}
+              <button onClick={!data?.progressStudent ? stageProgression : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.progressStudent ? 'bg-green-500/5 border-green-500/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
+                <PiNumberCircleTwoBold className={`${data?.progressStudent ? 'text-green-900/60 border-green-900/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
+                <span className={`font-semibold text-sm md:text-base ${data?.progressStudent ? 'text-green-950/50':'text-primary-accent/70'} font-noto`}>{data?.progressStudent ? 'Levels Progressed':'Progress Levels'}</span>
               </button>
-              {/* Index Number */}
-              <button onClick={!data?.default ? activateSession : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.default ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
-                <GoPasskeyFill className={`${data?.default ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-                <span className={`font-semibold text-sm md:text-base ${data?.default ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.default ? 'Session Activated':'Set as Default'}</span>
+              {/* Scoresheet Generation */}
+              <button onClick={!data?.stageSheet ? stageSheet : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.stageSheet ? 'bg-green-500/5 border-green-500/30 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
+                <PiNumberCircleThreeBold className={`${data?.stageSheet ? 'text-green-900/60 border-green-900/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
+                <span className={`font-semibold text-sm md:text-base ${data?.stageSheet ? 'text-green-950/50':'text-primary-accent/70'} font-noto`}>{data?.stageSheet ? 'Scoresheets Generated':'Setup Scoresheets'}</span>
               </button>
               {/* Pardon Registration */}
-              <button onClick={!data?.assignLateSheet ? activateEntry : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.assignLateSheet ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
-                <FaMoneyCheckDollar className={`${data?.assignLateSheet ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
-                <span className={`font-semibold text-sm md:text-base ${data?.assignLateSheet ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.assignLateSheet ? 'Late Entries Activated':'Activate Late Entries'}</span>
+              <button onClick={!data?.assignLateSheet ? activateEntry : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.assignLateSheet ? 'bg-amber-500/5 border-amber-500/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20'} border shadow`}>
+                <CiWarning className={`${data?.assignLateSheet ? 'text-amber-900/60 border-amber-600/30':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
+                <span className={`font-semibold text-sm md:text-base ${data?.assignLateSheet ? 'text-amber-900/50':'text-primary-accent/70'} font-noto`}>{data?.assignLateSheet ? 'Late Entries Activated':'Activate Late Entries'}</span>
               </button>
             </div>
           </section>

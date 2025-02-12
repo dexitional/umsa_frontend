@@ -4,7 +4,7 @@ import { FaLevelUpAlt } from 'react-icons/fa'
 import moment from 'moment'
 import { CgCalendarDates } from 'react-icons/cg'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
@@ -40,12 +40,14 @@ function ProgressionCardItem({ data }: Props) {
        <div className="flex justify-between">
           <div className="flex items-center space-x-1">
                 <FaLevelUpAlt className="h-4 w-5 text-primary/70" />
-                <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">YEAR: {data?.semesterNum/2}</span>
+                <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">{Math.ceil(data?.student?.semesterNum/2) == 0 ? "COMPLETED": "YEAR: "+Math.ceil(data?.student?.semesterNum/2)}</span>
             </div>
+            { Math.ceil(data?.student?.semesterNum/2) > 0 ?
             <div className="flex items-center space-x-1">
                 {/* <FaLevelUpAlt className="h-4 w-5 text-primary/70" /> */}
                 <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">SEMESTER:  &nbsp;{data?.semesterNum%2 == 0 ? 2: 1}</span>
-            </div>
+            </div> : null 
+            }
        </div>
         
         
@@ -53,14 +55,14 @@ function ProgressionCardItem({ data }: Props) {
     <div className="flex flex-col space-y-1">
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">
           <div className="flex group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`bg-green-950/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>LEVEL</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.student?.semesterNum/2) * 100}</span>
+              <span className={`bg-green-950/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>{Math.ceil(data?.student?.semesterNum/2) == 0 ? "COMPLETED": "LEVEL"}</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.student?.semesterNum/2) == 0 ? "COMPLETED": Math.ceil(data?.student?.semesterNum/2) * 100}</span>
           </div>
         </div>
         <div className="px-3 py-2 opacity-80 md:opacity-100 hidden md:flex rounded-md border bg-white items-center space-x-2 group">
          <div className="hidden md:flex items-center justify-center space-x-3 text-center">
-              <span className={`${!data?.completeStatus ? 'bg-primary-dark/60':'bg-primary-accent/60'} py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>LEVEL</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{(Math.ceil(data?.student?.semesterNum/2) * 100)}</span>
+              <span className={`bg-primary-dark/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>{Math.ceil(data?.student?.semesterNum/2) == 0 ? "COMPLETED": "LEVEL"}</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.student?.semesterNum/2) == 0 ? "": Math.ceil(data?.student?.semesterNum/2) * 100}</span>
           </div>
         </div>
     </div>

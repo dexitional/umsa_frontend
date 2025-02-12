@@ -1,10 +1,9 @@
-import React,{useState,useEffect,useRef} from 'react'
-import '../admission/FormPrint.css'
-import Logo from '../../assets/img/logo.png'
-import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { fetchSemesterSlip } from '../../store/utils/ssoApi'
-import { useReactToPrint } from 'react-to-print';
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useReactToPrint } from 'react-to-print'
+import Logo from '../../assets/img/logo.png'
+import './admission/FormPrint.css'
 
 const PaperTranscript = () => {
     const { sso } = useSelector(state=>state)

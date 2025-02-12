@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
@@ -33,7 +33,7 @@ function AISSheetStudentCard({ title,data }: Props) {
                 <span>{row?.student?.id}</span>
                </span>
               <span className="col-span-2 font-bold self-center">{row.indexno}</span>
-              <span className="col-span-3 font-medium self-center">{(row.student?.fname+' '+(row.student?.mname && row.student?.mname+' ')+row.student?.lname).toUpperCase()} </span>
+              <span className="col-span-3 font-medium self-center">{(row.student?.fname+' '+(row.student?.mname ? row.student?.mname+' ':'')+row.student?.lname).toUpperCase()} </span>
               <span className=' self-center'>{row.student?.gender == 'M' ? 'MALE':'FEMALE'}</span>
               <span className={`${row.student?.deferStatus ? 'text-primary-accent/80  self-center':' self-center'}`}>{row.student?.deferStatus ? 'DEFERRED':'ACTIVE'}</span>
             </div>

@@ -7,7 +7,7 @@ import { GiMoneyStack } from 'react-icons/gi'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/img/logo/mlk/logo.png'
+import Logo from '../../assets/img/logo/aucc/logo.png'
 import Service from '../../utils/fmsService'
 
 const { REACT_APP_API_URL } = import.meta.env;
@@ -72,7 +72,7 @@ function AccountCardItem({ data }: Props) {
        
         <div className="mt-10 flex items-center space-x-3">
             <GiMoneyStack className="h-6 w-6 text-primary/70" />
-            <div className={`${data?.accountNet > 0 ? 'bg-red-50':'bg-green-50' } px-2 py-0.5  rounded border text-sm font-bold text-gray-500`}>{ data?.accountNet > 0 ? 'DEBT:':'BAL:' }  {data.entryGroup == 'INT' ? 'USD':'GHC'} {Math.abs(data?.accountNet)}</div>
+            <div className={`${data?.accountNet > 0 ? 'bg-red-50':'bg-green-50' } px-2 py-0.5  rounded border text-sm font-bold text-gray-500`}>{ data?.accountNet > 0 ? 'DEBT:':'BAL:' }  {data.entryGroup == 'INT' ? 'USD':'GH₵'} {Math.abs(data?.accountNet)}</div>
             <Link to={`${encodeURIComponent(data?.id)}`} className="py-0.5 px-2 rounded flex items-center space-x-1.5 bg-primary/60">
               <FaMoneyBillTransfer className="h-4 w-4 text-amber-200"/>
               {/* <span className="text-sm text-white font-semibold">View</span> */}
@@ -93,10 +93,10 @@ function AccountCardItem({ data }: Props) {
             <span className="text-sm text-white font-semibold">RETIRE</span>
           </button>
           
-          { !data.indexno &&
+          { !data?.indexno ?
           <button  onClick={getIndex} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             <span className="text-sm text-white font-semibold">GET ID</span>
-          </button>
+          </button>: null
           }
 
           <button onClick={fineLate} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">

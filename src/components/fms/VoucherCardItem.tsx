@@ -51,7 +51,7 @@ function VoucherCardItem({ data }: Props) {
           </Form> */}
           <div className="flex items-center justify-center space-x-3 text-center">
               <span className={`bg-green-800/70 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>AMOUNT</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency } { data?.amount }</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{ data?.currency == 'GHC' ? 'GH₵': data?.currency } { data?.amount }</span>
           </div>
         </div>
     </div>

@@ -60,15 +60,179 @@ export const getTargetGroup = (group_code) => {
   return yr
 }
 
+export const getLevelSemester = (semester) => {
+  var yr:any = []
+  switch(semester){
+    case 1:  yr = ['100','First']; break;
+    case 2:  yr = ['100','Second']; break;
+    case 3:  yr = ['200','First']; break;
+    case 4:  yr = ['200','Second']; break;
+    case 5:  yr = ['300','First']; break;
+    case 6:  yr = ['300','Second']; break;
+    case 7:  yr = ['400','First']; break;
+    case 8:  yr = ['400','Second']; break;
+  } return yr
+}
+
+export const getGrade  = (num,grades) => {
+  if(num == null) return 'I'
+  num = parseFloat(num)
+  const vs = grades && grades.find(row => row.min <= num && num <= row.max)
+  return (vs && vs.grade) || 'I';
+}
+
+export const getPoint = (num,grades) => {
+  num = parseFloat(num)
+  const vs = grades && grades.find(row => row.min <= num && num <= row.max)
+  return (vs && parseFloat(vs.gradepoint)) || 0;
+}
+
+export const isCreditPassed = (num,grades,cutoff = 'D') => {
+  num = parseFloat(num)
+  const vs = grades && grades.find(row => row.grade == cutoff)
+  if(vs){
+    if(num > vs.min){
+      return true;
+    } else {
+      return false;
+    }
+  } return false;
+}
+
+export const average = (indexno,session_id,results) => {
+  // credit, gradepoint, session_id 
+  let pa:any = { gpa:0, cgpa:0 }
+  if(results?.length > 0){
+     // GPA
+     //@ts-ignore
+     const gp_sum:any = results?.filter(r => r.session_id == session_id)?.reduce(((acc,r) => {
+         const gp = getPoint(r.total_score,r.grade_meta) * r.credit;
+         return gp+acc;
+     }, 0))
+     //@ts-ignore
+     const gp_credit = results?.filter(r => r.session_id == session_id)?.reduce(((acc,r) => {r.credit+acc},0))
+     pa.gpa = gp_sum/gp_credit;  
+    
+     // CGPA
+     //@ts-ignore
+     const cp_sum = results?.filter(r => r.session_id <= session_id)?.reduce(((acc,r) => {
+         const gp = getPoint(r.total_score,r.grade_meta) * r.credit;
+         return gp+acc;
+     }, 0))
+     //@ts-ignore
+     const cp_credit = results?.filter(r => r.session_id <= session_id).reduce(((acc,r) => r.credit+acc,0));
+     pa.cgpa = cp_sum/cp_credit;
+  }
+}
+
 export const defaultLetterTemplate = `
-    <p><strong><u>ADMISSION TO THE ::program_name PROGRAMME (::admission_title)</u></strong></p><p><br></p><p>Congratulations!</p><p><br></p><p>I am pleased to inform you that, upon review of your application and, on the basis of your ::cert_condition, you have been offered admission to Level ::start_level of the <strong>::program_name</strong> programme for the ::session_year Academic year.</p><p><strong>Holders of Diploma/HND are to submit original copies of their certificate for verification, after which they may be exempted from the university of Ghana required course (offered at AUCC) for one semester. All other applicants will have to pass those required courses to complete their admission.</strong></p><p><br></p><p>Your field of specialisation will be confirmed at the end of Level 200 following an orientation session where you will learn about all the available specialisations and the possible career opportunities available in each specialisation.</p><p><br></p><p>The programme fee per semester is <strong>::fee_amount.</strong> However, with a discount of 15%, you are to pay <strong>::discount_amount</strong>. Please note that, the discount is for one academic year only. The fee must be paid through Cal Bank in the name of the <strong>African University College of Communications (AUCC) into account number ::bank_account at any branch of Cal Bank.</strong> After payment, the pay-in-slip must first be presented to the Accounts Officer at AUCC who will issue a receipt, a copy of which must be presented to the appropriate Secretariat of AUCC towards registration.</p><p><br></p><p><strong>Please note that registration will be on ::register_start to ::register_end, and lectures will begin on ::lecture_start. Orientation is on ::orient_start.</strong></p><p><br></p><p>Should you decide to withdraw from the programme within three weeks of registration, the University shall refund your fees to you less an administrative fee of 30%. No refunds will be made for withdrawals after the third week of registration.</p><p>All students are required to obey the rules and regulations of AUCC. A copy of the Student Handbook will be provided to you. Kindly note that AUCCs <strong>Weekend School is held on Fridays and Saturdays</strong>, and Management reserves the right to change sessions and courses when class sizes are not economically viable.</p><p><br></p><p>All correspondence in relation to your admission should be addressed to the Registrar and should include your reference number as above.</p><p>Congratulations once again. We look forward to personally welcoming you to our campus!</p><p><br></p><p>Yours faithfully,</p><p>::signature</p><p>::signatory</p>
+    <p><strong><u>ADMISSION TO THE ::program_name PROGRAMME (::admission_title)</u></strong></p><p><br></p><p>Congratulations!</p><p><br></p><p>I am pleased to inform you that, upon review of your application and, on the basis of your ::cert_condition, you have been offered admission to Level ::start_level of the <strong>::program_name</strong> programme for the ::session_year Academic year.</p><p><strong>Holders of Diploma/HND are to submit original copies of their certificate for verification, after which they may be exempted from the university of Ghana required course (offered at AUCB) for one semester. All other applicants will have to pass those required courses to complete their admission.</strong></p><p><br></p><p>Your field of specialisation will be confirmed at the end of Level 200 following an orientation session where you will learn about all the available specialisations and the possible career opportunities available in each specialisation.</p><p><br></p><p>The programme fee per semester is <strong>::fee_amount.</strong> However, with a discount of 15%, you are to pay <strong>::discount_amount</strong>. Please note that, the discount is for one academic year only. The fee must be paid through Cal Bank in the name of the <strong>African University of Communications And Business (AUCB) into account number ::bank_account at any branch of Cal Bank.</strong> After payment, the pay-in-slip must first be presented to the Accounts Officer at AUCB who will issue a receipt, a copy of which must be presented to the appropriate Secretariat of AUCB towards registration.</p><p><br></p><p><strong>Please note that registration will be on ::register_start to ::register_end, and lectures will begin on ::lecture_start. Orientation is on ::orient_start.</strong></p><p><br></p><p>Should you decide to withdraw from the programme within three weeks of registration, the University shall refund your fees to you less an administrative fee of 30%. No refunds will be made for withdrawals after the third week of registration.</p><p>All students are required to obey the rules and regulations of AUCB. A copy of the Student Handbook will be provided to you. Kindly note that AUCBs <strong>Weekend School is held on Fridays and Saturdays</strong>, and Management reserves the right to change sessions and courses when class sizes are not economically viable.</p><p><br></p><p>All correspondence in relation to your admission should be addressed to the Registrar and should include your reference number as above.</p><p>Congratulations once again. We look forward to personally welcoming you to our campus!</p><p><br></p><p>Yours faithfully,</p><p>::signature</p><p>::signatory</p>
 `;
 
 
   export const loadPlacerData = (dt,data) => {
-    console.log(data)
+    console.log(data);
     dt = dt.replace("::cert_condition", data?.admission?.sortedApplicant[0]?.applyType?.letterCondition);
     dt = dt.replace("::start_level", Math.ceil(data?.semesterNum % 2) * 100);
+    dt = dt.replace(/::program_name/g, data?.program?.longName);
+    dt = dt.replace(/::session_year/g, data?.session?.year);
+    dt = dt.replace("::signatory", data?.category?.admissionLetter[0]?.signatory);
+    dt = dt.replace(/::bank_account/g, data?.bill?.banckacc?.bankAccount || 'of the institution');
+    dt = dt.replace(/::admission_title/g, data?.admission?.title);
+    dt = dt.replace(/::lecture_start/g, moment(data?.session?.lectureStart).format("dddd, Do MMMM, YYYY"));
+    dt = dt.replace(/::register_start/g, moment(data?.session?.registerStart).format("dddd, Do MMMM,YYYY"));
+    dt = dt.replace(/::register_end/g, moment(data?.session?.registerEnd).format("dddd, Do MMMM, YYYY"));
+    dt = dt.replace(/::orient_start/g, moment(data?.session?.orientStart).format("dddd, Do MMMM, YYYY"));
+    const toWords = new ToWords(
+      data?.bill?.currency == "USD"
+        ? {
+            localeCode: "en-US",
+            converterOptions: {
+              currency: true,
+              ignoreDecimal: false,
+              ignoreZeroCurrency: false,
+              doNotAddOnly: true,
+            },
+          }
+        : {
+            localeCode: "en-GH",
+            converterOptions: {
+              currency: true,
+              ignoreDecimal: false,
+              ignoreZeroCurrency: false,
+              doNotAddOnly: true,
+            },
+          }
+    );
+
+    dt = dt.replace("::signature",`<img src="${(data?.category?.admissionLetter[0]?.signature)}" width='150px' height='40px' />`);
+    dt = dt.replace(/::fee_amount/g,`${toWords.convert((data && data?.bill?.amount) || 0)} ${data?.bill?.currency == "USD" ? " ( $" + (!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) + " )" : " ( GH¢" + (!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) + " )"}` );
+    dt = dt.replace(/::discount_amount/g, `${toWords.convert(((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) || 0)} ${data?.bill?.currency == "USD" ? " ( $" + ((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) + " )" : " ( GH¢" + ((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) + " )"}`);
+    
+    return dt;
+  };
+
+  export const loadAcademicPlacerData = (dt,data) => {
+    console.log(data);
+    //::::gender_title
+    dt = dt.replace("::start_level", Math.ceil(data?.semesterNum % 2) * 100);
+    dt = dt.replace(/::title/g, data?.student?.title ? data?.student?.title?.label+'.': '');
+    dt = dt.replace(/::namelg/g, `<span className="uppercase">${data?.student?.fname?.toUpperCase()} ${data?.student?.mname ? data?.student?.mname?.toUpperCase()+' ':''}${data?.student?.lname?.toUpperCase()}</span>`);
+    dt = dt.replace(/::name/g, `<span className="capitalize">${data?.student?.fname?.toLowerCase()} ${data?.student?.mname ? data?.student?.mname?.toLowerCase()+' ':''}${data?.student?.lname?.toLowerCase()}</span>`);
+    
+    dt = dt.replace(/::person/g, `${data?.student?.fname} ${data?.student?.mname ? data?.student?.mname+' ':''}${data?.student?.lname}`);
+    dt = dt.replace(/::gender_title/g, data?.student?.gender == 'M'? 'He':'She');
+    dt = dt.replace(/::gender_self/g, data?.student?.gender == 'M'? 'him':'her');
+    dt = dt.replace(/::program_name/g, `<span className="capitalize">${data?.student?.program?.longName?.toLowerCase()}</span>`);
+    dt = dt.replace(/::indexno/g, data?.student?.indexno);
+    dt = dt.replace(/::academic_status/g, data?.student?.completeStatus ? 'an active':'a past');
+    dt = dt.replace(/::level/g, Math.ceil(data?.student?.semesterNum/2)*100);
+    dt = dt.replace(/::admit_year/g, data?.student?.entryDate ? `${moment(data?.student?.entryDate).format('YYYY')}/${moment(data?.student?.entryDate).add(1,'years').format('YYYY')}`:'an');
+    dt = dt.replace(/::complete_year/g, data?.student?.exitDate ? moment(data?.student?.exitDate).format('MMM, YYYY'):' the required year of completion');
+    dt = dt.replace(/::session_year/g, data?.session?.year);
+    dt = dt.replace("::signatory", data?.signatory);
+    dt = dt.replace("::signature", `<img src="${data?.signature}" className="h-28"/>`);
+    // Deferment variables
+    dt = dt.replace(/::defer_letter_date/g, `<span className="capitalize">${moment(data?.deferment?.letterDate).format("MMMM DD, YYYY")?.toLowerCase()}</span>`);
+    dt = dt.replace(/::defer_resume_level/g, data?.deferment?.resumeLevel);
+    dt = dt.replace(/::defer_resume_semester/g, data.deferment?.resumeSemester == 1 ? 'First':'Second');
+    dt = dt.replace(/::defer_resume_year/g, data?.deferment?.resumeYear);
+    dt = dt.replace(/::cc/g, `<div className="flex items-start space-x-10"><h1>CC:</h1><h1>${data?.cc}</h1></div>`);
+    
+    const toWords = new ToWords(
+      data?.bill?.currency == "USD"
+        ? {
+            localeCode: "en-US",
+            converterOptions: {
+              currency: true,
+              ignoreDecimal: false,
+              ignoreZeroCurrency: false,
+              doNotAddOnly: true,
+            },
+          }
+        : {
+            localeCode: "en-GH",
+            converterOptions: {
+              currency: true,
+              ignoreDecimal: false,
+              ignoreZeroCurrency: false,
+              doNotAddOnly: true,
+            },
+          }
+    );
+
+    dt = dt.replace("::signature",`<img src="${(data?.category?.admissionLetter[0]?.signature)}" width='150px' height='40px' />`);
+    dt = dt.replace(/::fee_amount/g,`${toWords.convert((data && data?.bill?.amount) || 0)} ${data?.bill?.currency == "USD" ? " ( $" + (!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) + " )" : " ( GH¢" + (!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) + " )"}` );
+    dt = dt.replace(/::discount_amount/g, `${toWords.convert(((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) || 0)} ${data?.bill?.currency == "USD" ? " ( $" + ((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) + " )" : " ( GH¢" + ((!isNaN(data?.bill?.amount) ? data?.bill?.amount: 0) - (data?.bill?.discount || 0)) + " )"}`);
+    
+    return dt;
+  };
+
+
+  export const loadServicePlacerData = (dt,data) => {
+    console.log(data)
+    dt = dt?.replace("::cert_condition", data?.admission?.sortedApplicant[0]?.applyType?.letterCondition);
+    dt = dt?.replace("::start_level", Math.ceil(data?.semesterNum % 2) * 100);
     dt = dt.replace(/::program_name/g, data?.program?.longName);
     dt = dt.replace(/::session_year/g, data?.session?.year);
     dt = dt.replace("::signatory", data?.category?.admissionLetter[0]?.signatory);

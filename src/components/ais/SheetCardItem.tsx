@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaFolder, FaTrash } from 'react-icons/fa'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { getStudyMode } from '../../utils/util'
 
 type Props = {
@@ -12,11 +12,12 @@ type Props = {
 function SheetCardItem({ data }: Props) {
   return (
     <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.courseId}</h2>
+    <h2 className="text-sm md:text-base font-semibold font-noto text-gray-500 uppercase">{data?.courseId}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
           <div className="flex-1 text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{data?.course?.title?.toUpperCase()}</div>
-          <div className="py-0.5 px-2 w-fit text-sm rounded bg-primary/60 text-white font-bold">L { Math.ceil(data?.semesterNum/2)*100 }</div>
+          {/* <div className="py-0.5 px-2 w-fit text-sm rounded bg-primary/60 text-white font-bold">L { Math.ceil(data?.semesterNum/2)*100 }</div> */}
+          <div className="py-0.5 px-2 w-fit text-sm rounded bg-primary/60 text-white font-bold">YR { Math.ceil(data?.semesterNum/2) }</div>
       </div>
     </div>
     <div className="space-y-1 font-roboto">
@@ -24,25 +25,20 @@ function SheetCardItem({ data }: Props) {
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`text-primary/80 text-xs  font-semibold tracking-wider uppercase`}>{data?.session?.title }</span>
         </div>
-        {data.session?.tag == 'sub' &&
-        <div>
-            <span className="px-2 py-1 bg-green-50 rounded border text-xs font-medium text-gray-500 tracking-wider">{data.session?.tag ? 'MAIN STREAM' :'JANUARY/SUB STREAM'}</span>
-        </div>
+       
+         <div className="px-2 py-1 w-fit bg-amber-50 rounded border text-xs font-semibold text-gray-500 tracking-widest">{data.session?.tag == 'MAIN' ? 'MAIN STREAM' :'JANUARY/SUB STREAM'}</div>
+       
+        <div className="py-1 px-2 bg-green-50 rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider">{data.program?.longName}</div>
+       
+        { data.assignee &&
+         <div className="py-1 px-2 bg-red-200/20 rounded border text-[0.65rem] font-semibold text-amber-700 tracking-wider">ASSIGNED TO: {data.assignee?.fname} {data.assignee?.lname} ({data.assignStaffId}) </div>
         }
-        <div>
-            <span className="py-1 px-1 bg-green-50 rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider">{data.program?.longName}</span>
-        </div>
-        <div>
-            <span className="py-1 px-2 bg-amber-50/50 rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider">ASSIGNED TO: {data.assignee?.fname} {data.assignee?.lname} ({data.assignStaffId}) </span>
-        </div>
         { data.studyMode ? 
-        <div>
-            <span className="px-2 py-1 bg-amber-50/50 rounded border text-xs font-semibold text-gray-500 tracking-wider upppercase">{`${getStudyMode(data.studyMode)?.toUpperCase()} SESSION`}</span>
-        </div> : null
+         <div className="px-2 py-1 w-fit bg-amber-50/50 rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider upppercase">{`${getStudyMode(data.studyMode)?.toUpperCase()} SESSION`}</div>
+        : null
        }
-        <div>
-            <span className={`px-2 py-1 ${data.finalized ? 'bg-green-100/50': data.certified ? 'bg-green-50/50' : 'bg-amber-50/50' } rounded border text-xs font-semibold text-gray-500 tracking-wider`}>{data.finalized ? 'SHEET CLOSED': data.certified ? 'PUBLISHED': data.assessed ? 'SUBMITTED': 'CAPTURE MODE' }</span>
-        </div>
+        <div className={`px-2 py-1 w-fit ${data.finalized ? 'bg-green-100/50': data.certified ? 'bg-green-50/50' : 'bg-amber-50/50' } rounded border text-[0.65rem] font-semibold text-gray-500 tracking-wider`}>{data.finalized ? 'SHEET CLOSED': data.certified ? 'PUBLISHED': data.assessed ? 'SUBMITTED': 'CAPTURE MODE' }</div>
+        
     </div>
     <div className="flex flex-col space-y-1">
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">
@@ -69,7 +65,7 @@ function SheetCardItem({ data }: Props) {
           </> : null }
             <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
                 <span className={`bg-primary-dark/60 py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>SEMESTER</span>
-                <span className="font-semibold font-roboto text-base text-primary/60">{ data?.semesterNum%2 == 0 ? 'TWO' : 'ONE' }</span>
+                <span className="font-semibold font-roboto text-base italic text-primary/60">{ data?.semesterNum%2 == 0 ? '2' : '1' }</span>
             </div>
          
         </div>

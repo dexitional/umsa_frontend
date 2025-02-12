@@ -12,11 +12,12 @@ export async function action({ request, params }){
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
        data.dob = moment(data.dob)
-       data.semesterNum = Number(data.semesterNum)
        data.entryDate = moment(data.entryDate)
+        data.semesterNum = Number(data.semesterNum)
        data.completeStatus = data.completeStatus == 1
        data.deferStatus = data.deferStatus == 1
        data.graduateStatus = data.graduateStatus == 1
+       console.log(data)
     
    let resp;
     if(id != 0) 
@@ -118,7 +119,7 @@ function PgAISStudentForm({}: Props) {
                  <label className="flex flex-col space-y-2">
                     <span className="text-sm md:text-base text-gray-500 font-medium">Disability</span>
                     <select arial-label="disabilityId" name="disabilityId" defaultValue={data?.disabilityId} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
-                      <option selected disabled>-- Choose --</option>
+                      <option selected disabled>-- NO DISABILITY --</option>
                       { disabilities && disabilities?.map((row:any) =>(
                         <option key={row.id} value={row.id}>{row.title}</option>
                       ))}
@@ -153,7 +154,7 @@ function PgAISStudentForm({}: Props) {
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Date of Admission</span>
-                      <input arial-label="entryDate" name="entryDate"type="date" defaultValue={moment(data?.entryDate).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
+                      <input arial-label="entryDate" name="entryDate" type="date" defaultValue={data?.entryDate && moment(data?.entryDate).format("YYYY-MM-DD")} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
                </div>
              </div>
@@ -235,7 +236,7 @@ function PgAISStudentForm({}: Props) {
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Deferred Status</span>
-                      <select arial-label="deferStatus" name="deferStatus" defaultValue={data?.deferStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <select arial-label="deferStatus" name="deferStatus" defaultValue={Number(data?.deferStatus)} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value="0">NOT DEFFERED</option>
                         <option value="1">DEFFERED</option>
@@ -244,7 +245,7 @@ function PgAISStudentForm({}: Props) {
 
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Completed Status</span>
-                      <select arial-label="completeStatus" name="completeStatus" defaultValue={data?.completeStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <select arial-label="completeStatus" name="completeStatus" defaultValue={Number(data?.completeStatus)} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value="0">NOT COMPLETED</option>
                         <option value="1">COMPLETED</option>
@@ -263,16 +264,16 @@ function PgAISStudentForm({}: Props) {
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Graduated Status</span>
-                      <select arial-label="graduateStatus" name="graduateStatus" defaultValue={data?.graduateStatus} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <select arial-label="graduateStatus" name="graduateStatus" defaultValue={Number(data?.graduateStatus)} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value="0">NOT GRADUATED</option>
                         <option value="1">GRADUATED</option>
                       </select>
                   </label>
-                  <label className="flex flex-col space-y-2">
+                  {/* <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Certificate Number</span>
                       <input arial-label="graduateCertNo" name="graduateCertNo" defaultValue={data?.graduateCertNo} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
-                  </label>
+                  </label> */}
                   
                   <div className="flex items-center">
                     {/* <input type="hidden" name="studentId" defaultValue={data?.id} /> */}

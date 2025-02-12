@@ -18,7 +18,7 @@ function PgAISStudentIDCard({}: Props) {
   
   return (
     <div className="flex w-full flex-1 flex-col space-y-8 md:space-y-8 ">
-       <AISIDCardMLK data={data} />
+       <AISIDCard data={data} />
     </div>
   )
 }

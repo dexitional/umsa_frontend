@@ -706,7 +706,7 @@ class Service {
         } catch (error) { 
            return checkSession(error)
         }
-     }
+    }
 
      async fetchSchemes(keyword,page){
         try {
@@ -880,7 +880,7 @@ class Service {
                 headers: { "Content-Type" : "application/json", "x-access-token" : token }
             })
             if(res.status == 200){
-               //toast.success("Sheet saved!")
+               setTimeout(() => {toast.success("Sheet saved")}, 1000)
                return res.data
             } 
             else throw new(res.data.message)
@@ -1019,7 +1019,7 @@ class Service {
      }
 
 
-      /* Backlogs */
+    /* Backlogs */
     async fetchBacklogList(){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/ais/schemes/list`,{
@@ -1032,7 +1032,7 @@ class Service {
         } catch (error) { 
            return checkSession(error)
         }
-     }
+    }
 
      async fetchBacklogs(keyword,page){
         try {
@@ -1123,6 +1123,600 @@ class Service {
            return checkSession(error)
         }
      }
+
+
+
+   /* Resit Session */
+   async fetchResitSessionList(sessionId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resit-sessions/${encodeURIComponent(sessionId)}/list`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchResitSessions(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resit-sessions?keyword=${keyword}&page=${page}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchResitSession(sessionId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resit-sessions/${encodeURIComponent(sessionId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async saveResitSheet(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/resit-sessions/save`, data ,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             setTimeout(() => {toast.success("Sheet saved")}, 1000)
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async postResitSession(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/resit-sessions`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+           })
+          if(res.status == 200){
+             toast.success("Record created!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateResitSession(sessionId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/resit-sessions/${encodeURIComponent(sessionId)}`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record updated!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteResitSession(sessionId){
+      try {
+          const res = await axios.delete(`${REACT_APP_API_URL}/ais/resit-sessions/${encodeURIComponent(sessionId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record deleted!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
+
+
+   /* Resit */
+   async fetchResitList(){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resits/list`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchResits(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resits?keyword=${keyword}&page=${page}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchResit(resitId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/resits/${encodeURIComponent(resitId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async postResit(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/resits`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+           })
+          if(res.status == 200){
+             toast.success("Record created!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateResit(resitId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/resits/${encodeURIComponent(resitId)}`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record updated!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteResit(resitId){
+      try {
+         const res = await axios.delete(`${REACT_APP_API_URL}/ais/resits/${encodeURIComponent(resitId)}`,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200){
+            toast.success("Record deleted!")
+            return res.data
+         } 
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
+
+   /* Graduate Session */
+   async fetchGraduateSessionList(sessionId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduate-sessions/${encodeURIComponent(sessionId)}/list`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchGraduateSessions(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduate-sessions?keyword=${keyword}&page=${page}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchGraduateSession(sessionId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduate-sessions/${encodeURIComponent(sessionId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async generateGraduates(sessionId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduate-sessions/${encodeURIComponent(sessionId)}/generate`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async postGraduateSession(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/graduate-sessions`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+           })
+          if(res.status == 200){
+             toast.success("Record created!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateGraduateSession(sessionId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/graduate-sessions/${encodeURIComponent(sessionId)}`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record updated!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteGraduateSession(sessionId){
+      try {
+          const res = await axios.delete(`${REACT_APP_API_URL}/ais/graduate-sessions/${encodeURIComponent(sessionId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record deleted!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
+
+
+   /* Graduate */
+   async fetchGraduateList(){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduates/list`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchGraduates(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduates?keyword=${keyword}&page=${page}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchGraduate(graduateId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/graduates/${encodeURIComponent(graduateId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async postGraduate(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/graduates`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+           })
+          if(res.status == 200){
+             toast.success("Record created!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateGraduate(graduateId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/graduates/${encodeURIComponent(graduateId)}`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record updated!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteGraduate(graduateId){
+      try {
+         const res = await axios.delete(`${REACT_APP_API_URL}/ais/graduates/${encodeURIComponent(graduateId)}`,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200){
+            toast.success("Record deleted!")
+            return res.data
+         } 
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
+
+   /* TRANSWIFT */
+
+   async fetchTranswiftList(){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/transwifts/list`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+   
+   async fetchTranswifts(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/transwifts?keyword=${keyword}&page=${page}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchTranswift(transwiftId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/transwifts/${encodeURIComponent(transwiftId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200 || res.status == 202)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async postTranswift(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/transwifts`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record created!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateTranswift(transwiftId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/transwifts/${encodeURIComponent(transwiftId)}`, data,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record updated!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteTranswift(transwiftId){
+      try {
+          const res = await axios.delete(`${REACT_APP_API_URL}/ais/transwifts/${encodeURIComponent(transwiftId)}`,{
+              headers: { "Content-Type" : "application/json", "x-access-token" : token }
+          })
+          if(res.status == 200){
+             toast.success("Record deleted!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
+     /* Circulars */
+    
+     async fetchNotices(keyword,page){
+      try {
+         const res = await axios.get(`${REACT_APP_API_URL}/ais/notices?keyword=${keyword}&page=${page}`,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200 || res.status == 202)
+            return res.data
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async fetchNotice(noticeId){
+      try {
+         const res = await axios.get(`${REACT_APP_API_URL}/ais/notices/${encodeURIComponent(noticeId)}`,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200 || res.status == 202)
+            return res.data
+         else throw new(res.data.message)
+      
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async sendNotice(noticeId){
+      try {
+         const res = await axios.post(`${REACT_APP_API_URL}/ais/notices/send`, { noticeId } ,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200 || res.status == 202){
+            toast.success("Circular Sent!")
+            return res.data
+         }
+         else throw new(res.data.message)
+      } catch (error) {
+         return checkSession(error)
+      }
+   }
+
+   async postNotice(data){
+      try {
+         const res = await axios.post(`${REACT_APP_API_URL}/ais/notices`, data,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200){
+            toast.success("Record created!")
+            return res.data
+         } 
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async updateNotice(noticeId,data){
+      try {
+         const res = await axios.patch(`${REACT_APP_API_URL}/ais/notices/${encodeURIComponent(noticeId)}`, data,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200){
+            toast.success("Record updated!")
+            return res.data
+         } 
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+   async deleteNotice(noticeId){
+      try {
+         const res = await axios.delete(`${REACT_APP_API_URL}/ais/notices/${encodeURIComponent(noticeId)}`,{
+            headers: { "Content-Type" : "application/json", "x-access-token" : token }
+         })
+         if(res.status == 200){
+            toast.success("Record deleted!")
+            return res.data
+         } 
+         else throw new(res.data.message)
+      
+      } catch (error) { 
+         return checkSession(error)
+      }
+   }
+
+
 
 
       /* Deferments */
@@ -1259,6 +1853,9 @@ class Service {
             if(res.status == 200){
                toast.success("Student progressed!")
                return res.data
+            } else if(res.status == 202){
+               toast.error("Student already progressed!")
+               return false;
             } 
             else throw(res.data.message)
          
@@ -1377,6 +1974,90 @@ class Service {
            return checkSession(error)
         }
      }
+
+
+      /* Service Letters */
+    async fetchLetterList(){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/letters/list`)
+          if(res.status == 200 || res.status == 204)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+          toast.error(error.message)
+      }
+   }
+
+  async fetchLetters(keyword,page){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/letters?keyword=${keyword}&page=${page}`)
+          if(res.status == 200 || res.status == 204)
+            return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+          console.error(error.message)
+      }
+  }
+
+  async fetchLetter(letterId){
+      try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ais/letters/${letterId}`)
+          if(res.status == 200 || res.status == 204)
+             return res.data
+          else throw new(res.data.message)
+      
+      } catch (error) {
+          console.error(error.message)
+      }
+  }
+
+  async postLetter(data){
+      try {
+          const res = await axios.post(`${REACT_APP_API_URL}/ais/letters`, data,{
+             headers: { "Content-Type" : "application/json" }
+          })
+          if(res.status == 200){
+             toast.success("Record saved!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+          console.error(error.message)
+      }
+  }
+
+  async updateLetter(letterId,data){
+      try {
+          const res = await axios.patch(`${REACT_APP_API_URL}/ais/letters/${letterId}`, data,{
+             headers: { "Content-Type" : "application/json" }
+          })
+          if(res.status == 200){
+             toast.success("Record saved!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+          console.error(error.message)
+      }
+  }
+
+  async deleteLetter(letterId){
+      try {
+          const res = await axios.delete(`${REACT_APP_API_URL}/ais/letters/${letterId}`)
+          if(res.status == 200){
+             toast.success("Record deleted!")
+             return res.data
+          } 
+          else throw new(res.data.message)
+      
+      } catch (error) { 
+          console.error(error.message)
+      }
+  }
 
 
      /* DEPARTMENTS */

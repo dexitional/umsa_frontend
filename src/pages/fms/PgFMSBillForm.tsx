@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/ais/SubPageTitle'
+import React from 'react'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/ais/SubPageTitle'
 import Helper from '../../utils/aisService'
 import Service from '../../utils/fmsService'
-import moment from 'moment'
 
 type Props = {}
 
@@ -14,6 +13,7 @@ export async function action({ request, params }){
    let data = Object.fromEntries(formData)
        data.amount = parseFloat(data.amount)
        data.discount = parseFloat(data.discount)
+       data.quota = parseFloat(data.quota)
     
     
    let resp;
@@ -49,11 +49,11 @@ function PgFMSVcostForm({}: Props) {
   const { data,programs,sessions,banks }: any = useLoaderData();
   return (
     <main className="md:pl-10 p-2 md:p-6 space-y-4 md:space-y-10">
-      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Voucher Cost`} page="Voucher Costs" />
+      <SubPageTitle title={`${data?.id ? 'Edit':'Create'} Bill`} page="Bill" />
       <div className="p-2 md:p-6 border bg-slate-50/50 rounded-xl space-y-6">
          <section className="flex md:space-x-6">
            <div className="flex-1 flex flex-col space-y-1 md:space-y-3">
-              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Voucher Cost</h1>
+              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">{data?.id ? 'Edit':'Create'} Bill</h1>
               <div className="flex items-center space-x-2 text-zinc-400 text-base">
                  <span className="text-xs md:text-base tracking-wider">Please provide neccessary information</span>
               </div>
@@ -93,6 +93,11 @@ function PgFMSVcostForm({}: Props) {
                         <option value="GH">GHANAIAN STUDENT</option>
                         <option value="INT">INTERNATIONAL STUDENT</option>
                       </select>
+                  </label>
+
+                  <label className="flex flex-col space-y-2">
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Payment Quota Allowed in Percentage (%)</span>
+                      <input arial-label="quota" name="quota" type="number" defaultValue={data?.quota} className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
                  
                </div>

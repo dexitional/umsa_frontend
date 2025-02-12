@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Adinkra2 from '../assets/img/adinkra-bullet.png'
-import Adinkra from '../assets/img/logo/aucc/logo.png'
+// import Adinkra from '../assets/img/logo/aucc/logo.png'
+import Adinkra from '../assets/img/adinkra-bullet.png'
 import Logo from '../assets/img/logo_sso.png'
 // @ts-ignore
 import { FaArrowLeft, FaLock } from 'react-icons/fa'
@@ -8,7 +9,6 @@ import { FcLock } from 'react-icons/fc'
 import { ImProfile } from 'react-icons/im'
 import { MdWarning } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
-import SafeGuard from '../assets/img/icon-national-id.png'
 // import { useAuth } from '../utils/authService';
 import { PiStudentBold } from "react-icons/pi"
 import { useUserStore } from '../utils/authService'
@@ -81,7 +81,7 @@ function Login() {
         <section className="md:py-8 flex-1 hidden md:flex flex-col items-start justify-start md:space-y-28">
             <div>
                 {/* <img src={Logo} alt="" className="h-[6.5rem]"/> */}
-                <img src={Logo} alt="" className="h-[6.5rem]"/>
+                 <img src={Logo} alt="" className="h-[6.5rem]"/>
             </div>
             <div className="pl-10 text-white space-y-10">
                 <h2 className="px-4 py-0.5 text-[1.1rem] font-bold rounded-md bg-primary-dark/70 text-slate-50 tracking-wider">All Services in One location for Easy access.</h2>
@@ -97,6 +97,10 @@ function Login() {
                     <li className="flex items-center space-x-4">
                         <img src={Adinkra2} alt="" className="h-4"/>
                         <span className="text-[1.1rem] font-semibold">Easy access to Financial Management System.</span>
+                    </li>
+                    <li className="flex items-center space-x-4">
+                        <img src={Adinkra2} alt="" className="h-4"/>
+                        <span className="text-[1.1rem] font-semibold">Easy access to Election Management System.</span>
                     </li>
                     <li className="flex items-center space-x-4">
                         <img src={Adinkra2} alt="" className="h-4"/>
@@ -119,8 +123,8 @@ function Login() {
         </section>
         <section className="m-2 my-1 md:my-10 md:mx-4 md:w-[28rem] rounded-b-xl md:rounded-xl border-[3px] border-primary-dark/20 backdrop-blur-lg bg-primary bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-bottom flex flex-col justify-between overflow-y-scroll scrollbar-hide">
             <div className="p-6 flex-1 flex flex-col items-center">
-                <h1 className="my-4 md:my-10 text-3xl md:text-4xl text-white">Unified Portal</h1>
-                <img src={SafeGuard} alt="" className="h-20 md:h-24" />
+                {/* <h1 className="my-4 md:my-10 text-3xl md:text-4xl text-white">Unified Portal</h1> */}
+                <img src={Adinkra} alt="" className="mt-20 p-2 h-22 md:h-24 rounded-md border-2 border-dashed opacity-40 shadow-lg -rotate-45 " />
                 <div className="my-6 md:my-14 w-full space-y-8">
                     {/* Message */}
                     <div className={`${message ? 'flex':'hidden'} p-3 md:p-4 mx-auto md:w-[90%] md:space-x-4 shadow rounded-lg backdrop-blur-sm bg-white/40 bg-opacity-70`}>
@@ -151,7 +155,7 @@ function Login() {
                         </button>
                         <button onClick={()=> setShowSSOForm(true)} className={`${showSSOForm || showStudentForm || showVoucherForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
                             <FcLock className="h-6 w-6"/>
-                            <span className="text-sm md:text-base">Sign In with SSO Credentials</span>
+                            <span className="text-sm md:text-base">Sign In with Staff Credentials</span>
                         </button>
                         <button onClick={()=> setShowStudentForm(true)} className={`${showSSOForm || showStudentForm || showVoucherForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
                             <ImProfile className="h-6 w-6 text-primary-dark"/>
@@ -161,11 +165,11 @@ function Login() {
 
                     {/* Forms */}
                     <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm || showVoucherForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-primary-dark/30 bg-primary flex-col space-y-4 text-white text-lg`}>
-                        <div className="shadow bg-white/10 rounded-md flex items-center justify-between">
+                        <div className="shadow bg-white/10 rounded-md flex items-center justify-between overflow-hidden">
                            <h1 className="px-4 py-1 text-lg text-amber-100 font-semibold tracking-widest">
                              {showStudentForm ? 'STUDENT LOGIN' : showVoucherForm ? 'APPLICANT LOGIN':'STAFF LOGIN' }
                            </h1>
-                           <div className="relative pr-2">
+                           <div className="relative opacity-50">
                               <img src={Adinkra} alt="" className="h-10"/>
                            </div>
                         </div>
@@ -188,7 +192,7 @@ function Login() {
                 
             </div>
             <div className="h-14 w-full flex items-center justify-center">
-                <p className="text-white text-xs font-medium">Copyright © {new Date().getFullYear()} AUCC.</p>
+                <p className="text-white text-xs font-medium">Copyright &copy; {new Date().getFullYear()} AUCB</p>
             </div>
         </section>
       </main>

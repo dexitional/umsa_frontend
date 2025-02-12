@@ -1,17 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import "../admission/FormPrint.css";
-import Logo from "../../assets/img/logo.png";
-import Signature from "../../assets/img/signature.png";
-import { useReactToPrint } from "react-to-print";
-import { useSelector } from "react-redux";
-import moment from "moment";
 import ReactHtml from "html-react-parser";
-import { ToWords } from "to-words";
+import moment from "moment";
+import React, { useRef } from "react";
+import { useLoaderData } from "react-router";
+import { useReactToPrint } from "react-to-print";
+import Logo from "../../assets/img/logo.png";
+import Signature from "../../assets/img/thumb.png";
+import Service from '../../utils/aisService';
+import "./FormPrint.css";
+
+
+// Loader for Single Project
+export async function loader({ params }){
+  const transwift = await Service.fetchTranswift(params.transwiftId)
+  const letter = await Service.fetchLetter('att');
+  console.log(transwift, letter)
+  return { transwift,letter }
+}
 
 const PaperLetterAttest = () => {
-  const { sso } = useSelector((state) => state);
-  const { modal } = sso;
-  const [data, setData] = useState({});
+ 
+  const { transwift,letter }  = useLoaderData();
+  const student = transwift?.student;
   const printRef = useRef();
 
   const handlePrint = useReactToPrint({
@@ -32,99 +41,49 @@ const PaperLetterAttest = () => {
     </div>
     `;
   const loadPlacerData = (dt) => {
-    dt = dt.replace(/::name/g, data.student?.name.toLowerCase());
-    dt = dt.replace(/::academic_status/g, data.student?.complete_status ? "a past":"currently an active");
-    dt = dt.replace("::start_level",
-      data && Math.ceil(data.start_semester % 2) * 100
+    dt = dt.replace(/::name/g, `${student?.fname} ${student?.mname ? student?.mname+' ': ''}${student?.lname}`);
+    dt = dt.replace(/::academic_status/g, student?.completeStatus ? "a past":"currently an active");
+    dt = dt.replace("::start_level",Math.ceil(student?.entrySemesterNum % 2) * 100
     );
-    dt = dt.replace(/::program_name/g, data.student?.program_name_long.toLowerCase());
-    dt = dt.replace(/::admit_year/g, `${moment(data.student?.doa).format('YYYY')}/${moment(data.student?.doa).add(1,'year').format('YYYY')}`);
-    dt = dt.replace(/::complete_year/g, data.student?.doc ? moment(data.student?.doc).format("MMMM, YYYY") : "the respective period");
-    dt = dt.replace("::signatory", data.letter?.signatory);
-    dt = dt.replace(/::indexno/g, data.student?.indexno);
-    dt = dt.replace(/::person/g, data.student?.gender == 'M' ? 'him':'her');
+    dt = dt.replace(/::program_name/g, student?.program?.longName?.toLowerCase());
+    dt = dt.replace(/::admit_year/g, `${moment(student?.entryDate).format('YYYY')}/${moment(student?.entryDate).add(1,'year').format('YYYY')}`);
+    dt = dt.replace(/::complete_year/g, student?.exitDate ? moment(student?.exitDate).format("MMMM, YYYY") : "the respective period");
+    dt = dt.replace("::signatory", letter?.signatory);
+    dt = dt.replace(/::indexno/g, student?.indexno);
+    dt = dt.replace(/::person/g, student?.gender == 'M' ? 'him':'her');
     dt = dt.replace(
       "::signature",
       `<img src="${
-        (data && data.letter?.signature) || Signature
+        (letter?.signature) || Signature
       }" width='150px' height='50px' />`
     );
    
     return dt;
   };
 
-  useEffect(() => {
-    modal.content && setData({ ...modal.content.data });
-  }, []);
-
   return (
     <>
       <div className="row">
-        <div
-          className="Box small-12 columns"
-          style={{
-            width: "900px",
-            margin: "0px auto",
-            float: "none",
-            overflow: "hidden",
-          }}
-        >
-          <div className="small-12 columns u-pr-0 right">
-            <button
-              onClick={handlePrint}
-              className="Button u-floatRight u-mb-2"
-            >
-              &nbsp;&nbsp;Print &nbsp;&nbsp;
-            </button>
-          </div>
-        </div>
+         <div className="w-full"><button onClick={handlePrint} className="px-4 py-0.5 rounded-sm bg-primary-dark text-white font-semibold">Print</button></div>
       </div>
       <div className="print" ref={printRef}>
-        <div
-          className="fade-bg"
-          style={{
-            background: `url(${Logo}) center 50% / 650px 650px no-repeat`,
-            display: "block",
-            zIndex: 10,
-          }}
-        ></div>
-        <div className="cover">
-          <br />
-          <br />
+        <div className="" style={{background: `url(${Logo}) center 50% / 650px 650px no-repeat`, display: "block", zIndex: 10 }}></div>
+        <div className="">
+          <br /><br />
           <header>
             <div className="left-head">
               <img src={Logo} className="logo" />
               <div className="left-cover">
                 <h2>
-                  <span
-                    style={{
-                      fontSize: "27.5px",
-                      color: "#b76117",
-                      letterSpacing: "0.07em",
-                    }}
-                  >
-                    AFRICAN UNIVERSITY
-                  </span>
-                  <br />
-                  COLLEGE OF COMMUNICATIONS
+                  <span style={{ fontSize: "27.5px",color: "#b76117",letterSpacing: "0.07em" }}>AFRICAN UNIVERSITY</span>
+                  <br/> OF COMMUNICATIONS AND BUSINESS
                 </h2>
-                <h2>
-                  <span
-                    style={{
-                      fontSize: "15px",
-                      color: "#666",
-                      letterSpacing: "0.35em",
-                      top: "-30px",
-                    }}
-                  >
-                    LETTER OF ATTESTATION
-                  </span>
-                </h2>
+                <h2><span style={{ fontSize: "15px",color: "#666",letterSpacing: "0.35em",top: "-30px" }}>LETTER OF ATTESTATION</span></h2>
               </div>
             </div>
-            <div className="right-head address">
-              {/*
-                <address>
+            <div className="text-base">
+              
+                {/* <address>
                     School of Graduate Studies<br/>
                     Private Mail Bag<br/>
                     University Post Office<br/>
@@ -134,29 +93,19 @@ const PaperLetterAttest = () => {
                     Fax:+233 3220 60137<br/>
                     Email: graduatestudies@knust.edu.gh<br/><br/>
                     <span className="small">30/10/2020</span>
-                </address>
-                */}
-              <address>
-                Registrar's Office
-                <br />
-                African University
-                <br />
-                College of Communications <br />
-                Postal Box LG 510
-                <br />
-                Adabraka, Accra
-                <br />
-                &nbsp;
-                <span style={{ float: "left", direction: "ltr" }}>
-                  +233 307016193
-                </span>
-                <br />
-                registrar@aucc.edu.gh
+                </address> */}
+               
+            
+              <address className="text-sm">
+                Registrar's Office <br />
+                Postal Box LG 510<br />
+                Adabraka, Accra<br />
+                <br/>registrar@aucb.edu.gh
               </address>
-            </div>
+             </div>
           </header>
           <content>
-            <div>
+            <div className="h-[56rem]">
               <table className="ptable" style={{ marginTop:'120px' }}>
                 <tbody>
                   <tr rowspan="2">
@@ -169,54 +118,18 @@ const PaperLetterAttest = () => {
                           fontWeight:600,
                           color: "#333",
                           marginBottom:"30px"
-                       }}
-                      >
-                        Ref. #: {data?.student?.indexno}
+                       }}>
+                        Ref. #: {student?.indexno}
                       </p>
                       <p>
-                        <span
-                          style={{
-                            color: "#333",
-                            fontSize: "14pt",
-                            fontWeight:'bold',
-                            fontFamily:'serif'
-                          }}
-                        >
-                          TO WHOM IT MAY CONCERN
-                        </span>
+                        <span style={{ color: "#333",fontSize: "14pt", fontWeight:'bold', fontFamily:'serif' }}>TO WHOM IT MAY CONCERN</span>
                       </p>
                       <br />
-                      <span
-                        className="shead"
-                        style={{
-                          fontFamily: "serif",
-                          fontSize: "14pt",
-                        }}
-                      >
-                        Dear Sir/Madam,
-                      </span>
-                      <br />
-                      <br />
-                    </td>
-                    <td align="right">
-                      <p className="title" style={{  
-                          fontFamily: "serif",
-                          fontSize: "14pt"
-                       }}>
-                        {moment(data && data.created_at).format(
-                          "MMMM DD, YYYY"
-                        )}
-                      </p>
-                      <br />
-                    </td>
+                      <span className="shead" style={{fontFamily: "serif",fontSize: "14pt",}}>Dear Sir/Madam,</span>
+                      <br /><br /></td>
+                    <td align="right"><p className="title" style={{ fontFamily: "serif", fontSize: "14pt" }}>{moment(new Date()).format("MMMM DD, YYYY")}</p><br /></td>
                   </tr>
-                  <tr>
-                    <td className="shead maincontent" colSpan={3}>
-                      {/* {ReactHtml(loadPlacerData((data && data.letter?.template) || ""))} */}
-                      {/* {ReactHtml(loadPlacerData(output || ""))} */}
-                      {ReactHtml(loadPlacerData(data.letter?.template || output))}
-                    </td>
-                  </tr>
+                  <tr><td className="shead maincontent" colSpan={3}>{ReactHtml(loadPlacerData(letter?.template || output))}</td></tr>
                 </tbody>
               </table>
             </div>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/fms/SubPageTitle'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/fmsService'
 import moment from 'moment'
+import React from 'react'
+import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import SubPageTitle from '../../components/fms/SubPageTitle'
+import Service from '../../utils/fmsService'
 
 type Props = {}
 
@@ -67,6 +67,7 @@ function PgFMSChargeForm({}: Props) {
                       <option value="FEES">FEES</option>
                       <option value="FINE">FINE</option>
                       <option value="GRADUATION">GRADUATION</option>
+                      <option value="RESIT">RESIT</option>
                     </select>
                   </label>
                   <label className="flex flex-col space-y-2">

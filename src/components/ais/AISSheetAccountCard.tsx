@@ -106,7 +106,7 @@ function AISSheetAccountCard({ data,isUser }: Props) {
                }
               
               { data?.finalized ? 
-              <div className="px-3 py-1 w-fit rounded border text-sm font-medium text-gray-400 tracking-wider bg-slate-50">
+              <div className="mx-auto px-3 py-1 w-fit rounded border text-sm font-medium text-gray-400 tracking-wider bg-slate-50">
                 Sheet is published and closed!  No futher editting is allowed.
               </div>: null
               }

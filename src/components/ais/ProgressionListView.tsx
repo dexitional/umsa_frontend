@@ -1,5 +1,5 @@
 import React from 'react'
-import RegistrationListItem from './RegistrationListItem'
+import ProgressionListItem from './ProgressionListItem'
 
 type Props = {
   data: any
@@ -19,7 +19,7 @@ function ProgressionListView({ data }: Props) {
           <div>Action</div>
       </div>
       <div className="grid grid-cols-1 gap-y-4 text-xs text-slate-600 font-medium">
-          { data && data?.map((row:any) => (<RegistrationListItem key={row.id} data={row} />))}
+          { data && data?.map((row:any) => (<ProgressionListItem key={row.id} data={row} />))}
           { !data && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Records ...</h1>)}
       </div>
     </div>

@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useRef } from 'react';
 import { HiUserAdd } from "react-icons/hi";
 import { useNavigate } from 'react-router';
-import Logo from '../../assets/img/logo/mlk/logo.png';
+import Logo from '../../assets/img/logo/aucc/logo.png';
 import { useUserStore } from '../../utils/authService';
 const { REACT_APP_API_URL } = import.meta.env;
 
