@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Form, Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import Helper from '../../utils/aisService'
-import Asterix from '../../components/aisp/Asterix'
-import { useUserStore } from '../../utils/authService'
 import moment from 'moment'
+import React from 'react'
+import { Form, Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import Asterix from '../../components/aisp/Asterix'
+import Helper from '../../utils/aisService'
+import Service from '../../utils/amsService'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {}
 
@@ -55,7 +55,7 @@ function PgStepProfile({}: Props) {
              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-2">
                 <div className="p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Preferred Mode of Study <Asterix /></span>
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Preferred Session <Asterix /></span>
                       <select arial-label="studyMode" name="studyMode" defaultValue={data?.studyMode} required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
                         <option value={`M`}>MORNING</option>

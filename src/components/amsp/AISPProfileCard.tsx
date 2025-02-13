@@ -1,9 +1,8 @@
-import React from 'react'
-import { FiEdit } from "react-icons/fi";
-import { useUserStore } from '../../utils/authService';
-import { BiDownload } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { FaPrint } from 'react-icons/fa6';
+import { FiEdit } from "react-icons/fi";
+import { Link } from 'react-router-dom';
+import { useUserStore } from '../../utils/authService';
 
 type Props = {
   data: any;
@@ -19,7 +18,7 @@ function AISPProfileCard({ data }: Props) {
           <img className="w-full h-full md:w-52 md:h-52 object-cover object-top" src={`https://cdn.ucc.edu.gh/photos/?tag=${user?.user?.tag}`} />
         </div>
         <div className="px-3 space-y-1">
-            <h1 className="text-zinc-500 leading-5 md:font-medium text-base capitalize">{user?.user?.fname?.toLowerCase()} {user?.user?.mname && user?.user?.mname?.toLowerCase()+' '}{user?.user?.lname?.toLowerCase()}</h1>
+            <h1 className="text-zinc-500 leading-5 md:font-medium text-base capitalize">{user?.user?.fname?.toLowerCase()} {user?.user?.mname ? user?.user?.mname?.toLowerCase()+' ':''}{user?.user?.lname?.toLowerCase()}</h1>
             <p className="leading-5 text-sm text-primary/60 font-medium capitalize">{data?.department?.toLowerCase()}</p>
         </div>
         <Link to="/print/registration" className="px-4 py-2 bg-primary/90 text-white border shadow-lg rounded-md font-semibold tracking-wider flex items-center justify-center space-x-2">

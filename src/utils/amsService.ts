@@ -850,6 +850,7 @@ class Service {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
+               toast.success("Application Submitted Successfully!")
                return res.data
             } 
             else throw new(res.data.message)

@@ -20,7 +20,6 @@ export async function action({ request }) {
     data.submittedAt = moment();
     data.serial = serial;
     data.choiceId = formData.get('choiceId');
-  console.log(data)
   let resp = await Service.saveStepReview(data);
   if(resp){
     return redirect('/amsp/dash')
@@ -39,8 +38,7 @@ export async function loader({ params }){
 function PgStepReview({}: Props) {
 
   const { data,applicant } :any = useLoaderData();
-  console.log(data)
-
+  
   const finalize = () => {
 
   }
@@ -55,8 +53,8 @@ function PgStepReview({}: Props) {
                   <Link to="/amsp/dash" className="px-4 py-2 bg-primary-accent/90 rounded-md text-white font-semibold">Save & Exit</Link>
               </div>
               <Form method="post" encType="multipart/form-data"  className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
-                  <button type="submit" className="px-4 py-2 bg-primary rounded-md text-white font-semibold">Finalize Application</button>
-                  <input type="hidden" name="choiceId" value={data?.choice[0]?.id} />
+                <button type="submit" className="px-4 py-2 bg-primary rounded-md text-white font-semibold">Finalize Application</button>
+                <input type="hidden" name="choiceId" value={data?.choice[0]?.id} />
               </Form>
             </div>
          </section>

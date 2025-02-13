@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import SubPageTitle from '../../components/ams/SubPageTitle'
+import React from 'react'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/amsService'
+import SubPageTitle from '../../components/ams/SubPageTitle'
 import Helper from '../../utils/aisService'
-import moment from 'moment'
+import Service from '../../utils/amsService'
 
 type Props = {}
 
@@ -65,12 +64,12 @@ function PgAMSShortlistForm({}: Props) {
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">Entry Level</span>
+                      <span className="text-sm md:text-base text-gray-500 font-medium">Entry Year</span>
                       <select arial-label="semesterNum" name="semesterNum" defaultValue={data?.semesterNum} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option value="1">LEVEL 100</option>
-                        <option value="3">LEVEL 200</option>
-                        <option value="5">LEVEL 300</option>
+                        <option value="1">Year 1</option>
+                        <option value="3">Year 2</option>
+                        <option value="5">Year 3</option>
                       </select>
                   </label>
                   {/* <label className="flex flex-col space-y-2">
