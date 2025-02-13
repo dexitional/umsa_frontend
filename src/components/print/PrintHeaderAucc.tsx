@@ -42,7 +42,7 @@ function PrintHeaderAucc({}: Props) {
                     </div>
                     <div className="flex-1 space-y-6 print:space-y-4 print:text-xs">
                         <div className="flex justify-end font-semibold text-slate-900 tracking-wider">
-                            <p className="print:m-0 print:leading-[17px] text-sm print:text-xs text-left leading-[1.2rem]">Registrar's Office<br/>Postal Box LG 510<br/>Adabraka, Accra<br/>Ghana.</p>
+                            <p className="print:m-0 print:leading-[17px] text-sm print:text-xs text-left leading-[1.2rem]">Registrar's Office<br/>Postal Box LG 510<br/>Legon, Accra<br/>Ghana.</p>
                         </div>
                         <div className="flex justify-center">
                             <p className="pl-44 print:pr-0 print:m-0 print:leading-[17px] font-medium text-sm print:text-xs text-right leading-[1.2rem]">{ moment().format("Do MMMM, YYYY")}</p>

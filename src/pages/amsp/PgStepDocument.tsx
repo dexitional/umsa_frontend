@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Form, Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
-import Service from '../../utils/amsService'
-import Helper from '../../utils/aisService'
-import Asterix from '../../components/aisp/Asterix'
-import { useUserStore } from '../../utils/authService'
 import { FaFilePdf } from 'react-icons/fa6'
+import { Form, Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import Asterix from '../../components/aisp/Asterix'
+import Helper from '../../utils/aisService'
+import Service from '../../utils/amsService'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {}
 
@@ -75,7 +75,8 @@ function PgStepDocument({}: Props) {
         const base64:any = await Helper.convertBase64(f);
         setFiles([
           ...files.map((r,i) => {
-             //  if(i == id) return URL.createObjectURL(f);
+             //if(i == id) return f;
+            //  if(i == id) return URL.createObjectURL(f);
              if(i == id) return base64;
              return r;
           })
@@ -134,7 +135,7 @@ function PgStepDocument({}: Props) {
                       <input type="hidden" name={`base64_${i}`} value={files[i]}/>
                     </label>
                     {files && files[i] &&
-                    <Link to={(files[i])} target="_blank" className="px-6 py-2 h-fit w-fit border border-primary/60 rounded-full flex items-center space-x-2 self-end">
+                    <Link to={files[i]} target="_blank" className="px-6 py-2 h-fit w-fit border border-primary/60 rounded-full flex items-center space-x-2 self-end">
                        <FaFilePdf className="h-5 w-5 text-primary/80"/>
                        <span className="text-sm md:text-base text-primary/80 font-medium">Preview </span>
                     </Link>

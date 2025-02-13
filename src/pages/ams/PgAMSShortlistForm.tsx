@@ -86,7 +86,7 @@ function PgAMSShortlistForm({}: Props) {
              <div className="p-3 md:py-6 md:pb-10 md:px-6 w-full border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
                <div className="md:pl-6 space-y-4">
                 <label className="flex flex-col space-y-2">
-                    <span className="text-sm md:text-base text-gray-500 font-medium">Mode of Study</span>
+                    <span className="text-sm md:text-base text-gray-500 font-medium">Session</span>
                     <select arial-label="sessionMode" name="sessionMode" defaultValue={data?.sessionMode} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                       <option selected disabled>-- Choose --</option>
                       <option value="M">MORNING</option>
